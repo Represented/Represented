@@ -1,4 +1,5 @@
 ﻿using Plugin.Geolocator;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -112,7 +113,6 @@ namespace Represented
                 };
                 button.Navigation.PushAsync(content);
             }
-
             protected override void OnStart()
             {
                 // Handle when your app starts
@@ -128,4 +128,4 @@ namespace Represented
                 // Handle when your app resumes
             }
         }
-    }
+}

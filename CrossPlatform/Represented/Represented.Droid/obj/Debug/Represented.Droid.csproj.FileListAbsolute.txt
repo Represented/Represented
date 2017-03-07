@@ -140,4 +140,3 @@ C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented.Droid\obj\De
 C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented.Droid\obj\Debug\android\assets\Xamarin.Forms.Platform.Android.dll.mdb
 C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented.Droid\obj\Debug\android\assets\Xamarin.Forms.Xaml.dll.mdb
 C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented.Droid\obj\Debug\Represented.Droid.dll.mdb
-C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented.Droid\bin\Debug\Represented.Droid.dll.mdb

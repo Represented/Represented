@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Geolocator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,11 @@ namespace Represented
 
             public App()
             {
+                
+                var locator = CrossGeolocator.Current;
+                locator.DesiredAccuracy = 50;
+                var position = locator.GetPositionAsync(timeoutMilliseconds: 10000);
+                
                 Button allowLocServices = new Button
                 {
                     Text = "Tap Here to Allow Location Services"
@@ -30,8 +36,7 @@ namespace Represented
 
                 submitZipcode.Clicked += onEditorCompleted;
                 allowLocServices.Clicked += onButtonClicked;
-
-                // The root page of your application
+            
                 var welcomePage = new ContentPage
                 {
                     Title = "Represented",

@@ -27,5 +27,3 @@ C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented\obj\Debug\Re
 C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented\obj\Debug\Represented.pdb
 C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll.mdb
 C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented\bin\Debug\Represented.dll.mdb
-C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll.mdb
-C:\Users\jake\dev\Represented\CrossPlatform\Represented\Represented\bin\Debug\Represented.dll.mdb

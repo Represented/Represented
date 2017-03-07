@@ -66,14 +66,12 @@ namespace Represented
                     },
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
-
-                // The root page of your application
+            
                 var content = new ContentPage
                 {
                     Title = "WebApp",
                     Content = new StackLayout
                     {
-                        //VerticalOptions = LayoutOptions.Center,
                         Children = {
                         webView
                     }
@@ -85,6 +83,7 @@ namespace Represented
             void onEditorCompleted(object sender, EventArgs e)
             {
                 String arg = enterZipcode.Text;
+                if (arg == null || arg.Length != 5) return;
 
                 Button button = (Button)sender;
                 WebView webView = new WebView
@@ -95,14 +94,12 @@ namespace Represented
                     },
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
-
-                // The root page of your application
+            
                 var content = new ContentPage
                 {
                     Title = arg,
                     Content = new StackLayout
                     {
-                        //VerticalOptions = LayoutOptions.Center,
                         Children = {
                         webView
                     }

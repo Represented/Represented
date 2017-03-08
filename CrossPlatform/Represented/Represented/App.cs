@@ -16,10 +16,6 @@ namespace Represented
             public App()
             {
                 
-                var locator = CrossGeolocator.Current;
-                locator.DesiredAccuracy = 50;
-                var position = locator.GetPositionAsync(timeoutMilliseconds: 10000);
-                
                 Button allowLocServices = new Button
                 {
                     Text = "Tap Here to Allow Location Services"
@@ -61,14 +57,19 @@ namespace Represented
             }
 
 
-            void onButtonClicked(object sender, EventArgs e)
+            async void onButtonClicked(object sender, EventArgs e)
             {
+
+                var locator = CrossGeolocator.Current;
+                locator.DesiredAccuracy = 50;
+                var position = await locator.GetPositionAsync(timeoutMilliseconds: 10000);
+
                 Button button = (Button)sender;
                 WebView webView = new WebView
                 {
                     Source = new UrlWebViewSource
                     {
-                        Url = "http://138.197.9.140/",
+                        Url = "http://138.197.9.140/@" + position.Latitude + "," + position.Longitude,
                     },
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
@@ -78,15 +79,22 @@ namespace Represented
                     Title = "WebApp",
                     Content = new StackLayout
                     {
-                        Children = {
-                        webView
-                    }
+                        VerticalOptions = LayoutOptions.Center,
+                        Children =
+                        {
+                            new Label
+                            {
+                                Text = "URL: " + "http://138.197.9.140/@" + position.Latitude + "," + position.Longitude,
+                                HorizontalTextAlignment = TextAlignment.Center
+                            }
+                        // webView
+                        }
                     }
                 };
-                button.Navigation.PushAsync(content);
+                await button.Navigation.PushAsync(content);
             }
 
-            void onEditorCompleted(object sender, EventArgs e)
+            async void onEditorCompleted(object sender, EventArgs e)
             {
                 String arg = enterZipcode.Text;
                 if (arg == null || arg.Length != 5) return;
@@ -96,22 +104,29 @@ namespace Represented
                 {
                     Source = new UrlWebViewSource
                     {
-                        Url = "http://138.197.9.140/",
+                        Url = "http://138.197.9.140/" + arg,
                     },
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
             
                 var content = new ContentPage
                 {
-                    Title = arg,
+                    Title = "WebApp",
                     Content = new StackLayout
                     {
-                        Children = {
-                        webView
-                    }
+                        VerticalOptions = LayoutOptions.Center,
+                        Children =
+                        {
+                            new Label
+                            {
+                                Text = "URL: " + "http://138.197.9.140/" + arg,
+                                HorizontalTextAlignment = TextAlignment.Center
+                            }
+                        // webView
+                        }
                     }
                 };
-                button.Navigation.PushAsync(content);
+                await button.Navigation.PushAsync(content);
             }
             protected override void OnStart()
             {

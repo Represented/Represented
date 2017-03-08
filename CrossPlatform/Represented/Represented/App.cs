@@ -1,4 +1,6 @@
 ﻿using Plugin.Geolocator;
+using Represented.Data;
+using Represented.Model;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,8 @@ namespace Represented
 {
     public class App : Application
     {
+        static RepresentedDatabase database;
+
         Label enterZipcodePrompt = new Label();
         Entry enterZipcodeEntry = new Entry();
         Button allowLocServices = new Button();
@@ -20,6 +24,18 @@ namespace Represented
         WebView webView = new WebView();
         String urlString = "http://138.197.9.140/";
         bool locationStored = false;
+
+        static RepresentedDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new RepresentedDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("RepresentedSQLite.db3"));
+                }
+                return database;
+            }
+        }
 
         public App()
         {
@@ -70,6 +86,10 @@ namespace Represented
         {
             String arg = enterZipcodeEntry.Text;
             if (arg == null || arg.Length != 5) return;
+
+            enterZipcodeEntry.SetBinding(Entry.TextProperty, "Zip");
+            var representedItem = (RepresentedItem)BindingContext;
+            //await Database.SaveItemAsync(representedItem);
 
             Button button = (Button)sender;
 

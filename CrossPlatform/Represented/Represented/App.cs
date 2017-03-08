@@ -11,7 +11,8 @@ namespace Represented
 {
     public class App : Application
     {
-        Entry enterZipcode = new Entry();
+        Label enterZipcodePrompt = new Label();
+        Entry enterZipcodeEntry = new Entry();
         Button allowLocServices = new Button();
         Button submitZipcode = new Button();
         ContentPage welcomePage = new ContentPage();
@@ -23,9 +24,10 @@ namespace Represented
         public App()
         {
             // initializing view elements    
-            allowLocServices = new Button{Text = "Tap Here to Allow Location Services"};
-            submitZipcode = new Button{Text = "Enter"};
-            enterZipcode = new Entry{Keyboard = Keyboard.Numeric};
+            allowLocServices = new Button{Text="Tap Here to Allow Location Services"};
+            submitZipcode = new Button{Text="Enter"};
+            enterZipcodeEntry = new Entry{Keyboard=Keyboard.Numeric};
+            enterZipcodePrompt = new Label {HorizontalTextAlignment=TextAlignment.Center,Text="Or Enter Your Zipcode:"};
 
             // add event triggers
             submitZipcode.Clicked += onEditorCompleted;
@@ -38,15 +40,13 @@ namespace Represented
                 Content = new StackLayout
                 {
                     VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                    allowLocServices,
-                    new Label {
-                        HorizontalTextAlignment = TextAlignment.Center,
-                        Text = "Or Enter Your Zipcode:"
-                    },
-                    enterZipcode,
-                    submitZipcode
-                }
+                    Children =
+                    {
+                        allowLocServices,
+                        enterZipcodePrompt,
+                        enterZipcodeEntry,
+                        submitZipcode
+                    }
                 }
             };
 
@@ -63,19 +63,17 @@ namespace Represented
             Button button = (Button)sender;
 
             feedPage = buildWebPage(urlString + "@" + position.Latitude + "," + position.Longitude);
-            
             await button.Navigation.PushAsync(feedPage);
         }
 
         async void onEditorCompleted(object sender, EventArgs e)
         {
-            String arg = enterZipcode.Text;
+            String arg = enterZipcodeEntry.Text;
             if (arg == null || arg.Length != 5) return;
 
             Button button = (Button)sender;
 
             feedPage = buildWebPage(urlString + arg);
-            
             await button.Navigation.PushAsync(feedPage);
         }
 

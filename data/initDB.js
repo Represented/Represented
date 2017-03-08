@@ -15,3 +15,23 @@ MongoClient.connect(url, function(err, db) {
 
 	db.close();
 });
+
+// Create collections with document validation
+// http://mongodb.github.io/node-mongodb-native/2.2/tutorials/collections/
+var createValidated = function(db, callback) {
+  db.createCollection("contacts",
+	   {
+	      'validator': { '$or':
+	         [
+	            { 'phone': { '$type': "string" } },
+	            { 'email': { '$regex': /@mongodb\.com$/ } },
+	            { 'status': { '$in': [ "Unknown", "Incomplete" ] } }
+	         ]
+	      }
+	   },
+    function(err, results) {
+      console.log("Collection created.");
+      callback();
+    }
+  );
+};

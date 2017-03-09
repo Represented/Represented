@@ -6,7 +6,7 @@ using Represented.Droid;
 [assembly: Dependency(typeof(FileHelper))]
 namespace Represented.Droid
 {
-    public class FileHelper
+    public class FileHelper : IFileHelper
     {
         public string GetLocalFilePath(string filename)
         {

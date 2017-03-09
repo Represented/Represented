@@ -11,10 +11,8 @@ namespace Represented.Model
     {    
 		[PrimaryKey, AutoIncrement]
 		public int ID { get; set; }
-		public string Name { get; set; }
 		public string Zip { get; set; }
         public double Lat { get; set; }
         public double Long { get; set; }
-        public bool Done { get; set; }
     }
 }

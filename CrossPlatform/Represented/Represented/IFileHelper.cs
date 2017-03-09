@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Represented
 {
-    interface IFileHelper
+    public interface IFileHelper
     {
         string GetLocalFilePath(string filename);
     }

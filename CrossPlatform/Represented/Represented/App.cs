@@ -82,19 +82,36 @@ namespace Represented
             await button.Navigation.PushAsync(feedPage);
         }
 
-        async void onEditorCompleted(object sender, EventArgs e)
+        void onEditorCompleted(object sender, EventArgs e)
         {
             String arg = enterZipcodeEntry.Text;
             if (arg == null || arg.Length != 5) return;
-
-            enterZipcodeEntry.SetBinding(Entry.TextProperty, "Zip");
-            var representedItem = (RepresentedItem)BindingContext;
-            //await Database.SaveItemAsync(representedItem);
-
+            
             Button button = (Button)sender;
+            WebView webView = new WebView
+            {
+                Source = new UrlWebViewSource
+                {
+                    Url = "http://138.197.9.140/",
+                },
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
 
-            feedPage = buildWebPage(urlString + arg);
-            await button.Navigation.PushAsync(feedPage);
+            // The root page of your application
+            var content = new ContentPage
+            {
+                Title = "WebApp",
+                Content = new StackLayout
+                {
+                    //VerticalOptions = LayoutOptions.Center,
+                    Children = {
+                        webView
+                    }
+                }
+            };
+
+            //feedPage = buildWebPage(urlString + arg);
+            button.Navigation.PushAsync(content);
         }
 
         ContentPage buildWebPage(String url)
@@ -116,12 +133,14 @@ namespace Represented
                     VerticalOptions = LayoutOptions.Center,
                     Children =
                     {
+                        /*
                         new Label
                         {
                             Text = url,
                             HorizontalTextAlignment = TextAlignment.Center
                         }
-                    // webView
+                        */
+                        webView
                     }
                 }
             };

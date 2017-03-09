@@ -24,6 +24,7 @@ namespace Represented
         WebView webView = new WebView();
         String urlString = "http://138.197.9.140/";
         bool locationStored = false;
+        RepresentedItem representedItem = new RepresentedItem();
 
         static RepresentedDatabase Database
         {
@@ -43,6 +44,7 @@ namespace Represented
             allowLocServices = new Button{Text="Tap Here to Allow Location Services"};
             submitZipcode = new Button{Text="Enter"};
             enterZipcodeEntry = new Entry{Keyboard=Keyboard.Numeric};
+            enterZipcodeEntry.SetBinding(Entry.TextProperty, "Zip");
             enterZipcodePrompt = new Label {HorizontalTextAlignment=TextAlignment.Center,Text="Or Enter Your Zipcode:"};
 
             // add event triggers
@@ -78,74 +80,59 @@ namespace Represented
 
             Button button = (Button)sender;
 
-            feedPage = buildWebPage(urlString + "@" + position.Latitude + "," + position.Longitude);
-            await button.Navigation.PushAsync(feedPage);
-        }
-
-        void onEditorCompleted(object sender, EventArgs e)
-        {
-            String arg = enterZipcodeEntry.Text;
-            if (arg == null || arg.Length != 5) return;
-            
-            Button button = (Button)sender;
             WebView webView = new WebView
             {
                 Source = new UrlWebViewSource
                 {
-                    Url = "http://138.197.9.140/",
+                    Url = urlString,
                 },
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-
-            // The root page of your application
+            
             var content = new ContentPage
             {
                 Title = "WebApp",
                 Content = new StackLayout
                 {
-                    //VerticalOptions = LayoutOptions.Center,
                     Children = {
                         webView
                     }
                 }
             };
 
-            //feedPage = buildWebPage(urlString + arg);
-            button.Navigation.PushAsync(content);
+            await button.Navigation.PushAsync(content);
         }
 
-        ContentPage buildWebPage(String url)
+        async void onEditorCompleted(object sender, EventArgs e)
         {
-            webView = new WebView
+            String arg = enterZipcodeEntry.Text;
+            if (arg == null || arg.Length != 5) return;
+            
+            await App.Database.SaveItemAsync(representedItem);
+
+            Button button = (Button)sender;
+
+            WebView webView = new WebView
             {
                 Source = new UrlWebViewSource
                 {
-                    Url = url,
+                    Url = urlString,
                 },
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-
-            ContentPage webPage = new ContentPage
+            
+            var content = new ContentPage
             {
-                Title = "Represented",
+                Title = "WebApp",
                 Content = new StackLayout
                 {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children =
-                    {
-                        /*
-                        new Label
-                        {
-                            Text = url,
-                            HorizontalTextAlignment = TextAlignment.Center
-                        }
-                        */
+                    Children = {
                         webView
                     }
                 }
             };
-
-            return webPage;
+            
+            await button.Navigation.PushAsync(content);
         }
 
         protected override void OnStart()

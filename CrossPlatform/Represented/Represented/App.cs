@@ -27,11 +27,66 @@ namespace Represented
 
         public App()
         {
-            // initializing view elements    
-            allowLocServices = new Button{Text="Tap Here to Allow Location Services"};
-            submitZipcode = new Button{Text="Enter"};
-            enterZipcodeEntry = new Entry{Keyboard=Keyboard.Numeric};
-            enterZipcodePrompt = new Label {Text="Or Enter Your Zipcode", HorizontalTextAlignment=TextAlignment.Center};
+             
+            allowLocServices = new Button {
+                Text = "Allow Location Services!",
+                FontSize = 18,
+                BorderWidth = 4,
+                Margin = 40,
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            enterZipcodeEntry = new Entry
+            {
+                Keyboard = Keyboard.Numeric,
+                Placeholder = "01234",
+                PlaceholderColor = Color.Gray,
+                FontSize = 18,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            enterZipcodePrompt = new Label
+            {
+                Text = "OR ENTER ZIP CODE: ",
+                TextColor = Color.Black,
+                FontSize = 18,
+                VerticalOptions = LayoutOptions.Center
+            };
+
+            submitZipcode = new Button
+            {
+                Text = "Enter",
+                FontSize = 18,
+                BorderWidth = 4,
+                Margin = 40,
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Start
+            };
+
+            View innerZipcodeEntry = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.End,
+                Children =
+                {
+                     enterZipcodePrompt,
+                     enterZipcodeEntry
+                }
+            };
+
+            View zipcodeEntry = new StackLayout
+            {
+                Orientation = StackOrientation.Vertical,
+                Margin = 0,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                Children =
+                {
+                    innerZipcodeEntry,
+                    submitZipcode
+                }
+            };
 
             // add event triggers
             submitZipcode.Clicked += onEditorCompleted;
@@ -47,8 +102,7 @@ namespace Represented
                     Children =
                     {
                         allowLocServices,
-                        enterZipcodePrompt,
-                        enterZipcodeEntry,
+                        zipcodeEntry,
                         submitZipcode
                     }
                 }

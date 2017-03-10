@@ -1,129 +1,137 @@
-﻿using System;
+﻿using Plugin.Geolocator;
+using Represented.Data;
+using Represented.Model;
+using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Represented
 {
     public class App : Application
+    {
+        static RepresentedDatabase database;
+
+        Label enterZipcodePrompt = new Label();
+        Entry enterZipcodeEntry = new Entry();
+        Button allowLocServices = new Button();
+        Button submitZipcode = new Button();
+        ContentPage welcomePage = new ContentPage();
+        ContentPage feedPage = new ContentPage();
+        WebView webView = new WebView();
+
+        String urlString = "http://138.197.9.140/";
+
+        public App()
         {
-            Entry enterZipcode = new Entry();
+            // initializing view elements    
+            allowLocServices = new Button{Text="Tap Here to Allow Location Services"};
+            submitZipcode = new Button{Text="Enter"};
+            enterZipcodeEntry = new Entry{Keyboard=Keyboard.Numeric};
+            enterZipcodePrompt = new Label {Text="Or Enter Your Zipcode", HorizontalTextAlignment=TextAlignment.Center};
 
-            public App()
+            // add event triggers
+            submitZipcode.Clicked += onEditorCompleted;
+            allowLocServices.Clicked += onButtonClicked;
+
+            // welcome page accepts user location info and requests webpage
+            welcomePage = new ContentPage
             {
-                Button allowLocServices = new Button
+                Title = "Represented",
+                Content = new StackLayout
                 {
-                    Text = "Tap Here to Allow Location Services"
-                };
-
-                Button submitZipcode = new Button
-                {
-                    Text = "Enter"
-                };
-
-                enterZipcode = new Entry
-                {
-                    Keyboard = Keyboard.Numeric
-                };
-
-                submitZipcode.Clicked += onEditorCompleted;
-                allowLocServices.Clicked += onButtonClicked;
-
-                // The root page of your application
-                var welcomePage = new ContentPage
-                {
-                    Title = "Represented",
-                    Content = new StackLayout
+                    VerticalOptions = LayoutOptions.Center,
+                    Children =
                     {
-                        VerticalOptions = LayoutOptions.Center,
-                        Children = {
                         allowLocServices,
-                        new Label {
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Or Enter Your Zipcode:"
-                        },
-                        enterZipcode,
+                        enterZipcodePrompt,
+                        enterZipcodeEntry,
                         submitZipcode
                     }
-                    }
-                };
+                }
+            };
 
-                MainPage = new NavigationPage(welcomePage);
+            MainPage = new NavigationPage(welcomePage);
+        }
 
-            }
+        async void onButtonClicked(object sender, EventArgs e)
+        {
 
+            var locator = CrossGeolocator.Current;
+            locator.DesiredAccuracy = 50;
+            var position = await locator.GetPositionAsync(timeoutMilliseconds: 10000);
 
-            void onButtonClicked(object sender, EventArgs e)
+            Button button = (Button)sender;
+
+            WebView webView = new WebView
             {
-                Button button = (Button)sender;
-                WebView webView = new WebView
+                Source = new UrlWebViewSource
                 {
-                    Source = new UrlWebViewSource
-                    {
-                        Url = "http://138.197.9.140/",
-                    },
-                    VerticalOptions = LayoutOptions.FillAndExpand
-                };
-
-                // The root page of your application
-                var content = new ContentPage
+                    Url = urlString,
+                },
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            
+            var content = new ContentPage
+            {
+                Title = urlString + "@" + position.Latitude + "," + position.Longitude,
+                Content = new StackLayout
                 {
-                    Title = "WebApp",
-                    Content = new StackLayout
-                    {
-                        //VerticalOptions = LayoutOptions.Center,
-                        Children = {
+                    Children = {
                         webView
                     }
-                    }
-                };
-                button.Navigation.PushAsync(content);
-            }
+                }
+            };
+            
+            await button.Navigation.PushAsync(content);
+        }
 
-            void onEditorCompleted(object sender, EventArgs e)
+        async void onEditorCompleted(object sender, EventArgs e)
+        {
+            String arg = enterZipcodeEntry.Text;
+            if (arg == null || arg.Length != 5) return;
+
+            Button button = (Button)sender;
+
+            WebView webView = new WebView
             {
-                String arg = enterZipcode.Text;
-
-                Button button = (Button)sender;
-                WebView webView = new WebView
+                Source = new UrlWebViewSource
                 {
-                    Source = new UrlWebViewSource
-                    {
-                        Url = "http://138.197.9.140/",
-                    },
-                    VerticalOptions = LayoutOptions.FillAndExpand
-                };
-
-                // The root page of your application
-                var content = new ContentPage
+                    Url = urlString,
+                },
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            
+            var content = new ContentPage
+            {
+                Title = urlString + arg,
+                Content = new StackLayout
                 {
-                    Title = arg,
-                    Content = new StackLayout
-                    {
-                        //VerticalOptions = LayoutOptions.Center,
-                        Children = {
+                    Children = {
                         webView
                     }
-                    }
-                };
-                button.Navigation.PushAsync(content);
-            }
+                }
+            };
+            
+            await button.Navigation.PushAsync(content);
+        }
 
-            protected override void OnStart()
-            {
-                // Handle when your app starts
-            }
+        protected override void OnStart()
+        {
+            // Handle when your app starts
+        }
 
-            protected override void OnSleep()
-            {
-                // Handle when your app sleeps
-            }
+        protected override void OnSleep()
+        {
+            // Handle when your app sleeps
+        }
 
-            protected override void OnResume()
-            {
-                // Handle when your app resumes
-            }
+        protected override void OnResume()
+        {
+            // Handle when your app resumes
         }
     }
+}

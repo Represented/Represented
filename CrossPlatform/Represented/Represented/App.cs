@@ -18,7 +18,6 @@ namespace Represented
         Label enterZipcodePrompt = new Label();
         Entry enterZipcodeEntry = new Entry();
         Button allowLocServices = new Button();
-        Button submitZipcode = new Button();
         ContentPage welcomePage = new ContentPage();
         ContentPage feedPage = new ContentPage();
         WebView webView = new WebView();
@@ -32,7 +31,7 @@ namespace Represented
                 Text = "Allow Location Services!",
                 FontSize = 18,
                 BorderWidth = 4,
-                Margin = 40,
+                Margin = 40, 
                 HorizontalOptions = LayoutOptions.Fill,
                 VerticalOptions = LayoutOptions.Center
             };
@@ -54,17 +53,7 @@ namespace Represented
                 VerticalOptions = LayoutOptions.Center
             };
 
-            submitZipcode = new Button
-            {
-                Text = "Enter",
-                FontSize = 18,
-                BorderWidth = 4,
-                Margin = 40,
-                HorizontalOptions = LayoutOptions.Fill,
-                VerticalOptions = LayoutOptions.Start
-            };
-
-            View innerZipcodeEntry = new StackLayout
+            View zipcodeEntry = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
                 HorizontalOptions = LayoutOptions.Center,
@@ -76,38 +65,39 @@ namespace Represented
                 }
             };
 
-            View zipcodeEntry = new StackLayout
-            {
-                Orientation = StackOrientation.Vertical,
-                Margin = 0,
-                HorizontalOptions = LayoutOptions.CenterAndExpand,
-                Children =
-                {
-                    innerZipcodeEntry,
-                    submitZipcode
-                }
-            };
-
             // add event triggers
-            submitZipcode.Clicked += onEditorCompleted;
             allowLocServices.Clicked += onButtonClicked;
+            enterZipcodeEntry.Completed += onEntryCompleted;
 
             // welcome page accepts user location info and requests webpage
-            welcomePage = new ContentPage
+            StackLayout foreground = new StackLayout
             {
-                Title = "Represented",
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children =
+                VerticalOptions = LayoutOptions.Center,
+                Children =
                     {
                         allowLocServices,
-                        zipcodeEntry,
-                        submitZipcode
+                        zipcodeEntry
+                    }
+            };
+
+            var backgroundImage = new Image()
+            {
+                Source = ImageSource.FromFile("american-flag.jpg"),
+                Aspect = Aspect.Fill
+            };
+
+            welcomePage = new ContentPage
+            {
+                Title = "Welcome to Represented!",
+                Content = new AbsoluteLayout
+                {
+                    Children = {
+                        { backgroundImage, new Rectangle (0, 0, 1, 1), AbsoluteLayoutFlags.All },
+                        { foreground, new Rectangle (0, 0, 1, 1), AbsoluteLayoutFlags.All}
                     }
                 }
             };
-
+            
             MainPage = new NavigationPage(welcomePage);
         }
 
@@ -143,12 +133,12 @@ namespace Represented
             await button.Navigation.PushAsync(content);
         }
 
-        async void onEditorCompleted(object sender, EventArgs e)
+        async void onEntryCompleted(object sender, EventArgs e)
         {
             String arg = enterZipcodeEntry.Text;
             if (arg == null || arg.Length != 5) return;
 
-            Button button = (Button)sender;
+            Entry entry = (Entry)sender;
 
             WebView webView = new WebView
             {
@@ -158,7 +148,7 @@ namespace Represented
                 },
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-            
+
             var content = new ContentPage
             {
                 Title = urlString + arg,
@@ -169,8 +159,8 @@ namespace Represented
                     }
                 }
             };
-            
-            await button.Navigation.PushAsync(content);
+
+            await entry.Navigation.PushAsync(content);
         }
 
         protected override void OnStart()

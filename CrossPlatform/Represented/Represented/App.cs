@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Represented
@@ -22,8 +22,13 @@ namespace Represented
         ContentPage welcomePage = new ContentPage();
         ContentPage feedPage = new ContentPage();
         WebView webView = new WebView();
+
         String urlString = "http://138.197.9.140/";
         bool locationStored = false;
+        String zip = "";
+        Double lat = 0.0;
+        Double lng = 0.0;
+
         RepresentedItem representedItem = new RepresentedItem();
 
         static RepresentedDatabase Database
@@ -68,7 +73,47 @@ namespace Represented
                 }
             };
 
-            if (!locationStored) MainPage = new NavigationPage(welcomePage);
+            checkForStoredLocation();
+
+            if (locationStored == true)
+            {
+                WebView webView = new WebView
+                {
+                    Source = new UrlWebViewSource
+                    {
+                        Url = urlString,
+                    },
+                    VerticalOptions = LayoutOptions.FillAndExpand
+                };
+
+                var content = new ContentPage
+                {
+                    Title = "WebApp",
+                    Content = new StackLayout
+                    {
+                        Children = {
+                        webView
+                    }
+                    }
+                };
+
+                MainPage = new NavigationPage(content);
+            }
+            else MainPage = new NavigationPage(welcomePage);
+        }
+
+        async void checkForStoredLocation()
+        {
+            RepresentedItem repItem = await App.Database.GetItemAsync(1);
+
+            if (repItem != null)
+            {
+                locationStored = true;
+                zip = repItem.Zip;
+                lat = repItem.Lat;
+                lng = repItem.Long;
+            }
+            else locationStored = false;
         }
 
         async void onButtonClicked(object sender, EventArgs e)
@@ -77,6 +122,13 @@ namespace Represented
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 50;
             var position = await locator.GetPositionAsync(timeoutMilliseconds: 10000);
+
+            representedItem.ID = 1;
+            representedItem.Zip = "";
+            representedItem.Lat = position.Latitude;
+            representedItem.Long = position.Longitude;
+
+            await App.Database.SaveItemAsync(representedItem);
 
             Button button = (Button)sender;
 
@@ -107,7 +159,12 @@ namespace Represented
         {
             String arg = enterZipcodeEntry.Text;
             if (arg == null || arg.Length != 5) return;
-            
+
+            representedItem.ID = 1;
+            representedItem.Zip = arg;
+            representedItem.Lat = 0;
+            representedItem.Long = 0;
+
             await App.Database.SaveItemAsync(representedItem);
 
             Button button = (Button)sender;

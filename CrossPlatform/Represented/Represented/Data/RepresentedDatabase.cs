@@ -25,7 +25,7 @@ namespace Represented.Data
 
         public Task<List<RepresentedItem>> GetItemsNotDoneAsync()
         {
-            return database.QueryAsync<RepresentedItem>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
+            return database.QueryAsync<RepresentedItem>("SELECT * FROM [RepresentedItem] WHERE [Done] = 0");
         }
 
         public Task<RepresentedItem> GetItemAsync(int id)

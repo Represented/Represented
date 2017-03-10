@@ -50,6 +50,5 @@ C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\bin\D
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\bin\Debug\Xamarin.Forms.Xaml.xml
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.pdb
-C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.csprojResolveAssemblyReference.cache
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll.mdb
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\bin\Debug\Represented.dll.mdb

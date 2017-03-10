@@ -24,24 +24,6 @@ namespace Represented
         WebView webView = new WebView();
 
         String urlString = "http://138.197.9.140/";
-        bool locationStored = false;
-        String zip = "";
-        Double lat = 0.0;
-        Double lng = 0.0;
-
-        RepresentedItem representedItem = new RepresentedItem();
-
-        static RepresentedDatabase Database
-        {
-            get
-            {
-                if (database == null)
-                {
-                    database = new RepresentedDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("RepresentedSQLite.db3"));
-                }
-                return database;
-            }
-        }
 
         public App()
         {
@@ -49,15 +31,14 @@ namespace Represented
             allowLocServices = new Button{Text="Tap Here to Allow Location Services"};
             submitZipcode = new Button{Text="Enter"};
             enterZipcodeEntry = new Entry{Keyboard=Keyboard.Numeric};
-            enterZipcodeEntry.SetBinding(Entry.TextProperty, "Zip");
-            enterZipcodePrompt = new Label {HorizontalTextAlignment=TextAlignment.Center,Text="Or Enter Your Zipcode:"};
+            enterZipcodePrompt = new Label {Text="Or Enter Your Zipcode", HorizontalTextAlignment=TextAlignment.Center};
 
             // add event triggers
             submitZipcode.Clicked += onEditorCompleted;
             allowLocServices.Clicked += onButtonClicked;
-            
+
             // welcome page accepts user location info and requests webpage
-            var welcomePage = new ContentPage
+            welcomePage = new ContentPage
             {
                 Title = "Represented",
                 Content = new StackLayout
@@ -73,47 +54,7 @@ namespace Represented
                 }
             };
 
-            checkForStoredLocation();
-
-            if (locationStored == true)
-            {
-                WebView webView = new WebView
-                {
-                    Source = new UrlWebViewSource
-                    {
-                        Url = urlString,
-                    },
-                    VerticalOptions = LayoutOptions.FillAndExpand
-                };
-
-                var content = new ContentPage
-                {
-                    Title = "WebApp",
-                    Content = new StackLayout
-                    {
-                        Children = {
-                        webView
-                    }
-                    }
-                };
-
-                MainPage = new NavigationPage(content);
-            }
-            else MainPage = new NavigationPage(welcomePage);
-        }
-
-        async void checkForStoredLocation()
-        {
-            RepresentedItem repItem = await App.Database.GetItemAsync(1);
-
-            if (repItem != null)
-            {
-                locationStored = true;
-                zip = repItem.Zip;
-                lat = repItem.Lat;
-                lng = repItem.Long;
-            }
-            else locationStored = false;
+            MainPage = new NavigationPage(welcomePage);
         }
 
         async void onButtonClicked(object sender, EventArgs e)
@@ -123,13 +64,6 @@ namespace Represented
             locator.DesiredAccuracy = 50;
             var position = await locator.GetPositionAsync(timeoutMilliseconds: 10000);
 
-            representedItem.ID = 1;
-            representedItem.Zip = "";
-            representedItem.Lat = position.Latitude;
-            representedItem.Long = position.Longitude;
-
-            await App.Database.SaveItemAsync(representedItem);
-
             Button button = (Button)sender;
 
             WebView webView = new WebView
@@ -143,7 +77,7 @@ namespace Represented
             
             var content = new ContentPage
             {
-                Title = "WebApp",
+                Title = urlString + "@" + position.Latitude + "," + position.Longitude,
                 Content = new StackLayout
                 {
                     Children = {
@@ -151,7 +85,7 @@ namespace Represented
                     }
                 }
             };
-
+            
             await button.Navigation.PushAsync(content);
         }
 
@@ -160,13 +94,6 @@ namespace Represented
             String arg = enterZipcodeEntry.Text;
             if (arg == null || arg.Length != 5) return;
 
-            representedItem.ID = 1;
-            representedItem.Zip = arg;
-            representedItem.Lat = 0;
-            representedItem.Long = 0;
-
-            await App.Database.SaveItemAsync(representedItem);
-
             Button button = (Button)sender;
 
             WebView webView = new WebView
@@ -180,7 +107,7 @@ namespace Represented
             
             var content = new ContentPage
             {
-                Title = "WebApp",
+                Title = urlString + arg,
                 Content = new StackLayout
                 {
                     Children = {

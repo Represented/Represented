@@ -30,6 +30,7 @@ namespace Represented
             allowLocServices = new Button {
                 Text = "Allow Location Services!",
                 FontSize = 18,
+                FontAttributes = FontAttributes.Bold,
                 BorderWidth = 4,
                 Margin = 40, 
                 HorizontalOptions = LayoutOptions.Fill,
@@ -49,6 +50,7 @@ namespace Represented
             {
                 Text = "OR ENTER ZIP CODE: ",
                 TextColor = Color.Black,
+                FontAttributes = FontAttributes.Italic,
                 FontSize = 18,
                 VerticalOptions = LayoutOptions.Center
             };
@@ -70,33 +72,20 @@ namespace Represented
             enterZipcodeEntry.Completed += onEntryCompleted;
 
             // welcome page accepts user location info and requests webpage
-            StackLayout foreground = new StackLayout
+            welcomePage = new ContentPage
             {
-                VerticalOptions = LayoutOptions.Center,
-                Children =
+                Title = "Welcome to Represented!",
+                BackgroundColor = Color.FromHex("CCC4C4"),
+                Content = new StackLayout
+                {
+                    VerticalOptions = LayoutOptions.Center,
+                    Children =
                     {
                         allowLocServices,
                         zipcodeEntry
                     }
-            };
-
-            var backgroundImage = new Image()
-            {
-                Source = ImageSource.FromFile("american-flag.jpg"),
-                Aspect = Aspect.Fill
-            };
-
-            welcomePage = new ContentPage
-            {
-                Title = "Welcome to Represented!",
-                Content = new AbsoluteLayout
-                {
-                    Children = {
-                        { backgroundImage, new Rectangle (0, 0, 1, 1), AbsoluteLayoutFlags.All },
-                        { foreground, new Rectangle (0, 0, 1, 1), AbsoluteLayoutFlags.All}
-                    }
                 }
-            };
+        };
             
             MainPage = new NavigationPage(welcomePage);
         }

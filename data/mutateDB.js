@@ -21,19 +21,25 @@ var validateDistrict = function(district) {
 };
 module.exports.validateDistrict = validateDistrict;
 
-var insertDocument = function(db, collection, doc, callback) {
+var insertDistrict = function(db, district) {
+       if (db == null ||
+           district == null ||
+           callback == null ||
+           validateDistrict(district))
+               return false;
+
 	// Get the documents collection
-	var coll = db.collection(collection);
+	var districts = db.collection(district);
 	// Insert some documents
-	coll.insertOne(doc, function(err, result) {
+	districts.insertOne(doc, function(err, result) {
 		assert.equal(err, null);
 		assert.equal(1, result.result.n);
 		assert.equal(1, result.ops.length);
-		console.log("Inserted 1 document into the collection");
+		console.log("Inserted 1 district into districts");
 		callback(result);
 	});
 }
-module.exports.insertDocument = insertDocument;
+module.exports.insertDistrict = insertDistrict;
 
 // http://mongodb.github.io/node-mongodb-native/2.2/api/Db.html#dropDatabase
 var removeDB = function(db, callback) {

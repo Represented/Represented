@@ -1,24 +1,26 @@
-var assert = require('assert');
-//module.exports = {
-//	insert: function () {
-//	}
-//}
+var assert = require('assert'),
+    Validator = require('jsonschema').Validator,
+    v = new Validator();
 
-//var insertDocuments = function(db, callback) {
-//	// Get the documents collection
-//	var collection = db.collection('documents');
-//	// Insert some documents
-//	collection.insertMany([
-//		{a : 1}, {a : 2}, {a : 3}
-//	], function(err, result) {
-//		assert.equal(err, null);
-//		assert.equal(3, result.result.n);
-//		assert.equal(3, result.ops.length);
-//		console.log("Inserted 3 documents into the collection");
-//		callback(result);
-//	});
-//}
-// module.exports.insertDocuments = insertDocuments;
+var validateDistrict = function(district) {
+       return v.validate(district,
+               {
+                       "id": "/District",
+                       "type": "object",
+                       "properties": {
+                               "state": {"type": "string"},
+                               "district": {"type": "integer"},
+                               "zipcodes": {
+                                       "type": "array",
+                                       "items": {"type": "integer"}
+                               }
+                       },
+                       "required": ["state", "district"]
+               }
+       ).valid;
+};
+module.exports.validateDistrict = validateDistrict;
+
 var insertDocument = function(db, collection, doc, callback) {
 	// Get the documents collection
 	var coll = db.collection(collection);

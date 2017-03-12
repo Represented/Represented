@@ -59,3 +59,7 @@ C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\D
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\bin\Debug\Represented.dll.mdb
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll.mdb
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\bin\Debug\Represented.dll.mdb
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll.mdb
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\bin\Debug\Represented.dll.mdb
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll.mdb
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\bin\Debug\Represented.dll.mdb

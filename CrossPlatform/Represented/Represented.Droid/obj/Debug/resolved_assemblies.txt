@@ -54,3 +54,4 @@ C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\android\assets\System.Text.RegularExpressions.dll
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\android\assets\System.Collections.Concurrent.dll
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\android\assets\System.Runtime.InteropServices.dll
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\android\assets\System.Diagnostics.Tools.dll

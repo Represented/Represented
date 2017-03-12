@@ -198,7 +198,6 @@ C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\Represented.Droid.pdb
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\android\bin\Represented.Droid.apk
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\res\drawable\icon.png
-C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\res\drawable-hdpi\icon.png
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\res\drawable-xhdpi\icon.png
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\res\drawable-xxhdpi\icon.png
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\res\layout\tabbar.xml
@@ -208,6 +207,7 @@ C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\obj\Debug\uploadflags.txt
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\bin\Debug\Represented.Droid.dll.mdb
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\bin\Debug\Java.Interop.dll.mdb
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\bin\Debug\Mono.Android.dll.mdb
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\bin\Debug\mscorlib.dll.mdb
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\bin\Debug\Represented.dll.mdb
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented.Droid\bin\Debug\System.ComponentModel.Composition.dll.mdb

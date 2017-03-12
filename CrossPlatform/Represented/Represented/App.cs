@@ -16,6 +16,7 @@ namespace Represented
         Label enterZipcodePrompt = new Label();
         Entry enterZipcodeEntry = new Entry();
         Button allowLocServices = new Button();
+        View zipcodeEntry = new StackLayout();
         ContentPage welcomePage = new ContentPage();
         ContentPage feedPage = new ContentPage();
         WebView webView = new WebView();
@@ -70,7 +71,7 @@ namespace Represented
                 VerticalOptions = LayoutOptions.Center
             };
 
-            View zipcodeEntry = new StackLayout
+            zipcodeEntry = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
                 HorizontalOptions = LayoutOptions.Center,
@@ -86,7 +87,6 @@ namespace Represented
             allowLocServices.Clicked += onButtonClicked;
             enterZipcodeEntry.Completed += onEntryCompleted;
 
-            checkStoredLocation();
 
             // welcome page accepts user location info and requests webpage
             welcomePage = new ContentPage
@@ -103,8 +103,9 @@ namespace Represented
                     }
                 }
             };
-            
-            MainPage = new NavigationPage(welcomePage);
+
+            checkStoredLocation();
+
         }
 
         async void checkStoredLocation()
@@ -124,6 +125,59 @@ namespace Represented
                 {
                     storedLong = item.Long;
                 }
+            }
+
+            if(storedLong != 0.0 && storedLat != 0.0)
+            {
+                WebView webView = new WebView
+                {
+                    Source = new UrlWebViewSource
+                    {
+                        Url = urlString,
+                    },
+                    VerticalOptions = LayoutOptions.FillAndExpand
+                };
+
+                var content = new ContentPage
+                {
+                    Title = urlString + "@" + storedLat + "," + storedLong,
+                    Content = new StackLayout
+                    {
+                        Children = {
+                        webView
+                    }
+                    }
+                };
+
+                MainPage = new NavigationPage(content);
+            }
+            else if (storedZip.Length == 5)
+            {
+                WebView webView = new WebView
+                {
+                    Source = new UrlWebViewSource
+                    {
+                        Url = urlString,
+                    },
+                    VerticalOptions = LayoutOptions.FillAndExpand
+                };
+
+                var content = new ContentPage
+                {
+                    Title = urlString + storedZip,
+                    Content = new StackLayout
+                    {
+                        Children = {
+                        webView
+                    }
+                    }
+                };
+
+                MainPage = new NavigationPage(content);
+            }
+            else
+            {
+                MainPage = new NavigationPage(welcomePage);
             }
         }
 

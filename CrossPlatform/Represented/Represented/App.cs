@@ -22,17 +22,17 @@ namespace Represented
         String urlString = "http://138.197.9.140/";
 
         RepresentedItem repItem = new RepresentedItem();
-        static RepresentedDatabase database;
+        static RepresentedDatabase db;
 
         static RepresentedDatabase Database
         {
             get
             {
-                if (database == null)
+                if (db == null)
                 {
-                    database = new RepresentedDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("RepresentedSQLite.db3"));
+                    db = new RepresentedDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("RepresentedSQLite.db3"));
                 }
-                return database;
+                return db;
             }
         }
 

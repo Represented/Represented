@@ -23,6 +23,10 @@ namespace Represented
 
         RepresentedItem repItem = new RepresentedItem();
         static RepresentedDatabase db;
+        List<RepresentedItem> items = new List<RepresentedItem>();
+        String storedZip = "";
+        double storedLat = 0.0;
+        double storedLong = 0.0;
 
         static RepresentedDatabase Database
         {
@@ -82,6 +86,8 @@ namespace Represented
             allowLocServices.Clicked += onButtonClicked;
             enterZipcodeEntry.Completed += onEntryCompleted;
 
+            checkStoredLocation();
+
             // welcome page accepts user location info and requests webpage
             welcomePage = new ContentPage
             {
@@ -99,6 +105,26 @@ namespace Represented
             };
             
             MainPage = new NavigationPage(welcomePage);
+        }
+
+        async void checkStoredLocation()
+        {
+            List<RepresentedItem> items = await Database.GetItemsAsync();
+            foreach (RepresentedItem item in items)
+            {
+                if(item.Zip.Length == 5)
+                {
+                    storedZip = item.Zip;
+                }
+                if (item.Lat != 0.0)
+                {
+                    storedLat = item.Lat;
+                }
+                if (item.Long != 0.0)
+                {
+                    storedLong = item.Long;
+                }
+            }
         }
 
         async void onButtonClicked(object sender, EventArgs e)

@@ -153,6 +153,14 @@ exports.findDistrictWithMissingArgs = function(test) {
 //	});
 //};
 
+var reorderDistrictFields = function(dist) {
+	return {
+			_id: dist._id,
+			state: dist.state,
+			district: dist.district,
+		};
+};
+
 exports.findGoodDistrict = function(test) {
 	MongoClient.connect(url, function(err, db) {
 		assert.equal(null, err);
@@ -163,11 +171,7 @@ exports.findGoodDistrict = function(test) {
 		test.ok(mutateDB.insertDistrict(db, dist, function(result) {
 			// _id gets tacked on the end of dist; we need to put it at the front to
 			// test equality because findDistrcit() has _id as first field
-			dist = {
-					_id: dist._id,
-					state: dist.state,
-					district: dist.district,
-				};
+			dist = reorderDistrictFields(dist);
 			test.ok(mutateDB.findDistrict(db, dist, function(docs) {
 				test.ok(JSON.stringify(dist) == JSON.stringify(docs[0]), JSON.stringify(dist)+" doesn't match returned"+JSON.stringify(docs[0]));
 				db.dropDatabase();

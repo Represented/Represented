@@ -48,6 +48,36 @@ var insertDistrict = function(db, district, callback) {
 module.exports.insertDistrict = insertDistrict;
 
 /*
+ * Inserts districts into the districts collection
+ * @param {JSON} district
+ * @return {boolean} true if successful, false otherwise
+ */
+var insertDistricts = function(db, dists, callback) {
+       if (db == null ||
+           dists == null ||
+	   callback == null)
+               return false;
+
+	for (var i = 0; i < dists.length; i++)
+		if (!validateDistrict(dists[i]))
+			return false;
+
+	var districts = db.collection('districts');
+
+	// Insert some documents
+	districts.insertMany(dists, function(err, result) {
+		var numDistricts = dists.length;
+		assert.equal(err, null);
+		assert.equal(numDistricts, result.result.n);
+		assert.equal(numDistricts, result.ops.length);
+		console.log("Inserted "+numDistricts+" documents into the collection");
+		callback(result);
+	});
+	return true;
+};
+module.exports.insertDistricts = insertDistricts;
+
+/*
  * Finds a district or districts that match a query
  * @return {array} matching districts
  */

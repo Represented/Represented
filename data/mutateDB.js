@@ -21,25 +21,56 @@ var validateDistrict = function(district) {
 };
 module.exports.validateDistrict = validateDistrict;
 
-var insertDistrict = function(db, district) {
+/*
+ * Inserts a district into the districts collection
+ * @param {JSON} district
+ * @return {boolean} true if successful, false otherwise
+ */
+var insertDistrict = function(db, district, callback) {
        if (db == null ||
            district == null ||
-           callback == null ||
-           validateDistrict(district))
+	   callback == null ||
+           !validateDistrict(district))
                return false;
 
-	// Get the documents collection
-	var districts = db.collection(district);
+	var districts = db.collection('districts');
+
 	// Insert some documents
-	districts.insertOne(doc, function(err, result) {
+	districts.insertOne(district, function(err, result) {
 		assert.equal(err, null);
 		assert.equal(1, result.result.n);
 		assert.equal(1, result.ops.length);
-		console.log("Inserted 1 district into districts");
+		//console.log("Inserted 1 district into districts");
 		callback(result);
 	});
-}
+	return true;
+};
 module.exports.insertDistrict = insertDistrict;
+
+/*
+ * Finds a district or districts that match a query
+ * @return {array} matching districts
+ */
+var findDistrict = function(db, district, callback) {
+       if (db == null ||
+           district == null ||
+           callback == null ||
+	   // can't find an invalid district; must have a state and district field
+           !validateDistrict(district))
+               return false;
+
+	var districts = db.collection('districts');
+
+	districts.find(district).toArray(function(err, docs) {
+		assert.equal(err, null);
+		//console.log("Found the following records");
+		//console.log(docs);
+		callback(docs);
+	});
+	return true;
+};
+module.exports.findDistrict = findDistrict;
+
 
 // http://mongodb.github.io/node-mongodb-native/2.2/api/Db.html#dropDatabase
 var removeDB = function(db, callback) {
@@ -54,15 +85,15 @@ var removeDB = function(db, callback) {
 				dbs = dbs.databases;
 				// Did we find the db
 				var found = false;
-				
+
 				// Check if we have the db in the list
 				for(var i = 0; i < dbs.length; i++) {
 					if(dbs[i].name == 'integration_tests_to_drop') found = true;
 				}
-				
+
 				// We should not find the databases
 				if(process.env['JENKINS'] == null) test.equal(false, found);
-				
+
 				db.close();
 			});
 			console.log("Dropped the database");

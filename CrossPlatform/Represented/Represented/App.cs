@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -13,15 +14,15 @@ namespace Represented
 {
     public class App : Application
     {
+        // Initialization of View elements
         Label enterZipcodePrompt = new Label();
         Entry enterZipcodeEntry = new Entry();
         Button allowLocServices = new Button();
         View zipcodeEntry = new StackLayout();
         ContentPage welcomePage = new ContentPage();
-        ContentPage feedPage = new ContentPage();
-        WebView webView = new WebView();
         String urlString = "http://138.197.9.140/";
 
+        // Initialization of Data elements
         RepresentedItem repItem = new RepresentedItem();
         static RepresentedDatabase db;
         List<RepresentedItem> items = new List<RepresentedItem>();
@@ -29,6 +30,7 @@ namespace Represented
         double storedLat = 0.0;
         double storedLong = 0.0;
 
+        // Database constructor
         static RepresentedDatabase Database
         {
             get
@@ -41,8 +43,10 @@ namespace Represented
             }
         }
 
+        // Main method
         public App()
         { 
+            // Button allows location services
             allowLocServices = new Button {
                 Text = "Allow Location Services!",
                 FontSize = 18,
@@ -53,6 +57,7 @@ namespace Represented
                 VerticalOptions = LayoutOptions.Center
             };
 
+            // Entry accepts 5-digit zip code
             enterZipcodeEntry = new Entry
             {
                 Keyboard = Keyboard.Numeric,
@@ -62,6 +67,7 @@ namespace Represented
                 VerticalOptions = LayoutOptions.Center
             };
 
+            // Text prompts user to enter zip code
             enterZipcodePrompt = new Label
             {
                 Text = "OR ENTER ZIP CODE: ",
@@ -71,6 +77,7 @@ namespace Represented
                 VerticalOptions = LayoutOptions.Center
             };
 
+            // Layout of zip code entry elements
             zipcodeEntry = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
@@ -83,12 +90,12 @@ namespace Represented
                 }
             };
 
-            // add event triggers
+            // Adding event triggers to button and entry
             allowLocServices.Clicked += onButtonClicked;
             enterZipcodeEntry.Completed += onEntryCompleted;
 
-
-            // welcome page accepts user location info and requests webpage
+            // Welcome page contains location data prompts.
+            // Launches feed page upon completion
             welcomePage = new ContentPage
             {
                 Title = "Welcome to Represented!",
@@ -104,13 +111,18 @@ namespace Represented
                 }
             };
 
+            // Check to see if user has already stored location
             checkStoredLocation();
-
         }
 
+        // Accesses local database to check for stored location data
+        // If no location data stored, load welcome page
+        // If location data stored, load feed page with location specific feed
         async void checkStoredLocation()
         {
             List<RepresentedItem> items = await Database.GetItemsAsync();
+
+            // Iterate through database items returned from query
             foreach (RepresentedItem item in items)
             {
                 if(item.Zip.Length == 5)
@@ -127,8 +139,10 @@ namespace Represented
                 }
             }
 
+            // Latitude and Longitude take priority over other location data
             if(storedLong != 0.0 && storedLat != 0.0)
             {
+                // Build WebView with lat and long args
                 WebView webView = new WebView
                 {
                     Source = new UrlWebViewSource
@@ -138,6 +152,7 @@ namespace Represented
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
 
+                // Create content page with WebView
                 var content = new ContentPage
                 {
                     Title = urlString + "@" + storedLat + "," + storedLong,
@@ -151,8 +166,10 @@ namespace Represented
 
                 MainPage = new NavigationPage(content);
             }
+            // zip code is less reliable than lat and long
             else if (storedZip.Length == 5)
             {
+                // Build WebView with zip code arg
                 WebView webView = new WebView
                 {
                     Source = new UrlWebViewSource
@@ -162,6 +179,7 @@ namespace Represented
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
 
+                // Create content page with WebView
                 var content = new ContentPage
                 {
                     Title = urlString + storedZip,
@@ -175,27 +193,35 @@ namespace Represented
 
                 MainPage = new NavigationPage(content);
             }
+            // If no location data stored, load welcome page
             else
             {
                 MainPage = new NavigationPage(welcomePage);
             }
         }
 
+        // When button is clicked, get and store geolocation
+        // Then load feed page with zip code location arg
         async void onButtonClicked(object sender, EventArgs e)
         {
 
+            // Obtain user location data with geolocation
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 50;
             var position = await locator.GetPositionAsync(timeoutMilliseconds: 10000);
             
+            // Set data item fields with location data
             repItem.Zip = "";
             repItem.Lat = position.Latitude;
             repItem.Long = position.Longitude;
 
+            // Store location data in database
             await Database.SaveItemAsync(repItem);
 
+            // Create navigable view element
             Button button = (Button)sender;
 
+            // Build WebView with zip code arg
             WebView webView = new WebView
             {
                 Source = new UrlWebViewSource
@@ -204,7 +230,8 @@ namespace Represented
                 },
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
-            
+
+            // Create content page with WebView
             var content = new ContentPage
             {
                 Title = urlString + "@" + position.Latitude + "," + position.Longitude,
@@ -216,22 +243,31 @@ namespace Represented
                 }
             };
             
+            // Push feed page onto navigation stack
             await button.Navigation.PushAsync(content);
         }
 
+        // When entry is completed, check input and store zip code
+        // Then load feed page with zip code location arg
         async void onEntryCompleted(object sender, EventArgs e)
         {
+            // Obtain zipcode from entry field and check 5-digit int
             String arg = enterZipcodeEntry.Text;
             if (arg == null || arg.Length != 5) return;
-            
+            if (Regex.IsMatch(arg, @"^\d+$") == false) return;
+
+            // Set data item fields with location data
             repItem.Zip = arg;
             repItem.Lat = 0.0;
             repItem.Long = 0.0;
 
+            // Store location data in database
             await Database.SaveItemAsync(repItem);
 
+            // Create navigable view element
             Entry entry = (Entry)sender;
 
+            // Build WebView with lat and long args
             WebView webView = new WebView
             {
                 Source = new UrlWebViewSource
@@ -241,6 +277,7 @@ namespace Represented
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
 
+            // Create content page with WebView
             var content = new ContentPage
             {
                 Title = urlString + arg,
@@ -252,6 +289,7 @@ namespace Represented
                 }
             };
 
+            // Push feed page onto navigation stack
             await entry.Navigation.PushAsync(content);
         }
 

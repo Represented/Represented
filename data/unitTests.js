@@ -110,22 +110,6 @@ exports.insertBadDistrict = function(test) {
 	});
 };
 
-exports.insertGoodDistrict = function(test) {
-	MongoClient.connect(url, function(err, db) {
-		assert.equal(null, err);
-		test.ok(mutateDB.insertDistrict(db,
-			{
-				state: "WI",
-				district: 1,
-			}, function(result) {
-			db.dropDatabase();
-			test.ok(true);
-			test.expect(2);
-			test.done();
-		}));
-	});
-};
-
 exports.findDistrictWithMissingArgs = function(test) {
 	MongoClient.connect(url, function(err, db) {
 		assert.equal(null, err);
@@ -161,9 +145,9 @@ var reorderDistrictFields = function(dist) {
 		};
 };
 
-exports.findGoodDistrict = function(test) {
+exports.insertGoodDistrict = function(test) {
 	MongoClient.connect(url, function(err, db) {
-		assert.equal(null, err);
+		test.ok(null == err);
 		var dist = {
 				state: "WI",
 				district: 1,
@@ -175,9 +159,73 @@ exports.findGoodDistrict = function(test) {
 			test.ok(mutateDB.findDistrict(db, dist, function(docs) {
 				test.ok(JSON.stringify(dist) == JSON.stringify(docs[0]), JSON.stringify(dist)+" doesn't match returned"+JSON.stringify(docs[0]));
 				db.dropDatabase();
-				test.expect(3);
+				test.expect(4);
 				test.done();
 			}));
+		}));
+	});
+};
+
+exports.insertBadDistricts = function(test) {
+	MongoClient.connect(url, function(err, db) {
+		test.ok(null == err);
+		var districts = [
+					{
+					state: "WI",
+					district: 1,
+					},
+					{
+					state: "WI",
+					district: 2,
+					},
+					{
+					state: "WI",
+					district: 3,
+					},
+					// one is missing district field
+					{
+					state: "WI",
+					},
+				];
+		test.ifError(mutateDB.insertDistricts(db, districts, function(result) {
+		}));
+		db.dropDatabase();
+		test.expect(2);
+		test.done();
+	});
+};
+
+exports.insertGoodDistricts = function(test) {
+	MongoClient.connect(url, function(err, db) {
+		test.ok(null == err);
+		var districts = [
+					{
+					state: "WI",
+					district: 1,
+					},
+					{
+					state: "WI",
+					district: 2,
+					},
+					{
+					state: "WI",
+					district: 3,
+					},
+					{
+					state: "WI",
+					district: 4,
+					},
+				];
+		test.ok(mutateDB.insertDistricts(db, districts, function(result) {
+			for (var i = 0; i < districts.length; i ++) {
+				var dist = reorderDistrictFields(districts[i]);
+				test.ok(mutateDB.findDistrict(db, dist, function(docs) {
+					test.ok(JSON.stringify(dist) == JSON.stringify(docs[0]), JSON.stringify(dist)+" doesn't match returned"+JSON.stringify(docs[0]));
+				}));
+			}
+				db.dropDatabase();
+				test.expect(6);
+				test.done();
 		}));
 	});
 };

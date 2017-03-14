@@ -172,3 +172,65 @@ var findDistrict = function(db, district, callback) {
 	return true;
 };
 module.exports.findDistrict = findDistrict;
+
+/*
+ * Finds a representative or representatives that match a query
+ * @return {array} matching representatives
+ */
+var findRepresentative = function(db, representative, callback) {
+	//console.log("Entered findDistrict()");
+       if (db == null ||
+           representative == null ||
+           callback == null ||
+	   // can't find an invalid district; must have a state and district field
+           !validateRepresentative(representative))
+               return false;
+
+	var representatives = db.collection('representatives');
+
+	representatives.find(representative).toArray(function(err, docs) {
+		assert.equal(err, null);
+//		console.log("Found the following records");
+//		console.log(docs);
+		callback(docs);
+	});
+	return true;
+};
+module.exports.findRepresentative = findRepresentative;
+
+/*
+ * Inserts one or more representatives into the districts collection
+ * @param {JSON array} representatives
+ * @return {boolean} true if successful, false otherwise
+ */
+var insertRepresentatives = function(db, reps, callback) {
+	if (db == null ||
+			reps == null ||
+			callback == null)
+				return false;
+
+	for (var i = 0; i < reps.length; i++)
+		if (!validateRepresentative(reps[i]))
+			return false;
+
+	var representatives = db.collection('representatives');
+
+	// Insert some documents
+	representatives.insertMany(reps, function(err, result) {
+		var numReps = reps.length;
+		assert.equal(err, null);
+		assert.equal(numReps, result.result.n);
+		assert.equal(numReps, result.ops.length);
+//		console.log("Inserted "+numReps+" representatives into the collection");
+		callback(result);
+	});
+	return true;
+};
+module.exports.insertRepresentatives = insertRepresentatives;
+
+// TODO
+// add representative(s)
+// add sponsor to legislation (ObjectID)
+// add cosponsors to legislation (ObjectID)
+// add representatives to action
+// add legisltation

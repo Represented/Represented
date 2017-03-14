@@ -62,6 +62,73 @@ var validateRepresentative = function(district) {
 };
 module.exports.validateRepresentative = validateRepresentative;
 
+var validateLegislation = function(legislation) {
+	// TODO fix voteSchema so that it actually works
+//	var voteSchema = {
+//		"id": "/Vote",
+//		"type": "object",
+//		"properties": {
+////			"enum": ["for", "against", "absent"]
+////			"representative": {"type": "object"},
+//			"enum": [
+//				{"vote":"for"},
+//				{"vote":"against"},
+//				{"vote":"absent"},
+//			],
+//		},
+//
+////		"required": ["representative", "enum"]
+////		"required": ["for"]
+//	};
+//	v.addSchema(voteSchema, "/Vote");
+
+	var actionSchema = {
+		"id": "/Action",
+		"type": "object",
+		"properties": {
+			"status": {"type": "string"},
+			"date": {"type": "string"},
+			"body": {"type": "string"},
+			"representatives": {
+							"type": "array",
+							"items": "object"
+			},
+			"votes": {
+							"type": "array",
+							"items": {
+								"representative": {"type": "object"},
+								//"$ref": "/Vote",
+								"vote": {"type": "string"}
+							}
+			}
+		},
+		"required": ["status", "body"]
+	};
+	v.addSchema(actionSchema, '/Action');
+
+	return v.validate(legislation, {
+		"id": "/Legislation",
+		"type": "object",
+		"properties": {
+			"name": {"type": "string"},
+			"summary": {"type": "string"},
+			"categories": {"type": "string"},
+			"body": {"type": "string"},
+			"sponsor": {"type": "object"},
+			"cosponsors": {
+				"type": "array",
+				"items": {"type": "object"}
+			},
+			"actions": {
+							"type": "array",
+							"items": {"$ref": "/Action"},
+			},
+		},
+		"required": ["name", "summary"]
+	}).valid;
+};
+module.exports.validateLegislation = validateLegislation;
+
 /*
  * Inserts a district into the districts collection
  * @param {JSON} district
@@ -192,11 +259,36 @@ var findRepresentative = function(db, representative, callback) {
 		assert.equal(err, null);
 //		console.log("Found the following records");
 //		console.log(docs);
+//		console.log("typeof _id "+typeof docs[0]._id);
 		callback(docs);
 	});
 	return true;
 };
 module.exports.findRepresentative = findRepresentative;
+
+/*
+ * Finds legislation(s) that match a query
+ * @return {array} matching legislation(s)
+ */
+var findLegislation = function(db, leg, callback) {
+	//console.log("Entered findDistrict()");
+       if (db == null ||
+           leg == null ||
+           callback == null ||
+	   // can't find an invalid district; must have a state and district field
+           !validateLegislation(leg))
+               return false;
+
+	db.collection('legislation').find(leg).toArray(function(err, docs) {
+		assert.equal(err, null);
+//		console.log("Found the following records");
+//		console.log(docs);
+//		console.log("typeof _id "+typeof docs[0]._id);
+		callback(docs);
+	});
+	return true;
+};
+module.exports.findLegislation = findLegislation;
 
 /*
  * Inserts one or more representatives into the districts collection
@@ -228,9 +320,37 @@ var insertRepresentatives = function(db, reps, callback) {
 };
 module.exports.insertRepresentatives = insertRepresentatives;
 
+/*
+ * Inserts one or more pieces of legislation into the legislation collection
+ * @param {JSON array} legislation
+ * @return {boolean} true if successful, false otherwise
+ */
+var insertLegislations = function(db, legs, callback) {
+	if (db == null ||
+			legs == null ||
+			callback == null)
+				return false;
+
+	for (var i = 0; i < legs.length; i++)
+		if (!validateLegislation(legs[i]))
+			return false;
+
+	// Insert some documents
+	db.collection('legislation').insertMany(legs, function(err, result) {
+		var count = legs.length;
+		assert.equal(err, null);
+		assert.equal(count, result.result.n);
+		assert.equal(count, result.ops.length);
+//		console.log("Inserted "+count+" into legislation collection");
+		callback(result);
+	});
+	return true;
+};
+module.exports.insertLegislations = insertLegislations;
+
 // TODO
 // add representative(s)
 // add sponsor to legislation (ObjectID)
 // add cosponsors to legislation (ObjectID)
-// add representatives to action
-// add legisltation
+// add representatives to action (ObjectID)
+// add legislation

@@ -13,6 +13,20 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 19, name: 'Magma'},
       {id: 20, name: 'Tornado'}
     ];
-    return {heroes};
+    //return{heroes};
+    let actions = [
+      {
+        id: 1,
+        bill: 'S.595',
+        rep: {
+          name: 'Ron Johnson',
+          party: 'R',
+          state: 'WI',
+          bodyOfCongress: 'Senate',
+        },
+        action: 'Cosponsor'
+      }
+    ];
+    return {heroes, actions};
   }
 }

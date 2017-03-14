@@ -1,0 +1,8 @@
+<h2>My Rep's Actions</h2>
+<ul class="actions">
+  <li *ngFor="let repaction of repactions">
+    <h3>{{repaction.bill}}</h3>
+    <h4>Representative: {{repaction.rep.name}} {{repaction.rep.party}}-{{repaction.rep.state}}</h4>
+    <h4>Action: {{repaction.action}}</h4>
+  </li>
+</ul>

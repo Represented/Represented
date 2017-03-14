@@ -5,11 +5,11 @@ import { Component }          from '@angular/core';
   selector: 'my-app',
   template: `
     <h1>
-      <img src="../img/represented_logo_3.png" height="50" width="40">{{title}}
+      <img src="../img/represented_logo_3.png" height="50" width="40" routerLink="/newsfeed" routerLinkActive="active">{{title}}
       <img src="../img/Info.png" height="40" width="40" align="right" routerLink="/about" routerLinkActive="active">
     </h1>
     <nav>
-      <a routerLink="/dashboard" routerLinkActive="active">My Reps</a>
+      <a routerLink="/newsfeed" routerLinkActive="active">My Reps</a>
       <a routerLink="/heroes" routerLinkActive="active">House</a>
       <a routerLink="/heroes" routerLinkActive="active">Senate</a>
       <a routerLink="/about" routerLinkActive="active">About</a>

@@ -16,6 +16,8 @@ import { HeroesComponent }      from './heroes.component';
 import { HeroDetailComponent }  from './hero-detail.component';
 import { HeroService }          from './hero.service';
 import { HeroSearchComponent }  from './hero-search.component';
+import { NewsfeedComponent }    from './newsfeed.component';
+import { RepActionService }   from './repaction.service';
 
 
 @NgModule({
@@ -32,9 +34,13 @@ import { HeroSearchComponent }  from './hero-search.component';
     DashboardComponent,
     HeroDetailComponent,
     HeroesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    NewsfeedComponent
   ],
-  providers: [ HeroService ],
+  providers: [
+    HeroService,
+    RepActionService
+   ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

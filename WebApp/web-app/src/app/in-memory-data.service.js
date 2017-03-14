@@ -15,7 +15,21 @@ var InMemoryDataService = (function () {
             { id: 19, name: 'Magma' },
             { id: 20, name: 'Tornado' }
         ];
-        return { heroes: heroes };
+        //return{heroes};
+        var actions = [
+            {
+                id: 1,
+                bill: 'S.595',
+                rep: {
+                    name: 'Ron Johnson',
+                    party: 'R',
+                    state: 'WI',
+                    bodyOfCongress: 'Senate',
+                },
+                action: 'Cosponsor'
+            }
+        ];
+        return { heroes: heroes, actions: actions };
     };
     return InMemoryDataService;
 }());

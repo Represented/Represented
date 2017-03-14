@@ -8,7 +8,7 @@ import { RepActionService }         from './repaction.service';
   moduleId: module.id,
   selector: 'my-newsfeed',
   templateUrl: './newsfeed.component.html',
-  styleUrls: [ './newsfeed.component.css' ]
+  styleUrls: [ '../scss/newsfeed.component.css' ]
 })
 export class NewsfeedComponent implements OnInit {
   repactions: RepAction[];

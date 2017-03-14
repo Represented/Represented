@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
     moduleId:module.id,
     selector: 'my-welcome',
     templateUrl: './welcome.component.html',
-    styleUrls: ['./welcome.component.css']
+    styleUrls: ['../scss/welcome.component.css']
 })
 export class WelcomeComponent{
-    
+
 }

@@ -52,7 +52,7 @@ var HeroSearchComponent = (function () {
             moduleId: module.id,
             selector: 'hero-search',
             templateUrl: './hero-search.component.html',
-            styleUrls: ['./hero-search.component.css'],
+            styleUrls: ['../scss/hero-search.component.css'],
             providers: [hero_search_service_1.HeroSearchService]
         }), 
         __metadata('design:paramtypes', [hero_search_service_1.HeroSearchService, router_1.Router])

@@ -320,3 +320,47 @@ exports.validateGoodRepresentative = function(test) {
 	));
 	test.done();
 };
+
+// _id gets tacked on the end of dist; we need to put it at the front to
+// test equality because findDistrict() has _id as first field
+var reorderRepresentativeFields = function(rep) {
+	return {
+			_id: rep._id,
+			name: rep.name,
+			location: rep.location,
+			title: rep.title,
+			party: rep.party,
+		};
+};
+
+exports.insertGoodRepresentatives = function(test) {
+	MongoClient.connect(url, function(err, db) {
+		test.ok(null == err);
+		var reps= [{
+				name: {first: "sally", last:"seashell"},
+				location: {state: "wisconsin", district: 1},
+				title: "senator",
+				party: "independent"
+			},
+			{
+				name: {first: "john", last:"doe"},
+				location: {state: "alabama", district: 69},
+				title: "congressman",
+				party: "libertarian"
+			}];
+		test.ok(mutateDB.insertRepresentatives(db, reps, function(result) {
+			reps[0] = reorderRepresentativeFields(reps[0]);
+			test.ok(mutateDB.findRepresentative(db, reps[0], function(docs) {
+				test.ifError(docs.length == 0);
+				test.ok(JSON.stringify(reps[0]) === JSON.stringify(docs[0]), JSON.stringify(reps[0])+" doesn't match returned "+JSON.stringify(docs[0]));
+				var rep2 = reorderRepresentativeFields(reps[1]);
+				test.ok(mutateDB.findRepresentative(db, rep2, function(docs) {
+					test.ok(JSON.stringify(rep2) === JSON.stringify(docs[0]), JSON.stringify(rep2)+" doesn't match returned "+JSON.stringify(docs[0]));
+					db.dropDatabase();
+					test.expect(7);
+					test.done();
+				}));
+			}));
+		}));
+	});
+};

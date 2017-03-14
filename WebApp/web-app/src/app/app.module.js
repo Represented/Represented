@@ -18,6 +18,7 @@ var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
 var in_memory_data_service_1 = require('./in-memory-data.service');
 var about_component_1 = require('./about.component');
 var app_component_1 = require('./app.component');
+var welcome_component_1 = require('./welcome.component');
 var dashboard_component_1 = require('./dashboard.component');
 var heroes_component_1 = require('./heroes.component');
 var hero_detail_component_1 = require('./hero-detail.component');
@@ -39,6 +40,7 @@ var AppModule = (function () {
             ],
             declarations: [
                 about_component_1.AboutComponent,
+                welcome_component_1.WelcomeComponent,
                 app_component_1.AppComponent,
                 dashboard_component_1.DashboardComponent,
                 hero_detail_component_1.HeroDetailComponent,

@@ -11,6 +11,7 @@ import { InMemoryDataService }  from './in-memory-data.service';
 
 import { AboutComponent }       from './about.component';
 import { AppComponent }         from './app.component';
+import { WelcomeComponent}      from './welcome.component';
 import { DashboardComponent }   from './dashboard.component';
 import { HeroesComponent }      from './heroes.component';
 import { HeroDetailComponent }  from './hero-detail.component';
@@ -30,6 +31,7 @@ import { RepActionService }   from './repaction.service';
   ],
   declarations: [
     AboutComponent,
+    WelcomeComponent,
     AppComponent,
     DashboardComponent,
     HeroDetailComponent,

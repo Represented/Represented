@@ -137,11 +137,14 @@ exports.findDistrictWithMissingArgs = function(test) {
 //	});
 //};
 
+// _id gets tacked on the end of dist; we need to put it at the front to
+// test equality because findDistrict() has _id as first field
 var reorderDistrictFields = function(dist) {
 	return {
 			_id: dist._id,
 			state: dist.state,
 			district: dist.district,
+			zipcode: dist.zipcode,
 		};
 };
 
@@ -157,7 +160,51 @@ exports.insertGoodDistrict = function(test) {
 			// test equality because findDistrcit() has _id as first field
 			dist = reorderDistrictFields(dist);
 			test.ok(mutateDB.findDistrict(db, dist, function(docs) {
-				test.ok(JSON.stringify(dist) == JSON.stringify(docs[0]), JSON.stringify(dist)+" doesn't match returned"+JSON.stringify(docs[0]));
+				test.ok(JSON.stringify(dist) == JSON.stringify(docs[0]), JSON.stringify(dist)+" doesn't match returned "+JSON.stringify(docs[0]));
+				db.dropDatabase();
+				test.expect(4);
+				test.done();
+			}));
+		}));
+	});
+};
+
+exports.insertGoodDistrict2 = function(test) {
+	MongoClient.connect(url, function(err, db) {
+		test.ok(null == err);
+		var dist = {
+				state: "WI",
+				district: 1,
+				zipcode: [53527],
+			   };
+		test.ok(mutateDB.insertDistrict(db, dist, function(result) {
+			// _id gets tacked on the end of dist; we need to put it at the front to
+			// test equality because findDistrcit() has _id as first field
+			dist = reorderDistrictFields(dist);
+			test.ok(mutateDB.findDistrict(db, dist, function(docs) {
+				test.ok(JSON.stringify(dist) == JSON.stringify(docs[0]), JSON.stringify(dist)+" doesn't match returned "+JSON.stringify(docs[0]));
+				db.dropDatabase();
+				test.expect(4);
+				test.done();
+			}));
+		}));
+	});
+};
+
+exports.insertGoodDistrict3 = function(test) {
+	MongoClient.connect(url, function(err, db) {
+		test.ok(null == err);
+		var dist = {
+				state: "WI",
+				district: 1,
+				zipcode: [53527, 53706],
+			   };
+		test.ok(mutateDB.insertDistrict(db, dist, function(result) {
+			// _id gets tacked on the end of dist; we need to put it at the front to
+			// test equality because findDistrcit() has _id as first field
+			dist = reorderDistrictFields(dist);
+			test.ok(mutateDB.findDistrict(db, dist, function(docs) {
+				test.ok(JSON.stringify(dist) == JSON.stringify(docs[0]), JSON.stringify(dist)+" doesn't match returned "+JSON.stringify(docs[0]));
 				db.dropDatabase();
 				test.expect(4);
 				test.done();
@@ -198,34 +245,67 @@ exports.insertBadDistricts = function(test) {
 exports.insertGoodDistricts = function(test) {
 	MongoClient.connect(url, function(err, db) {
 		test.ok(null == err);
-		var districts = [
-					{
-					state: "WI",
-					district: 1,
-					},
-					{
-					state: "WI",
-					district: 2,
-					},
-					{
-					state: "WI",
-					district: 3,
-					},
-					{
-					state: "WI",
-					district: 4,
-					},
-				];
+		var districts = [ { state: "WI", district: 1,}, { state: "WI", district: 2,}, ];
 		test.ok(mutateDB.insertDistricts(db, districts, function(result) {
-			for (var i = 0; i < districts.length; i ++) {
-				var dist = reorderDistrictFields(districts[i]);
-				test.ok(mutateDB.findDistrict(db, dist, function(docs) {
-					test.ok(JSON.stringify(dist) == JSON.stringify(docs[0]), JSON.stringify(dist)+" doesn't match returned"+JSON.stringify(docs[0]));
+			districts[0] = reorderDistrictFields(districts[0]);
+			test.ok(mutateDB.findDistrict(db, districts[0], function(docs) {
+				test.ok(JSON.stringify(districts[0]) === JSON.stringify(docs[0]), JSON.stringify(districts[0])+" doesn't match returned "+JSON.stringify(docs[0]));
+				var dist2 = reorderDistrictFields(districts[1]);
+				test.ok(mutateDB.findDistrict(db, dist2, function(docs) {
+					test.ok(JSON.stringify(dist2) === JSON.stringify(docs[0]), JSON.stringify(dist2)+" doesn't match returned "+JSON.stringify(docs[0]));
+					db.dropDatabase();
+					test.expect(6);
+					test.done();
 				}));
-			}
-				db.dropDatabase();
-				test.expect(6);
-				test.done();
+			}));
 		}));
 	});
 };
+
+exports.insertGoodZipcode = function(test) {
+	MongoClient.connect(url, function(err, db) {
+		test.ok(null == err);
+		var dist = { state: "WI", district: 1, };
+		test.ok(mutateDB.insertDistrict(db, dist, function(result) {
+			dist = reorderDistrictFields(dist);
+			test.ok(mutateDB.insertZipCode(db, dist, 53527, function(result) {}));
+			db.dropDatabase();
+			test.expect(3);
+			test.done();
+		}));
+	});
+};
+
+exports.insertGoodZipcode2 = function(test) {
+	MongoClient.connect(url, function(err, db) {
+		test.ok(null == err);
+		var dist = { state: "WI", district: 1, };
+		test.ok(mutateDB.insertDistrict(db, dist, function(result) {
+			dist = reorderDistrictFields(dist);
+			test.ok(mutateDB.insertZipCode(db, dist, 53527, function(result) {
+				dist.zipcode = [53527];
+					test.ok(mutateDB.findDistrict(db, dist, function(docs) {
+					test.ok(JSON.stringify(dist) === JSON.stringify(docs[0]), JSON.stringify(dist)+" doesn't match returned "+JSON.stringify(docs[0]));
+						db.dropDatabase();
+						test.expect(5);
+						test.done();
+				}));
+			}));
+		}));
+	});
+};
+
+exports.insertBadZipcodes = function(test) {
+	MongoClient.connect(url, function(err, db) {
+		test.ok(null == err);
+		var dist = { state: "WI", district: 1, };
+		test.ok(mutateDB.insertDistrict(db, dist, function(result) {
+			dist = reorderDistrictFields(dist);
+			test.ifError(mutateDB.insertZipCode(db, dist, [53527, 53706], function(result) {}));
+			db.dropDatabase();
+			test.expect(3);
+			test.done();
+		}));
+	});
+};
+

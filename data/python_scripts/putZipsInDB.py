@@ -2,10 +2,13 @@
 import csv, urllib2, json, time
 from pymongo import MongoClient
 
-client = MongoClient('mongodb://localhost:27017/wiscodb')
-db = client['wiscodb']
+# establish connection to db
+dbName = 'representedDB'
+client = MongoClient('mongodb://localhost:27017/{}'.format(dbName))
+db = client[dbName]
 coll = db['districts']
 
+# add zipcode to districts for each zipcode inside the csv
 count = 0
 with open('free-zipcode-database-Primary.csv') as infile:
     reader = csv.reader(infile)

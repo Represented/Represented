@@ -309,3 +309,14 @@ exports.insertBadZipcodes = function(test) {
 	});
 };
 
+exports.validateGoodRepresentative = function(test) {
+	test.ok(mutateDB.validateRepresentative(
+		{
+			name: {first: "sally", last:"seashell"},
+			location: {state: "wisconsin", district: 1},
+			title: "senator",
+			party: "independent"
+		}
+	));
+	test.done();
+};

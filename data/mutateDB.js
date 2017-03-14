@@ -26,10 +26,10 @@ var validateRepresentative = function(district) {
 		"id": "/Name",
 		"type": "object",
 		"properties": {
-			"firstName": {"type": "string"},
-			"lastName": {"type": "string"},
+			"first": {"type": "string"},
+			"last": {"type": "string"}
 		},
-		"required": ["firstName", "lastName"]
+		"required": ["first", "last"]
 	};
 	v.addSchema(nameSchema, '/Name');
 
@@ -38,7 +38,7 @@ var validateRepresentative = function(district) {
 		"type": "object",
 		"properties": {
 			"state": {"type": "string"},
-			"district": {"type": "string"},
+			"district": {"type": "integer"}
 		},
 		"required": ["state", "district"]
 	};
@@ -48,14 +48,14 @@ var validateRepresentative = function(district) {
 		"id": "/Representative",
 		"type": "object",
 		"properties": {
-			"name": {"$ref", "/Name"},
-			"location": {"$ref", "/Location"},
+			"name": {"$ref": "/Name"},
+			"location": {"$ref": "/Location"},
 			"title": {"type": "string"},
 			"party": {"type": "string"},
 			"biography": {"type": "string"},
 			"portraitURL": {"type": "string"},
 			"email": {"type": "string"},
-			"phoneNumber": {"type": "string"},
+			"phoneNumber": {"type": "string"}
 		},
 		"required": ["name", "location", "title", "party"]
 	}).valid;

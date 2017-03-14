@@ -70,7 +70,7 @@ var insertDistricts = function(db, dists, callback) {
 		assert.equal(err, null);
 		assert.equal(numDistricts, result.result.n);
 		assert.equal(numDistricts, result.ops.length);
-		console.log("Inserted "+numDistricts+" documents into the collection");
+//		console.log("Inserted "+numDistricts+" documents into the collection");
 		callback(result);
 	});
 	return true;
@@ -78,10 +78,41 @@ var insertDistricts = function(db, dists, callback) {
 module.exports.insertDistricts = insertDistricts;
 
 /*
+ * Adds a zipcode to a district
+ * @param {JSON} district (needs state and district fields)
+ * @param {integer} zipcode
+ * @return {boolean} true if successful, false otherwise
+ */
+var insertZipCode = function(db, district, zipcode, callback) {
+	if (db == null ||
+			district == null ||
+			zipcode == null ||
+			typeof zipcode !== 'number' ||
+			callback == null ||
+		  !validateDistrict(district)) {
+				return false;
+			}
+
+
+	var districts = db.collection('districts');
+
+	// Insert some documents
+	districts.updateOne(district, { $addToSet: {zipcode: zipcode} }, function(err, result) {
+		assert.equal(err, null);
+		assert.equal(1, result.result.n);
+		//console.log("Updated the document "+JSON.stringify(district));
+		callback(result);
+	});
+	return true;
+};
+module.exports.insertZipCode = insertZipCode;
+
+/*
  * Finds a district or districts that match a query
  * @return {array} matching districts
  */
 var findDistrict = function(db, district, callback) {
+	//console.log("Entered findDistrict()");
        if (db == null ||
            district == null ||
            callback == null ||

@@ -364,3 +364,91 @@ exports.insertGoodRepresentatives = function(test) {
 		}));
 	});
 };
+
+exports.validateGoodLegislation = function(test) {
+	test.ok(mutateDB.validateLegislation(
+		{
+			name: "Act to Add Hot Dogs to School Lunches",
+			summary: "Adds Dogs to Lunches",
+			actions: [
+					{
+						status: "passed House",
+						body: "This is the body.",
+						votes: [
+							{
+									vote:"for"
+							}
+						],
+					}
+			],
+		}
+	));
+	test.done();
+};
+
+// _id gets tacked on the end of dist; we need to put it at the front to
+// test equality because findDistrict() has _id as first field
+var reorderLegislationFields = function(leg) {
+	return {
+			_id: leg._id,
+			name: leg.name,
+			summary: leg.summary,
+			categories: leg.categories,
+			body: leg.body,
+			sponsor: leg.sponsor,
+			cosponsors: leg.cosponsors,
+			actions: leg.actions
+		};
+};
+
+exports.insertGoodLegislations = function(test) {
+	MongoClient.connect(url, function(err, db) {
+		test.ok(null == err);
+		var legs = [
+			{
+				name: "Act to Add Hot Dogs to School Lunches",
+				summary: "Adds Dogs to Lunches",
+				actions: [
+						{
+							status: "passed House",
+							body: "This is the body.",
+							votes: [
+								{
+										vote:"for"
+								}
+							],
+						}
+				],
+			},
+			{
+				name: "Act to Make Pizza a Vegetable",
+				summary: "This allows our kiddos to get a full serving of veggies.",
+				actions: [
+						{
+							status: "passed Senate",
+							body: "This is the pizza body.",
+							votes: [
+								{
+										vote:"against"
+								}
+							],
+						}
+				],
+			}
+		];
+		test.ok(mutateDB.insertLegislations(db, legs, function(result) {
+			legs[0] = reorderLegislationFields(legs[0]);
+			test.ok(mutateDB.findLegislation(db, legs[0], function(docs) {
+				test.ifError(docs.length == 0);
+				test.ok(JSON.stringify(legs[0]) === JSON.stringify(legs[0]), JSON.stringify(legs[0])+" doesn't match returned "+JSON.stringify(docs[0]));
+				var leg2 = reorderLegislationFields(legs[1]);
+				test.ok(mutateDB.findLegislation(db, leg2, function(docs) {
+					test.ok(JSON.stringify(leg2) === JSON.stringify(docs[0]), JSON.stringify(leg2)+" doesn't match returned "+JSON.stringify(docs[0]));
+					db.dropDatabase();
+					test.expect(7);
+					test.done();
+				}));
+			}));
+		}));
+	});
+};

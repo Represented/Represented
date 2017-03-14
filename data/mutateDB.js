@@ -21,6 +21,47 @@ var validateDistrict = function(district) {
 };
 module.exports.validateDistrict = validateDistrict;
 
+var validateRepresentative = function(district) {
+	var nameSchema = {
+		"id": "/Name",
+		"type": "object",
+		"properties": {
+			"firstName": {"type": "string"},
+			"lastName": {"type": "string"},
+		},
+		"required": ["firstName", "lastName"]
+	};
+	v.addSchema(nameSchema, '/Name');
+
+	var locationSchema = {
+		"id": "/Location",
+		"type": "object",
+		"properties": {
+			"state": {"type": "string"},
+			"district": {"type": "string"},
+		},
+		"required": ["state", "district"]
+	};
+	v.addSchema(locationSchema, '/Location');
+
+	return v.validate(district, {
+		"id": "/Representative",
+		"type": "object",
+		"properties": {
+			"name": {"$ref", "/Name"},
+			"location": {"$ref", "/Location"},
+			"title": {"type": "string"},
+			"party": {"type": "string"},
+			"biography": {"type": "string"},
+			"portraitURL": {"type": "string"},
+			"email": {"type": "string"},
+			"phoneNumber": {"type": "string"},
+		},
+		"required": ["name", "location", "title", "party"]
+	}).valid;
+};
+module.exports.validateRepresentative = validateRepresentative;
+
 /*
  * Inserts a district into the districts collection
  * @param {JSON} district

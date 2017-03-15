@@ -1,3 +1,5 @@
+@import '../node_modules/primeng/resources/primeng.min.css';
+
 /* Master Styles */
 h1 {
   color: #369;

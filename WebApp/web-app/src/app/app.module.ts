@@ -18,8 +18,8 @@ import { HeroDetailComponent }  from './hero-detail.component';
 import { HeroService }          from './hero.service';
 import { HeroSearchComponent }  from './hero-search.component';
 import { NewsfeedComponent }    from './newsfeed.component';
-import { RepActionService }   from './repaction.service';
-
+import { RepActionService }     from './repaction.service';
+import { DataScrollerModule }   from 'primeng/primeng';
 
 @NgModule({
   imports: [
@@ -27,7 +27,8 @@ import { RepActionService }   from './repaction.service';
     FormsModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
-    AppRoutingModule
+    AppRoutingModule,
+    DataScrollerModule
   ],
   declarations: [
     AboutComponent,

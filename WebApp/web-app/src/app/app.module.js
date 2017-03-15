@@ -26,6 +26,7 @@ var hero_service_1 = require('./hero.service');
 var hero_search_component_1 = require('./hero-search.component');
 var newsfeed_component_1 = require('./newsfeed.component');
 var repaction_service_1 = require('./repaction.service');
+var primeng_1 = require('primeng/primeng');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -36,7 +37,8 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 http_1.HttpModule,
                 angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService),
-                app_routing_module_1.AppRoutingModule
+                app_routing_module_1.AppRoutingModule,
+                primeng_1.DataScrollerModule
             ],
             declarations: [
                 about_component_1.AboutComponent,

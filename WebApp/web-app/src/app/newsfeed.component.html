@@ -1,8 +1,15 @@
-<h2>My Rep's Actions</h2>
-<ul class="actions">
-  <li *ngFor="let repaction of repactions">
-    <h3>{{repaction.bill}}</h3>
-    <h4>Representative: {{repaction.rep.name}} {{repaction.rep.party}}-{{repaction.rep.state}}</h4>
-    <h4>Action: {{repaction.action}}</h4>
-  </li>
-</ul>
+<p-dataScroller [value]="repactions" [rows]="10" [buffer]="0.4">
+  <p-header>
+    Scroll Down to Load More
+  </p-header>
+  <template let-rep pTemplate="item">
+    <!--<h2>My Rep's Actions</h2>
+    <ul class="actions">
+      <li *ngFor="let repaction of repactions">
+        <h3>{{repaction.bill}}</h3>
+        <h4>Representative: {{repaction.rep.name}} {{repaction.rep.party}}-{{repaction.rep.state}}</h4>
+        <h4>Action: {{repaction.action}}</h4>
+      </li>
+    </ul>-->
+  </template>
+</p-dataScroller>\

@@ -2,6 +2,8 @@
 import csv, urllib2, json, time
 from pymongo import MongoClient
 
+start = time.time()
+
 # establish connection to db
 dbName = 'representedDB'
 client = MongoClient('mongodb://localhost:27017/{}'.format(dbName))
@@ -31,3 +33,5 @@ with open('free-zipcode-database-Primary.csv') as infile:
                 print("{} count: {}".format(zipDict, count))
                 result = db.districts.insert_one(zipDict)
         time.sleep(1)
+
+print("this script took {} seconds to run".format(time.time()-start))

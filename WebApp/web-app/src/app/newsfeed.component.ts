@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
-
 import { RepAction }                from './repaction';
 import { RepActionService }         from './repaction.service';
+import { DataScrollerModule }       from 'primeng/primeng';
 
 @Component({
   moduleId: module.id,

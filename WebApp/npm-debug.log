@@ -3,7 +3,7 @@
 2 info using npm@4.1.2
 3 info using node@v7.7.1
 4 verbose stack Error: ENOENT: no such file or directory, open '/Users/Benzaydman/Represented/package.json'
-5 verbose cwd /Users/Benzaydman/Represented
+5 verbose cwd /Users/Benzaydman/Represented/WebApp
 6 error Darwin 15.6.0
 7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
 8 error node v7.7.1

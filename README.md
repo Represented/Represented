@@ -21,13 +21,13 @@ CS 506 Project
 * Android Device with Android 4.x or newer
 
 ## Building and Running
-## Xamarin Application
+### Xamarin Application
 1.  Enable Developer Options on Android device and connect to machine over data cable
 2.  Open Represented.sln in Visual Studio
 3.  Set Represented.Droid as startup project
 4.  Select Android device from dropdown of deployable devices
 5.  Select Build->Deploy and then open application on Android device
-## Installation
+### Installation
 1. Spin up Ubuntu 16.04 Xenial either as a VPS, a Docker container, or a Vagrant virtual machine.
     * For example, with Vagrant installed:
 ```

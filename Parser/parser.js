@@ -1,9 +1,8 @@
 // flag to track whether the data currently being posted to the database is representative data or legislation data
 var isRepData = true;
 
-// requires for connecting to the database and using XML HTTP requests
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-var mutateDB = require('../Database/MutateDB'),
+// requires for connecting to the database
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest,
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
 
@@ -88,10 +87,13 @@ function postData(outputData) {
 			//TODO remove
 			console.log("Attempting to insert representative data into db");
 
-			// inserting representative data into the database
-			mutateDB.insertRepresentatives(db, outputData, function() {
-				db.close();
-				console.log("Successfully inserted representative data into db");
+			// Insert some documents
+			db.collection('representatives').insertMany(outputData, function(err, result) {
+				var count = legs.length;
+				assert.equal(err, null);
+				assert.equal(count, result.result.n);
+				assert.equal(count, result.ops.length);
+				callback(result);
 			});
 		});
 	} else {
@@ -107,11 +109,13 @@ function postData(outputData) {
 			//TODO remove
 			console.log("Attempting to insert legislation data into db");
 
-			// inserting legislation data into the database
-			mutateDB.insertLegislations(db, outputData, function() {
-                                db.close();
-				console.log("Successfully inserted liegislation data into db");
-                        });
+			db.collection('legislation').insertMany(outputData, function(err, result) {
+				var count = legs.length;
+				assert.equal(err, null);
+				assert.equal(count, result.result.n);
+				assert.equal(count, result.ops.length);
+				callback(result);
+			});
 		});
 	}
 }

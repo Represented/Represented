@@ -1,4 +1,4 @@
-var mutateDB = require('./mutateDB');
+var mutateDB = require('./MutateDB');
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
 

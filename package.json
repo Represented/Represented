@@ -4,7 +4,7 @@
   "description": "CS 506 Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p src/",
     "build:watch": "tsc -p src/ -w",
     "build:e2e": "tsc -p e2e/",
@@ -48,7 +48,7 @@
     "jsonschema": "^1.1.1",
     "mongodb": "^2.2.24",
     "nodeunit": "^0.11.0",
-    "xmlhttprequest": "^1.8.0"
+    "xmlhttprequest": "^1.8.0",
     "@angular/common": "2.4.5",
     "@angular/compiler": "2.4.5",
     "@angular/compiler-cli": "2.4.5",

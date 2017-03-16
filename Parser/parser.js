@@ -1,5 +1,10 @@
-// flag to track whether the data currently being posted to the database is representative data or legislation data
-var isRepData = true;
+// enum and flag to track whether the data currently being posted to the database is representative data or legislation data
+var dataEnum = {
+	REP : 0,
+	LEGISLATION : 1,
+	VOTES : 2
+}
+var dataFlag = dataEnum.REP;
 
 // requires for connecting to the database
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest,
@@ -11,7 +16,7 @@ function getData() {
 	/* calling Sunlight API to get JSON data */
 
 	// using different values for arg to get all necessary data
-	for (i = 0; i < 2; i++) {
+	for (i = 0; i < 3; i++) {
 
 		// setting up path for next HTTP request; start of path will 
 		// always be the same, but various arguments will be appended 
@@ -21,11 +26,15 @@ function getData() {
 		switch (i) {
 			case 0: 
 				arg = "legislators?per_page=all";
-				isRepData = true;
+				dataFlag = dataEnum.REP;
 				break;
 			case 1:
 				arg = "bills?history.active=true&order=last_action_at";
-				isRepData = false;
+				dataFlag = dataEnum.LEGISLATION;
+				break;
+			case 2:
+				arg = "votes?fields=bill_id,results,voter_ids";
+				dataFlag = dataEnum.VOTES;
 				break;
 			default:
 				console.log("Unexpected parser behavior encountered; stopping execution.");
@@ -46,7 +55,7 @@ function getData() {
 				console.log(this.responseText);
 		       		var inputData = JSON.parse(this.responseText);
 				//TODO remove
-				console.log(inputData.results);
+				//console.log(inputData.results);
 				postData(inputData.results);
 			}
 		};
@@ -71,10 +80,10 @@ function postData(outputData) {
 	console.log("Calling postData()");
 
 	// database url
-	var url = 'mongodb://localhost:27017/myproject';
+	var url = 'mongodb://localhost:27017/representedDB';
 
 	// deciding whether this is representative or legislation data
-	if (isRepData) {
+	if (dataFlag == dataEnum.REP) {
 
 		//TODO remove
 		console.log("Inserting representative data");
@@ -89,14 +98,14 @@ function postData(outputData) {
 
 			// Insert some documents
 			db.collection('representatives').insertMany(outputData, function(err, result) {
-				var count = legs.length;
+				var count = outputData.length;
 				assert.equal(err, null);
 				assert.equal(count, result.result.n);
 				assert.equal(count, result.ops.length);
-				callback(result);
+				db.close();
 			});
 		});
-	} else {
+	} else if (dataFlag == dataEnum.LEGISLATION) {
 
 		//TODO remove
 		console.log("Inserting legislation data");
@@ -110,13 +119,40 @@ function postData(outputData) {
 			console.log("Attempting to insert legislation data into db");
 
 			db.collection('legislation').insertMany(outputData, function(err, result) {
-				var count = legs.length;
+				var count = outputData.length;
 				assert.equal(err, null);
 				assert.equal(count, result.result.n);
 				assert.equal(count, result.ops.length);
-				callback(result);
+				db.close();
 			});
 		});
+	} else if (dataFlag == dataEnum.VOTES) {
+		//TODO remove
+                console.log("Inserting votes data");
+
+		// looping over each vote and getting rid of voter field
+		for (j = 0; j < outputData.length; j++) {
+			delete outputData[j].voter;
+		}
+
+                // connecting to database
+                MongoClient.connect(url, function(err, db) {
+                        assert.equal(err, null);
+                        console.log("Connected correctly to server");
+
+                        //TODO remove
+                        console.log("Attempting to insert votes data into db");
+
+                        db.collection('votes').insertMany(outputData, function(err, result) {
+                                var count = outputData.length;
+                                assert.equal(err, null);
+                                assert.equal(count, result.result.n);
+                                assert.equal(count, result.ops.length);
+				db.close();
+                        });
+                });
+	} else {
+		console.log("Error; processing unknown data type");
 	}
 }
 

@@ -1,8 +1,9 @@
 // flag to track whether the data currently being posted to the database is representative data or legislation data
 var isRepData = true;
 
-// requires for connecting to the database
-var mutateDB = require('../Database/MutateDB');
+// requires for connecting to the database and using XML HTTP requests
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var mutateDB = require('../Database/MutateDB'),
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
 

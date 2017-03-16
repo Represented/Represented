@@ -10,12 +10,10 @@ import { Component }          from '@angular/core';
     </h1>
     <nav>
       <a routerLink="/newsfeed" routerLinkActive="active">My Reps</a>
-      <a routerLink="/heroes" routerLinkActive="active">House</a>
-      <a routerLink="/heroes" routerLinkActive="active">Senate</a>
+      <a routerLink="/newsfeed" routerLinkActive="inactive">House</a>
+      <a routerLink="/newsfeed" routerLinkActive="inactive">Senate</a>
       <a routerLink="/about" routerLinkActive="active">About</a>
       <a routerLink="/welcome" routerLinkActive="active">Welcome</a>
-      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-      <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
     </nav>
     <router-outlet></router-outlet>
   `,

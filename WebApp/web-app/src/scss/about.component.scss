@@ -33,21 +33,27 @@
 }
 
 .informed{
+  h1, h3 {
+    color: white;
+  }
   background-color: blue;
   border-color: white;
   border-width: 3px;
   padding: 25px;
   color: white;
-  text-align: right;
+  text-align: center;
 }
 
 .contact{
+  h1, h3 {
+    color: white;
+  }
   background-color: red;
   border-color: white;
   border-width: 3px;
   padding: 25px;
   color: white;
-  text-align: center;;
+  text-align: center;
 }
 
 h1{

@@ -30,7 +30,9 @@
   border-width: 3px;
   padding: 25px;
   color: white;
-  text-align: right; }
+  text-align: center; }
+  .informed h1, .informed h3 {
+    color: white; }
 
 .contact {
   background-color: red;
@@ -39,6 +41,10 @@
   padding: 25px;
   color: white;
   text-align: center; }
+  .contact h1, .contact h3 {
+    color: white; }
 
 h1 {
   font-size: 36px; }
+
+/*# sourceMappingURL=about.component.css.map */

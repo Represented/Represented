@@ -16,7 +16,7 @@ namespace Represented
         Button allowLocServices = new Button();
         View zipcodeEntry = new StackLayout();
         ContentPage welcomePage = new ContentPage();
-        String urlString = "http://138.197.9.140/";
+        String urlString = "http://represented506.me:3000/";
 
         // Initialization of Data elements
         RepresentedItem repItem = new RepresentedItem();

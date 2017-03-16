@@ -1,6 +1,11 @@
 // flag to track whether the data currently being posted to the database is representative data or legislation data
 var isRepData = true;
 
+// requires for connecting to the database
+var mutateDB = require('../Database/MutateDB');
+    MongoClient = require('mongodb').MongoClient,
+    assert = require('assert');
+
 function getData() {
 
 	/* calling Sunlight API to get JSON data */
@@ -82,15 +87,11 @@ function postData(outputData) {
 			//TODO remove
 			console.log("Attempting to insert representative data into db");
 
-			//TODO get doc and mutate
 			// inserting representative data into the database
-			insertRepresentatives(db, outputData, function() {
+			mutateDB.insertRepresentatives(db, outputData, function() {
 				db.close();
+				console.log("Successfully inserted representative data into db");
 			});
-
-			//TODO remove
-			console.log("Successfully inserted representative data into db");
-
 		});
 	} else {
 
@@ -105,14 +106,11 @@ function postData(outputData) {
 			//TODO remove
 			console.log("Attempting to insert legislation data into db");
 
-			//TODO get doc and mutate
 			// inserting legislation data into the database
-			insertLegislations(db, outputData, function() {
+			mutateDB.insertLegislations(db, outputData, function() {
                                 db.close();
+				console.log("Successfully inserted liegislation data into db");
                         });
-
-			//TODO remove
-			console.log("Successfully inserted liegislation data into db");
 		});
 	}
 }

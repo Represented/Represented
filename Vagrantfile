@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# most of Vagrantfile copied from http://askubuntu.com/questions/832137/ubuntu-xenial64-box-password
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
@@ -48,6 +50,32 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	sudo bash nodesource_setup.sh
 	apt-get -y install nodejs
 	apt-get -y install build-essential
+	cd /vagrant
+	npm install
   SHELL
+
+  # EXTRAS atop what was copied from the link above
+  # config.vm.synced_folder "../", "/home/ubuntu/"
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
+
+#root@represented:~# useradd -s /bin/bash -m -d /home/safeuser -c "safe user" safeuser
+#root@represented:~# passwd safeuser
+#Enter new UNIX password: 
+#Retype new UNIX password: 
+#passwd: password updated successfully
+#root@represented:~#  usermod -aG sudo safeuser
+#root@represented:~# apt-get install libcap2-bin
+#Reading package lists... Done
+#Building dependency tree       
+#Reading state information... Done
+#libcap2-bin is already the newest version (1:2.24-12).
+#The following packages were automatically installed and are no longer required:
+#  linux-headers-4.4.0-64 linux-headers-4.4.0-64-generic
+#  linux-image-4.4.0-64-generic snap-confine
+#Use 'apt autoremove' to remove them.
+#0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#root@represented:~# setcap cap_net_bind_service=+ep /usr/local/bin/node
+#root@represented:~# npm install pm2 -g
+
 
 end

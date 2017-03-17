@@ -31,4 +31,8 @@ CS 506 Project
 1. Spin up Ubuntu 16.04 Xenial the provided Vagrant Vagrantfile
 ```
 $ vagrant up
+$ vagrant ssh
+ubuntu@ubuntu-xenial:~$ cd /vagrant
+ubuntu@ubuntu-xenial:/vagrant$ npm start
 ```
+You can now access the project from localhost:3000

@@ -4,7 +4,7 @@ CS 506 Project
 ## Sytem Requirements
 ### Hardware
 * Minimum 2 GB of RAM
-* TODO Minimum XXX mb/s of Bandwidth
+* Minimum 10 MB/s of Bandwidth
 * Minimum 20GB storage
 ### Software
 * Ubuntu 16.04 operating system

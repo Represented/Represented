@@ -16,7 +16,7 @@ var WelcomeComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'my-welcome',
-            templateUrl: './welcome.component.html',
+            templateUrl: '../views/welcome.component.html',
             styleUrls: ['../scss/welcome.component.css']
         }), 
         __metadata('design:paramtypes', [])

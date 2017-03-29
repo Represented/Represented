@@ -51,7 +51,7 @@ var HeroSearchComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'hero-search',
-            templateUrl: './hero-search.component.html',
+            templateUrl: '../views/hero-search.component.html',
             styleUrls: ['../scss/hero-search.component.css'],
             providers: [hero_search_service_1.HeroSearchService]
         }), 

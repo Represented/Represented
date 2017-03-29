@@ -7,7 +7,7 @@ import { DataScrollerModule }       from 'primeng/primeng';
 @Component({
   moduleId: module.id,
   selector: 'my-newsfeed',
-  templateUrl: './newsfeed.component.html',
+  templateUrl: '../views/newsfeed.component.html',
   styleUrls: [ '../scss/newsfeed.component.css' ]
 })
 export class NewsfeedComponent implements OnInit {

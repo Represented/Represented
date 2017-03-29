@@ -16,7 +16,7 @@ var AboutComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'my-about',
-            templateUrl: './about.component.html',
+            templateUrl: '../views/about.component.html',
             styleUrls: ['../scss/about.component.css']
         }), 
         __metadata('design:paramtypes', [])

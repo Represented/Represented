@@ -14,14 +14,16 @@ var about_component_1 = require('./about.component');
 var dashboard_component_1 = require('./dashboard.component');
 var heroes_component_1 = require('./heroes.component');
 var hero_detail_component_1 = require('./hero-detail.component');
+var legislator_component_1 = require('./legislator.component');
 var newsfeed_component_1 = require('./newsfeed.component');
 var welcome_component_1 = require('./welcome.component');
 var routes = [
     { path: '', redirectTo: '/newsfeed', pathMatch: 'full' },
+    { path: 'about', component: about_component_1.AboutComponent },
     { path: 'dashboard', component: dashboard_component_1.DashboardComponent },
     { path: 'detail/:id', component: hero_detail_component_1.HeroDetailComponent },
+    { path: 'legislator', component: legislator_component_1.LegislatorComponent },
     { path: 'heroes', component: heroes_component_1.HeroesComponent },
-    { path: 'about', component: about_component_1.AboutComponent },
     { path: 'newsfeed', component: newsfeed_component_1.NewsfeedComponent },
     { path: 'welcome', component: welcome_component_1.WelcomeComponent }
 ];

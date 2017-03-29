@@ -30,7 +30,7 @@ var NewsfeedComponent = (function () {
             moduleId: module.id,
             selector: 'my-newsfeed',
             templateUrl: '../views/newsfeed.component.html',
-            styleUrls: ['../scss/newsfeed.component.css']
+            styleUrls: ['../styles/newsfeed.component.css']
         }), 
         __metadata('design:paramtypes', [repaction_service_1.RepActionService, router_1.Router])
     ], NewsfeedComponent);

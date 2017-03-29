@@ -8,7 +8,7 @@ import { HeroService }         from './hero.service';
   moduleId: module.id,
   selector: 'my-heroes',
   templateUrl: '../views/heroes.component.html',
-  styleUrls: [ '../scss/heroes.component.css' ]
+  styleUrls: [ '../styles/heroes.component.css' ]
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];

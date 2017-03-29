@@ -17,7 +17,7 @@ var AboutComponent = (function () {
             moduleId: module.id,
             selector: 'my-about',
             templateUrl: '../views/about.component.html',
-            styleUrls: ['../scss/about.component.css']
+            styleUrls: ['../styles/about.component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], AboutComponent);

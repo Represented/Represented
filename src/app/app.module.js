@@ -12,21 +12,24 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
+var http_2 = require('@angular/http');
 var app_routing_module_1 = require('./app-routing.module');
 // Imports for loading & configuring the in-memory web api
 var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
 var in_memory_data_service_1 = require('./in-memory-data.service');
 var about_component_1 = require('./about.component');
 var app_component_1 = require('./app.component');
-var welcome_component_1 = require('./welcome.component');
 var dashboard_component_1 = require('./dashboard.component');
+var primeng_1 = require('primeng/primeng');
 var heroes_component_1 = require('./heroes.component');
 var hero_detail_component_1 = require('./hero-detail.component');
 var hero_service_1 = require('./hero.service');
 var hero_search_component_1 = require('./hero-search.component');
+var legislator_component_1 = require('./legislator.component');
+var legislator_service_1 = require('./legislator.service');
 var newsfeed_component_1 = require('./newsfeed.component');
 var repaction_service_1 = require('./repaction.service');
-var primeng_1 = require('primeng/primeng');
+var welcome_component_1 = require('./welcome.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -36,22 +39,25 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
+                http_2.JsonpModule,
                 angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService),
                 app_routing_module_1.AppRoutingModule,
                 primeng_1.DataScrollerModule
             ],
             declarations: [
                 about_component_1.AboutComponent,
-                welcome_component_1.WelcomeComponent,
                 app_component_1.AppComponent,
                 dashboard_component_1.DashboardComponent,
                 hero_detail_component_1.HeroDetailComponent,
                 heroes_component_1.HeroesComponent,
                 hero_search_component_1.HeroSearchComponent,
-                newsfeed_component_1.NewsfeedComponent
+                legislator_component_1.LegislatorComponent,
+                newsfeed_component_1.NewsfeedComponent,
+                welcome_component_1.WelcomeComponent
             ],
             providers: [
                 hero_service_1.HeroService,
+                legislator_service_1.LegislatorService,
                 repaction_service_1.RepActionService
             ],
             bootstrap: [app_component_1.AppComponent]

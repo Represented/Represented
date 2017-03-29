@@ -17,7 +17,7 @@ var WelcomeComponent = (function () {
             moduleId: module.id,
             selector: 'my-welcome',
             templateUrl: '../views/welcome.component.html',
-            styleUrls: ['../scss/welcome.component.css']
+            styleUrls: ['../styles/welcome.component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], WelcomeComponent);

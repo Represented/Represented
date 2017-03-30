@@ -44,8 +44,25 @@ sl.bills().filter("cosponsor_ids", bioguide_id).filter("order","introduced_on").
 // LEGISLATION PAGE ==========================================================
 	// TODO getLegislationDataByBillID()
 
+// bill id unique to one piece of legislation
+var bill_id = "hres221-115";
+
+// filter bills by bill id; gets bill info for one bill
+sl.bills().filter("bill_id", bill_id).filter("history.active", "true").fields("actions", "bill_id", "bill_type", "chamber", "cosponsors_count", "enacted_as", "history", "introduced_on", "last_action_at", "last_vote_at", "official_title", "short_title", "sponsor", "sponsor_id", "urls").filter("congress", "115").call(success);
+// filter votes by bill id; gets vote info for multiple votes on same bill
+sl.votes().filter("bill_id", bill_id).fields("bill_id", "chamber", "number", "voted_at", "vote_type", "question", "required", "result", "source", "voter_ids").filter("congress", "115").call(success);
 
 // REPRESENTATIVE PAGE =======================================================
 	// TODO getInformationAboutRepresentative()
 	// TODO getLegislationByRepresentative() // actions of representative
 	// TODO getVotesByRepresentative()
+
+// getInformationAboutRepresentative()
+// filter legislators by bioguide id
+sl.legislators().filter("bioguide_id", bioguide_id).filter("in_office", "true").fields("bioguide_id", "chamber", "contact_form", "district", "facebook_id", "first_name", "last_name", "oc_email", "office", "party", "phone", "state", "title", "twitter_id", "website", "youtube_id").call(success);
+
+// getLegislationByRepresentative()
+// exactly the same as above code that gets legis by rep using sponsor_id and cosponsor_id
+
+// getVotesByRepresentative()
+// could be accomplished by getting legislation by rep, then using those bill_ids as input for getting votes by bill_id; that code is also above

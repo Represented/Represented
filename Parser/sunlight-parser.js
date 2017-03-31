@@ -11,7 +11,7 @@
 var sl = require("sunlight-congress-api");
 
 var success = function(data){
-	console.log(data);
+	console.log(data.results);
 }
 sl.init("SOMEAPIKEY");
 
@@ -27,19 +27,39 @@ sl.init("SOMEAPIKEY");
 // get representatives by location
 // zip (e.g. Cottage Grove, WI)
 var zip = "53527";
-sl.legislatorsLocate().filter("zip", zip).fields("bioguide_id", "title", "first_name", "last_name", "name_suffix", "party").call(success);
+//sl.legislatorsLocate().filter("zip", zip).fields("bioguide_id", "title", "first_name", "last_name", "name_suffix", "party").call(success);
+sl.legislatorsLocate().filter("zip", zip).filter("in_office", "true").
+                                fields("bioguide_id", "chamber", "contact_form", "district", "facebook_id",
+                                "first_name", "last_name", "oc_email", "office", "party", "phone", "state",
+                                "title", "twitter_id", "website", "youtube_id").call(success);
 // lat+long (e.g. Madison, WI)
 var lat = "43.073052";
 var longi = "-89.401230";
-sl.legislatorsLocate().filter("latitude", lat).filter("longitude", longi).fields("bioguide_id", "title", "first_name", "last_name", "name_suffix", "party").call(success);
+//sl.legislatorsLocate().filter("latitude", lat).filter("longitude", longi).fields("bioguide_id", "title", "first_name", "last_name", "name_suffix", "party").call(success);
+sl.legislatorsLocate().filter("latitude", lat).filter("longitude", longi).filter("in_office", "true").
+                                fields("bioguide_id", "chamber", "contact_form", "district", "facebook_id",
+                                "first_name", "last_name", "oc_email", "office", "party", "phone", "state",
+                                "title", "twitter_id", "website", "youtube_id").call(success);
 
 // get legislation for each representative
 // must get if rep is sponsor, cosponsor, or in committee because that means that they would have a say in the bill
 var bioguide_id = "B001230";
 // filter by sponsorship
-sl.bills().filter("sponsor_id", bioguide_id).filter("order","introduced_on").filter("history.active", "true").fields("bill_id", "bill_type", "number", "official_title", "popular_title", "short_title", "nicknames").filter("order", "last_action_at").filter("congress", "115").call(success);
+//sl.bills().filter("sponsor_id", bioguide_id).filter("order","introduced_on").filter("history.active", "true").fields("bill_id", "bill_type", "number", "official_title", "popular_title", "short_title", "nicknames").filter("order", "last_action_at").filter("congress", "115").call(success);
 // filter by cosponsorship
-sl.bills().filter("cosponsor_ids", bioguide_id).filter("order","introduced_on").filter("history.active", "true").fields("bill_id", "bill_type", "number", "official_title", "popular_title", "short_title", "nicknames").filter("order", "last_action_at").filter("congress", "115").call(success);
+//sl.bills().filter("cosponsor_ids", bioguide_id).filter("order","introduced_on").filter("history.active", "true").fields("bill_id", "bill_type", "number", "official_title", "popular_title", "short_title", "nicknames").filter("order", "last_action_at").filter("congress", "115").call(success);
+
+sl.bills().filter("sponsor_id", bioguide_id).filter("order", "introduced_on").
+                                filter("history.active", "true").filter("congress", "115").
+                                fields("actions", "bill_id", "bill_type", "chamber", "cosponsors_count",
+                                "enacted_as", "history", "introduced_on", "last_action_at", "last_vote_at",
+                                "official_title", "short_title", "sponsor", "sponsor_id", "urls").call(success);
+
+sl.bills().filter("cosponsor_ids", bioguide_id).filter("order", "introduced_on").
+                                filter("history.active", "true").filter("congress", "115").
+                                fields("actions", "bill_id", "bill_type", "chamber", "cosponsors_count",
+                                "enacted_as", "history", "introduced_on", "last_action_at", "last_vote_at",
+                                "official_title", "short_title", "sponsor", "sponsor_id", "urls").call(success);
 
 // LEGISLATION PAGE ==========================================================
 	// TODO getLegislationDataByBillID()
@@ -48,9 +68,12 @@ sl.bills().filter("cosponsor_ids", bioguide_id).filter("order","introduced_on").
 var bill_id = "hres221-115";
 
 // filter bills by bill id; gets bill info for one bill
-sl.bills().filter("bill_id", bill_id).filter("history.active", "true").fields("actions", "bill_id", "bill_type", "chamber", "cosponsors_count", "enacted_as", "history", "introduced_on", "last_action_at", "last_vote_at", "official_title", "short_title", "sponsor", "sponsor_id", "urls").filter("congress", "115").call(success);
+//sl.bills().filter("bill_id", bill_id).filter("history.active", "true").fields("actions", "bill_id", "bill_type", "chamber", "cosponsors_count", "enacted_as", "history", "introduced_on", "last_action_at", "last_vote_at", "official_title", "short_title", "sponsor", "sponsor_id", "urls").filter("congress", "115").call(success);
 // filter votes by bill id; gets vote info for multiple votes on same bill
-sl.votes().filter("bill_id", bill_id).fields("bill_id", "chamber", "number", "voted_at", "vote_type", "question", "required", "result", "source", "voter_ids").filter("congress", "115").call(success);
+//sl.votes().filter("bill_id", bill_id).fields("bill_id", "chamber", "number", "voted_at", "vote_type", "question", "required", "result", "source", "voter_ids").filter("congress", "115").call(success);
+sl.votes().filter("bill_id", bill_id).filter("congress", "115").
+                        fields("bill_id", "chamber", "number", "voted_at",
+                        "vote_type", "question", "required", "result", "source").call(success);
 
 // REPRESENTATIVE PAGE =======================================================
 	// TODO getInformationAboutRepresentative()
@@ -59,7 +82,7 @@ sl.votes().filter("bill_id", bill_id).fields("bill_id", "chamber", "number", "vo
 
 // getInformationAboutRepresentative()
 // filter legislators by bioguide id
-sl.legislators().filter("bioguide_id", bioguide_id).filter("in_office", "true").fields("bioguide_id", "chamber", "contact_form", "district", "facebook_id", "first_name", "last_name", "oc_email", "office", "party", "phone", "state", "title", "twitter_id", "website", "youtube_id").call(success);
+//sl.legislators().filter("bioguide_id", bioguide_id).filter("in_office", "true").fields("bioguide_id", "chamber", "contact_form", "district", "facebook_id", "first_name", "last_name", "oc_email", "office", "party", "phone", "state", "title", "twitter_id", "website", "youtube_id").call(success);
 
 // getLegislationByRepresentative()
 // exactly the same as above code that gets legis by rep using sponsor_id and cosponsor_id

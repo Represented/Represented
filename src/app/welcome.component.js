@@ -12,6 +12,15 @@ var core_1 = require('@angular/core');
 var WelcomeComponent = (function () {
     function WelcomeComponent() {
     }
+    WelcomeComponent.prototype.allowLocationServices = function () {
+        var lat = 0;
+        var lng = 0;
+        navigator.geolocation.getCurrentPosition(function (position) {
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+            console.log("latitude: " + lat + ", longitude: " + lng);
+        });
+    };
     WelcomeComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

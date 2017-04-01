@@ -5,6 +5,9 @@
 *.swp
 *.swo
 
+# Ignore vagrant files
+.vagrant/
+
 # User-specific files
 *.suo
 *.user

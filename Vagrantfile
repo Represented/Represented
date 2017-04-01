@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# most of Vagrantfile copied from http://askubuntu.com/questions/832137/ubuntu-xenial64-box-password
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
@@ -48,6 +50,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	sudo bash nodesource_setup.sh
 	apt-get -y install nodejs
 	apt-get -y install build-essential
+	cd /vagrant
+	npm install
   SHELL
+
+  # EXTRAS atop what was copied from the link above
+  # config.vm.synced_folder "../", "/home/ubuntu/"
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
 
 end

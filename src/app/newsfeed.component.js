@@ -16,21 +16,19 @@ var NewsfeedComponent = (function () {
         this.repActionService = repActionService;
         this.router = router;
     }
-    NewsfeedComponent.prototype.getActions = function () {
-        var _this = this;
-        this.repActionService
-            .getActions()
-            .then(function (repactions) { return _this.repactions = repactions; });
-    };
+    /*getActions(): void {
+      this.repActionService
+          .getActions()
+          .then(repactions => this.repactions = repactions);
+    }*/
     NewsfeedComponent.prototype.ngOnInit = function () {
-        this.getActions();
     };
     NewsfeedComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'my-newsfeed',
-            templateUrl: './newsfeed.component.html',
-            styleUrls: ['../scss/newsfeed.component.css']
+            templateUrl: '../views/newsfeed.component.html',
+            styleUrls: ['../styles/newsfeed.component.css']
         }), 
         __metadata('design:paramtypes', [repaction_service_1.RepActionService, router_1.Router])
     ], NewsfeedComponent);

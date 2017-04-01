@@ -4,8 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
     moduleId:module.id,
     selector: 'my-welcome',
-    templateUrl: './welcome.component.html',
-    styleUrls: ['../scss/welcome.component.css']
+    templateUrl: '../views/welcome.component.html',
+    styleUrls: ['../styles/welcome.component.css']
 })
 export class WelcomeComponent{
 

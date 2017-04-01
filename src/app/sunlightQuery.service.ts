@@ -1,9 +1,10 @@
+//
 // // service that will handle getting representative, legislation, and vote data via the Sunlight Congress API
 // export class SunlightQueryService {
 //
 // 	//TODO decide whether to use global var or constructor Promise for Sunlight API
 // 	private sl = require("sunlight-congress-api");
-// 	sl.init("SOMEAPIKEY");
+// 	//this.sl.init("SOMEAPIKEY");
 // 	constructor() {}
 //
 //
@@ -14,8 +15,8 @@
 // 	 * chamber, state, district (null for senators), office street
 // 	 * address, and social media and contact info.
 // 	 */
-// 	getRepresentativesByZip(zip) {
-// 		var reps = sl.legislatorsLocate().filter("zip", zip).filter("in_office", "true").
+// 	getRepresentativesByZip(zip: string) {
+// 		var reps = this.sl.legislatorsLocate().filter("zip", zip).filter("in_office", "true").
 // 				fields("bioguide_id", "chamber", "contact_form", "district", "facebook_id",
 // 				"first_name", "last_name", "oc_email", "office", "party", "phone", "state",
 // 				"title", "twitter_id", "website", "youtube_id").results;
@@ -28,8 +29,8 @@
 // 	 * chamber, state, district (null for senators), office street
 // 	 * address, and social media and contact info.
 // 	 */
-// 	getRepresentativesByGeolocation(lat, longi) {
-// 		var reps = sl.legislatorsLocate().filter("latitude", lat).filter("longitude", longi).filter("in_office", "true").
+// 	getRepresentativesByGeolocation(lat:number, longi:number) {
+// 		var reps = this.sl.legislatorsLocate().filter("latitude", lat).filter("longitude", longi).filter("in_office", "true").
 // 				fields("bioguide_id", "chamber", "contact_form", "district", "facebook_id",
 // 				"first_name", "last_name", "oc_email", "office", "party", "phone", "state",
 // 				"title", "twitter_id", "website", "youtube_id").results;
@@ -41,7 +42,7 @@
 // 	 * Returns same info as for getting reps by zip or geolocation.
 // 	 */
 // 	getRepresentativesInSenate() {
-// 		var senators = sl.legislators.filter("chamber", "senate").filter("in_office", "true").
+// 		var senators = this.sl.legislators.filter("chamber", "senate").filter("in_office", "true").
 // 				fields("bioguide_id", "chamber", "contact_form", "district", "facebook_id",
 //                                 "first_name", "last_name", "oc_email", "office", "party", "phone", "state",
 //                                 "title", "twitter_id", "website", "youtube_id").results;
@@ -53,7 +54,7 @@
 // 	 * Returns same info as for getting reps by zip or geolocation.
 // 	 */
 // 	getRepresentativesInHouse() {
-// 		var representatives = sl.legislators.filter("chamber", "house").filter("in_office", "true").
+// 		var representatives = this.sl.legislators.filter("chamber", "house").filter("in_office", "true").
 //                                 fields("bioguide_id", "chamber", "contact_form", "district", "facebook_id",
 //                                 "first_name", "last_name", "oc_email", "office", "party", "phone", "state",
 //                                 "title", "twitter_id", "website", "youtube_id").results;
@@ -70,18 +71,18 @@
 // 	 * of most recent action, time of most recent vote, official and shortened titles,
 // 	 * sponsor and their unique ID, and object containing links to official bill descriptions.
 // 	 */
-// 	getLegislationByRepresentativeID(bioguide_id) {
+// 	getLegislationByRepresentativeID(bioguide_id:string) {
 //
 // 		// array to hold all sponsored and cosponsored bills
 // 		var bills = [];
 //
-// 		var sponsorBills = sl.bills().filter("sponsor_id", bioguide_id).filter("order", "introduced_on").
+// 		var sponsorBills = this.sl.bills().filter("sponsor_id", bioguide_id).filter("order", "introduced_on").
 // 				filter("history.active", "true").filter("congress", "115").
 // 				fields("actions", "bill_id", "bill_type", "chamber", "cosponsors_count",
 // 				"enacted_as", "history", "introduced_on", "last_action_at", "last_vote_at",
 // 				"official_title", "short_title", "sponsor", "sponsor_id", "urls").results;
 //
-// 		var cosponsorBills = sl.bills().filter("cosponsor_ids", bioguide_id).filter("order", "introduced_on").
+// 		var cosponsorBills = this.sl.bills().filter("cosponsor_ids", bioguide_id).filter("order", "introduced_on").
 //                                 filter("history.active", "true").filter("congress", "115").
 //                                 fields("actions", "bill_id", "bill_type", "chamber", "cosponsors_count",
 //                                 "enacted_as", "history", "introduced_on", "last_action_at", "last_vote_at",
@@ -102,8 +103,8 @@
 // 	 * between all unique representative IDs and how the corresponding
 // 	 * representatives voted on this question.
 // 	 */
-// 	getVotesbyLegislationID(bill_id) {
-// 		var votes = sl.votes().filter("bill_id", bill_id).filter("congress", "115").
+// 	getVotesbyLegislationID(bill_id:string) {
+// 		var votes = this.sl.votes().filter("bill_id", bill_id).filter("congress", "115").
 // 				fields("bill_id", "chamber", "number", "voted_at",
 // 				"vote_type", "question", "required", "result", "source").results;
 //

@@ -16,7 +16,7 @@ namespace Represented
         Button allowLocServices = new Button();
         View zipcodeEntry = new StackLayout();
         ContentPage welcomePage = new ContentPage();
-        String urlString = "http://represented506.me:3000/";
+        String urlString = "http://represented506.me:8000/";
 
         // Initialization of Data elements
         RepresentedItem repItem = new RepresentedItem();
@@ -143,7 +143,7 @@ namespace Represented
                 {
                     Source = new UrlWebViewSource
                     {
-                        Url = urlString,
+                        Url = urlString + "lat=" + storedLat + ",long=" + storedLong,
                     },
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
@@ -151,7 +151,7 @@ namespace Represented
                 // Create content page with WebView
                 var content = new ContentPage
                 {
-                    Title = urlString + "@" + storedLat + "," + storedLong,
+                    Title = "Represented",
                     Content = new StackLayout
                     {
                         Children = {
@@ -170,7 +170,7 @@ namespace Represented
                 {
                     Source = new UrlWebViewSource
                     {
-                        Url = urlString,
+                        Url = urlString + "zip=" + storedZip,
                     },
                     VerticalOptions = LayoutOptions.FillAndExpand
                 };
@@ -178,7 +178,7 @@ namespace Represented
                 // Create content page with WebView
                 var content = new ContentPage
                 {
-                    Title = urlString + storedZip,
+                    Title = "Represented",
                     Content = new StackLayout
                     {
                         Children = {
@@ -222,7 +222,7 @@ namespace Represented
             {
                 Source = new UrlWebViewSource
                 {
-                    Url = urlString,
+                    Url = urlString + "lat=" + position.Latitude + ",long=" + position.Longitude,
                 },
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
@@ -230,7 +230,7 @@ namespace Represented
             // Create content page with WebView
             var content = new ContentPage
             {
-                Title = urlString + "@" + position.Latitude + "," + position.Longitude,
+                Title = "Represented",
                 Content = new StackLayout
                 {
                     Children = {
@@ -268,7 +268,7 @@ namespace Represented
             {
                 Source = new UrlWebViewSource
                 {
-                    Url = urlString,
+                    Url = urlString + "zip=" + arg,
                 },
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
@@ -276,7 +276,7 @@ namespace Represented
             // Create content page with WebView
             var content = new ContentPage
             {
-                Title = urlString + arg,
+                Title = "Represented",
                 Content = new StackLayout
                 {
                     Children = {

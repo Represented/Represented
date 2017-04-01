@@ -1,0 +1,50 @@
+Tom and Charlie
+	FEED PAGE
+	(getLegislationByLegislationID)...
+	When feed page loads, need to make a query to get reps by location
+	Then need content to display on feed: get legislation by reps
+		just make sure that we are only getting legislation that 
+		corresponds to those three representatives; skip all other legislation
+	
+	LEGISLATION
+	getLegislationDataByBillID()
+	
+	REPRESENTATIVE
+	getInformationAboutRepresentative()
+	getLegislationByRepresentative() // actions of representative
+	getVotesByRepresentative()
+	
+	all of this will be stored into object arrays used to populate timelines/other views
+	these are the big messy objects that have more fields that we are going to use for the views
+	
+	Need a different service for each query;
+	Each service represents a call to the Sunlight API
+	These are stored in src/app/
+	
+	Need to learn promises and observables for angular
+	Need to learn Typescript too maybe?
+	
+	We are making the services to contain the queries
+
+Michael and Ben:
+	cleanup src/app cause it's getting messy
+	create stubs for each query so that we know exactly which queries that
+	we need to provide
+
+Greg
+	Cookies
+	Run cookie check: if it passes, go to feed page
+	if not, go to welcome screen
+	make sure this is well-defined
+	What if friend who doesn't have cookie goes to non-welcome-page URL?
+
+Aaron
+	Routing; make sure that you go to welcome page if you don't have cookie
+
+Jacob
+	Trying to setup a production server to replace lite-server on the
+	DO droplet
+
+	a.k.a. get Forever server to work
+
+Programming session Thursday. Doing this a lot this weekend

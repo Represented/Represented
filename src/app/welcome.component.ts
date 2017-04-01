@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
     moduleId:module.id,
@@ -8,6 +8,11 @@ import { FormBuilder, Validators } from '@angular/forms';
     styleUrls: ['../scss/welcome.component.css']
 })
 export class WelcomeComponent{
+
+    public zipSubmissionForm = new FormGroup({
+      'zipcode': new FormControl('zipcode', Validators.required)
+    });
+
     allowLocationServices(){
       var lat = 0;
       var lng = 0;
@@ -19,16 +24,10 @@ export class WelcomeComponent{
       });
     }
 
-    public zipSubmissionForm = this.fb.group({
-      zipcode: ["", Validators.required]
-    });
+    submitZip() {
+      var zip = this.zipSubmissionForm.get('zipcode').value;
 
-    constructor(public fb: FormBuilder) {}
-
-    submitZip(event) {
-      var zip = "";
-
-      zip = this.zipSubmissionForm.controls.zipcode.value;
-      console.log("zip: " + this.zipSubmissionForm.controls.zipcode.value);
+      console.log("zip: " + zip);
     }
+
 }

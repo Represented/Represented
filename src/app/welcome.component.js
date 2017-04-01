@@ -11,10 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var WelcomeComponent = (function () {
-    function WelcomeComponent(fb) {
-        this.fb = fb;
-        this.zipSubmissionForm = this.fb.group({
-            zipcode: ["", forms_1.Validators.required]
+    function WelcomeComponent() {
+        this.zipSubmissionForm = new forms_1.FormGroup({
+            'zipcode': new forms_1.FormControl('zipcode', forms_1.Validators.required)
         });
     }
     WelcomeComponent.prototype.allowLocationServices = function () {
@@ -26,10 +25,9 @@ var WelcomeComponent = (function () {
             console.log("latitude: " + lat + ", longitude: " + lng);
         });
     };
-    WelcomeComponent.prototype.submitZip = function (event) {
-        var zip = "";
-        zip = this.zipSubmissionForm.controls.zipcode.value;
-        console.log("zip: " + this.zipSubmissionForm.controls.zipcode.value);
+    WelcomeComponent.prototype.submitZip = function () {
+        var zip = this.zipSubmissionForm.get('zipcode').value;
+        console.log("zip: " + zip);
     };
     WelcomeComponent = __decorate([
         core_1.Component({
@@ -38,7 +36,7 @@ var WelcomeComponent = (function () {
             templateUrl: './welcome.component.html',
             styleUrls: ['../scss/welcome.component.css']
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder])
+        __metadata('design:paramtypes', [])
     ], WelcomeComponent);
     return WelcomeComponent;
 }());

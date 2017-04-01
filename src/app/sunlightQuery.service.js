@@ -111,3 +111,4 @@
 // 		return votes;
 // 	}
 // }
+//# sourceMappingURL=sunlightQuery.service.js.map

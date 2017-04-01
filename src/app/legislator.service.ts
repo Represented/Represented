@@ -28,8 +28,8 @@ export class LegislatorService {
     var search = new URLSearchParams()
     search.set('bioguide_id', bioguide_id);
     let res = this.jsonp.get(`${this.baseUrl}/legislators?`, { search })
-               .map(mapLegislators)
-               .catch(handleError);
+               .map(mapLegislators);
+               //.catch(handleError);
                //.catch(this.handleError);
     return res;
   }

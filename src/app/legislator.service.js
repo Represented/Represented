@@ -30,8 +30,8 @@ var LegislatorService = (function () {
         var search = new http_1.URLSearchParams();
         search.set('bioguide_id', bioguide_id);
         var res = this.jsonp.get(this.baseUrl + "/legislators?", { search: search })
-            .map(mapLegislators)
-            .catch(handleError);
+            .map(mapLegislators);
+        //.catch(handleError);
         //.catch(this.handleError);
         return res;
     };

@@ -17,10 +17,11 @@ var LegislatorComponent = (function () {
         this.router = router;
     }
     LegislatorComponent.prototype.getLegislator = function () {
+        var _this = this;
         this.legislatorService
-            .getLegislatorTest("R000570");
-        //.getLegislatorById("R000570")
-        //.then(legislator => this.legislator = legislator);
+            .getAllLegislators()
+            .subscribe(function (legislator) { return _this.legislator = legislator; });
+        console.log(this.legislator);
     };
     LegislatorComponent.prototype.ngOnInit = function () {
         this.getLegislator();

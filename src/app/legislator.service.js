@@ -10,32 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-require('rxjs/add/operator/toPromise');
+var Observable_1 = require('rxjs/Observable');
+//import 'rxjs/add/operator/toPromise';
 require('rxjs/add/operator/map');
+require('rxjs/add/observable/throw');
 var LegislatorService = (function () {
     function LegislatorService(jsonp) {
         this.jsonp = jsonp;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.legislatorUrl = 'https://congress.api.sunlightfoundation.com/legislators?callback=JSONP_CALLBACK';
+        this.baseUrl = 'https://congress.api.sunlightfoundation.com';
     }
+    LegislatorService.prototype.getAllLegislators = function () {
+        this.headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
+        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { headers: this.headers })
+            .map(function (response) { return response.json().results; });
+        return res;
+    };
     LegislatorService.prototype.getLegislatorById = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('bioguide_id', bioguide_id);
-        return this.jsonp.get(this.legislatorUrl, { search: search })
-            .toPromise()
-            .then(function (response) { return response.json().data; })
-            .catch(this.handleError);
-    };
-    LegislatorService.prototype.getLegislatorTest = function (bioguide_id) {
-        var search = new http_1.URLSearchParams();
-        search.set('bioguide_id', bioguide_id);
-        this.jsonp.get(this.legislatorUrl, { search: search })
-            .map(function (res) { return res.json(); })
-            .subscribe(function (data) { return console.log(data); });
-    };
-    LegislatorService.prototype.handleError = function (error) {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
+        var res = this.jsonp.get(this.baseUrl + "/legislators?", { search: search })
+            .map(mapLegislators)
+            .catch(handleError);
+        //.catch(this.handleError);
+        return res;
     };
     LegislatorService = __decorate([
         core_1.Injectable(), 
@@ -44,4 +42,18 @@ var LegislatorService = (function () {
     return LegislatorService;
 }());
 exports.LegislatorService = LegislatorService;
+function mapLegislators(response) {
+    // The response of the API has a results
+    // property with the actual results
+    console.log(response.json());
+    return response.json().results;
+}
+function handleError(error) {
+    // log error
+    // could be something more sofisticated
+    var errorMsg = error.message || "Yikes! There was was a problem with our hyperdrive device and we couldn't retrieve your data!";
+    console.error(errorMsg);
+    // throw an application level error
+    return Observable_1.Observable.throw(errorMsg);
+}
 //# sourceMappingURL=legislator.service.js.map

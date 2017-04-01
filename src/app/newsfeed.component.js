@@ -16,14 +16,12 @@ var NewsfeedComponent = (function () {
         this.repActionService = repActionService;
         this.router = router;
     }
-    NewsfeedComponent.prototype.getActions = function () {
-        var _this = this;
-        this.repActionService
-            .getActions()
-            .then(function (repactions) { return _this.repactions = repactions; });
-    };
+    /*getActions(): void {
+      this.repActionService
+          .getActions()
+          .then(repactions => this.repactions = repactions);
+    }*/
     NewsfeedComponent.prototype.ngOnInit = function () {
-        this.getActions();
     };
     NewsfeedComponent = __decorate([
         core_1.Component({

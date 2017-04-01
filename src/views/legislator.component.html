@@ -2,5 +2,12 @@
 
 </div>
 <div class="rep">
-  <h1>{{legislator.first_name}} {{legislator.last_name}}</h1>
+  <section *ngIf="errorMsg">
+    {{errorMsg}}
+  </section>
+  <ul>
+    <li *ngFor="let rep of legislator">
+      <h1>{{rep.first_name}} {{rep.last_name}}</h1>
+    </li>
+  </ul>
 </div>

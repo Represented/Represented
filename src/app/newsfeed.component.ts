@@ -17,12 +17,12 @@ export class NewsfeedComponent implements OnInit {
     private repActionService: RepActionService,
     private router: Router) { }
 
-  getActions(): void {
+  /*getActions(): void {
     this.repActionService
         .getActions()
         .then(repactions => this.repactions = repactions);
-  }
+  }*/
   ngOnInit(): void {
-    this.getActions();
+
   }
 }

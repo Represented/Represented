@@ -1,7 +1,7 @@
 import { Component, OnInit }        from '@angular/core';
 import { Router }                   from '@angular/router';
 
-import { Legislator }               from '../data/legislator';
+import { Legislator }               from './legislator';
 import { LegislatorService }        from './legislator.service';
 import { DataScrollerModule }       from 'primeng/primeng';
 
@@ -20,9 +20,10 @@ export class LegislatorComponent implements OnInit {
 
   getLegislator(): void {
     this.legislatorService
-        .getLegislatorTest("R000570");
-        //.getLegislatorById("R000570")
-        //.then(legislator => this.legislator = legislator);
+        //.getLegislatorTest("R000570");
+        .getAllLegislators()
+        .subscribe(legislator => this.legislator = legislator);
+        console.log(this.legislator);
   }
   ngOnInit(): void {
     this.getLegislator();

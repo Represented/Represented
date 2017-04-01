@@ -4,7 +4,7 @@ export class Legislator {
   chamber: string;
   contact_form: string;
   crp_id: string;
-  district: number;
+  district?: number;
   facebook_id: string;
   fax: string;
   fec_ids: string[];
@@ -23,7 +23,7 @@ export class Legislator {
   office: string;
   party: string;
   phone: string;
-  senate_class: number;
+  senate_class?: number;
   state: string;
   state_name: string;
   state_rank: string;

@@ -24,7 +24,6 @@ namespace Represented.Test
         public void TestPutZip(string zip)
         {
             var app = setUp();
-            app.checkStoredLocation();
             tearDown();
         }
     }

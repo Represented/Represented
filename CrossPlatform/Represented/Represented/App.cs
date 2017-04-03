@@ -176,8 +176,7 @@ namespace Represented
         {
             // Obtain zipcode from entry field and check 5-digit int
             String arg = enterZipcodeEntry.Text;
-            if (arg == null || arg.Length != 5) return;
-            if (Regex.IsMatch(arg, @"^\d+$") == false) return;
+            if (isValidZip(arg) == false) return;
 
             // Set data item fields with location data
             repItem.Zip = arg;
@@ -191,8 +190,29 @@ namespace Represented
             await MainPage.Navigation.PushAsync(buildContent("zip=" + arg));
         }
 
+        public bool isValidZip(string argString)
+        {
+
+            if (argString == null || argString.Length != 5) return false;
+            if (Regex.IsMatch(argString, @"^\d+$") == false) return false;
+
+            return true;
+        }
+
         public ContentPage buildContent(string argString)
         {
+            if (!argString.Substring(0,4).Equals("zip=") ||
+                !argString.Substring(0,4).Equals("lat="))
+            {
+                throw new URLFormatException("First URL argument improperly formatted.");
+            }
+
+            if (!argString.Substring(0, 4).Equals("zip=") &&
+                !argString.Contains("long="))
+            {
+                throw new URLFormatException("Second URL argument improperly formatted.");
+            }
+
             // Build WebView with lat and long args
             WebView webView = new WebView
             {

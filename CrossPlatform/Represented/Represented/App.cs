@@ -4,7 +4,6 @@ using Represented.Model;
 using Represented.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
 namespace Represented
@@ -23,11 +22,6 @@ namespace Represented
         RepresentedItem repItem = new RepresentedItem();
         static RepresentedDatabase db;
         List<RepresentedItem> items = new List<RepresentedItem>();
-        /*
-        String storedZip = "";
-        double storedLat = 0.0;
-        double storedLong = 0.0;
-        */
 
         // Database constructor
         static RepresentedDatabase Database
@@ -122,37 +116,6 @@ namespace Represented
             List<RepresentedItem> items = await Database.GetItemsAsync();
 
             MainPage = WelcomeViewModel.setMainPage(items, welcomePage);
-            /*
-            // Iterate through database items returned from query
-            foreach (RepresentedItem item in items)
-            {
-                if(item.Zip.Length == 5)
-                {
-                    storedZip = item.Zip;
-                }
-                if (item.Lat != 0.0)
-                {
-                    storedLat = item.Lat;
-                }
-                if (item.Long != 0.0)
-                {
-                    storedLong = item.Long;
-                }
-            }
-            
-            if(storedLong != 0.0 && storedLat != 0.0)
-            {
-                MainPage = new NavigationPage(buildContent("lat=" + storedLat + ",long=" + storedLong));
-            }
-            else if (storedZip.Length == 5)
-            {
-                MainPage = new NavigationPage(buildContent("zip=" + storedZip));
-            }
-            else
-            {
-                MainPage = new NavigationPage(welcomePage);
-            }
-            */
         }
 
         // When button is clicked, get and store geolocation
@@ -194,54 +157,6 @@ namespace Represented
             // Push feed page onto navigation stack
             await MainPage.Navigation.PushAsync(WelcomeViewModel.buildContent("zip=" + arg));
         }
-        /*
-        public bool isValidZip(string argString)
-        {
-
-            if (argString == null || argString.Length != 5) return false;
-            if (Regex.IsMatch(argString, @"^\d+$") == false) return false;
-
-            return true;
-        }
-
-        public ContentPage buildContent(string argString)
-        {
-            if (!argString.Substring(0,4).Equals("zip=") &&
-                !argString.Substring(0,4).Equals("lat="))
-            {
-                throw new URLFormatException("First URL argument invalid in URL: " + urlString + argString);
-            }
-
-            if (!argString.Substring(0, 4).Equals("zip=") &&
-                !argString.Contains("long="))
-            {
-                throw new URLFormatException("Second URL argument invalid in URL: " + urlString + argString);
-            }
-
-            // Build WebView with lat and long args
-            WebView webView = new WebView
-            {
-                Source = new UrlWebViewSource
-                {
-                    Url = urlString + argString,
-                },
-                VerticalOptions = LayoutOptions.FillAndExpand
-            };
-
-            var content = new ContentPage
-            {
-                Title = "Represented",
-                Content = new StackLayout
-                {
-                    Children = {
-                        webView
-                    }
-                }
-            };
-
-            return content;
-        }
-        */
 
         protected override void OnStart()
         {

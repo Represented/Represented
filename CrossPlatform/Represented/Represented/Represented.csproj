@@ -45,7 +45,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="URLFormatException.cs" />
+    <Compile Include="Exceptions\PageCreationException.cs" />
+    <Compile Include="Exceptions\URLFormatException.cs" />
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

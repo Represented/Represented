@@ -1,11 +1,6 @@
-﻿using Plugin.Geolocator;
-using Represented.Model;
-using System;
+﻿using Represented.Model;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Represented.ViewModels
@@ -18,6 +13,16 @@ namespace Represented.ViewModels
         // If location data stored, load feed page with location specific feed
         public static NavigationPage setMainPage(List<RepresentedItem> items, ContentPage welcomePage)
         {
+            if (items == null)
+            {
+                throw new Exceptions.PageCreationException("Cannot set MainPage: items == null");
+            }
+
+            if (welcomePage == null)
+            {
+                throw new Exceptions.PageCreationException("Cannot set MainPage: welcomePage == null");
+            }
+
             var storedZip = "";
             var storedLat = 0.0;
             var storedLong = 0.0;
@@ -66,13 +71,13 @@ namespace Represented.ViewModels
             if (!argString.Substring(0, 4).Equals("zip=") &&
                 !argString.Substring(0, 4).Equals("lat="))
             {
-                throw new URLFormatException("First URL argument invalid in URL: " + Represented.App.urlString + argString);
+                throw new Exceptions.URLFormatException("First URL argument invalid in URL: " + App.urlString + argString);
             }
 
             if (!argString.Substring(0, 4).Equals("zip=") &&
                 !argString.Contains("long="))
             {
-                throw new URLFormatException("Second URL argument invalid in URL: " + Represented.App.urlString + argString);
+                throw new Exceptions.URLFormatException("Second URL argument invalid in URL: " + App.urlString + argString);
             }
 
             // Build WebView with lat and long args
@@ -80,7 +85,7 @@ namespace Represented.ViewModels
             {
                 Source = new UrlWebViewSource
                 {
-                    Url = Represented.App.urlString + argString,
+                    Url = App.urlString + argString,
                 },
                 VerticalOptions = LayoutOptions.FillAndExpand
             };

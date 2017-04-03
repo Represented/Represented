@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace Represented
+namespace Represented.Exceptions
 {
-    class URLFormatException : Exception
+    public class PageCreationException : Exception
     {
         // Constructors
-        public URLFormatException(string message) 
+        public PageCreationException(string message) 
         : base(message) 
         { }
     }

@@ -201,16 +201,16 @@ namespace Represented
 
         public ContentPage buildContent(string argString)
         {
-            if (!argString.Substring(0,4).Equals("zip=") ||
+            if (!argString.Substring(0,4).Equals("zip=") &&
                 !argString.Substring(0,4).Equals("lat="))
             {
-                throw new URLFormatException("First URL argument improperly formatted.");
+                throw new URLFormatException("First URL argument invalid in URL: " + urlString + argString);
             }
 
             if (!argString.Substring(0, 4).Equals("zip=") &&
                 !argString.Contains("long="))
             {
-                throw new URLFormatException("Second URL argument improperly formatted.");
+                throw new URLFormatException("Second URL argument invalid in URL: " + urlString + argString);
             }
 
             // Build WebView with lat and long args

@@ -52,5 +52,10 @@ C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\D
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.csproj.GenerateResource.Cache
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.pdb
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.csprojResolveAssemblyReference.cache
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll.mdb
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\bin\Debug\Represented.dll.mdb
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll.mdb
+C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\bin\Debug\Represented.dll.mdb
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\obj\Debug\Represented.dll.mdb
 C:\Users\jake\dev\RepresentedProject\CrossPlatform\Represented\Represented\bin\Debug\Represented.dll.mdb

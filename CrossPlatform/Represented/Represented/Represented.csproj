@@ -46,6 +46,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="URLFormatException.cs" />
+    <Compile Include="ViewModels\WelcomeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />

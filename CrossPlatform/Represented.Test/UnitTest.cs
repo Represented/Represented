@@ -6,38 +6,17 @@ namespace Represented.Test
     [TestClass]
     public class UnitTest
     {
-        List<Represented.Model.RepresentedItem> db_DOC;
-        Represented.Model.RepresentedItem repItem;
 
-        public Represented.App setUp()
+        [TestMethod]
+        public void TestURLFormat()
         {
-            db_DOC = new List<Represented.Model.RepresentedItem>();
-            repItem = new Represented.Model.RepresentedItem();
-            return new Represented.App();
-        }
-
-        public void tearDown()
-        {
-            db_DOC.Clear();
-            repItem = null;
+            Represented.ViewModels.WelcomeViewModel.buildContent("zip=53703");
         }
 
         [TestMethod]
-        public void TestURLFormat(string url)
+        public void TestZipValid()
         {
-            var app = setUp();
-            app.buildContent(url);
-            tearDown();
-            app = null;
-        }
-
-        [TestMethod]
-        public void TestZipValid(string zip)
-        {
-            var app = setUp();
-            app.isValidZip(zip);
-            tearDown();
-            app = null;
+            Represented.ViewModels.WelcomeViewModel.isValidZip("53703");
         }
     }
 }

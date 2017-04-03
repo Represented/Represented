@@ -1,6 +1,7 @@
 ﻿using Plugin.Geolocator;
 using Represented.Data;
 using Represented.Model;
+using Represented.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -16,15 +17,17 @@ namespace Represented
         Button allowLocServices = new Button();
         View zipcodeEntry = new StackLayout();
         ContentPage welcomePage = new ContentPage();
-        String urlString = "http://represented506.me:8000/";
+        public static String urlString = "http://represented506.me:8000/";
 
         // Initialization of Data elements
         RepresentedItem repItem = new RepresentedItem();
         static RepresentedDatabase db;
         List<RepresentedItem> items = new List<RepresentedItem>();
+        /*
         String storedZip = "";
         double storedLat = 0.0;
         double storedLong = 0.0;
+        */
 
         // Database constructor
         static RepresentedDatabase Database
@@ -118,6 +121,8 @@ namespace Represented
         {
             List<RepresentedItem> items = await Database.GetItemsAsync();
 
+            MainPage = WelcomeViewModel.setMainPage(items, welcomePage);
+            /*
             // Iterate through database items returned from query
             foreach (RepresentedItem item in items)
             {
@@ -147,6 +152,7 @@ namespace Represented
             {
                 MainPage = new NavigationPage(welcomePage);
             }
+            */
         }
 
         // When button is clicked, get and store geolocation
@@ -167,7 +173,7 @@ namespace Represented
             await Database.SaveItemAsync(repItem);
             
             // Push feed page onto navigation stack
-            await MainPage.Navigation.PushAsync(buildContent("lat=" + position.Latitude + ",long=" + position.Longitude));
+            await MainPage.Navigation.PushAsync(WelcomeViewModel.buildContent("lat=" + position.Latitude + ",long=" + position.Longitude));
         }
 
         // When entry is completed, check input and store zip code
@@ -176,8 +182,7 @@ namespace Represented
         {
             // Obtain zipcode from entry field and check 5-digit int
             String arg = enterZipcodeEntry.Text;
-            if (isValidZip(arg) == false) return;
-
+            if (WelcomeViewModel.isValidZip(arg) == false) return;
             // Set data item fields with location data
             repItem.Zip = arg;
             repItem.Lat = 0.0;
@@ -187,9 +192,9 @@ namespace Represented
             await Database.SaveItemAsync(repItem);
             
             // Push feed page onto navigation stack
-            await MainPage.Navigation.PushAsync(buildContent("zip=" + arg));
+            await MainPage.Navigation.PushAsync(WelcomeViewModel.buildContent("zip=" + arg));
         }
-
+        /*
         public bool isValidZip(string argString)
         {
 
@@ -236,6 +241,7 @@ namespace Represented
 
             return content;
         }
+        */
 
         protected override void OnStart()
         {

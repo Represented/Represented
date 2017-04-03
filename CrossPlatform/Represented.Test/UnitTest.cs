@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Represented.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest
     {
         List<Represented.Model.RepresentedItem> db_DOC;
         Represented.Model.RepresentedItem repItem;

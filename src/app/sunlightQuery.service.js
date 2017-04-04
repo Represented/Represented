@@ -7,7 +7,7 @@
 // 	//this.sl.init("SOMEAPIKEY");
 // 	constructor() {}
 //
-// 
+//
 // 	//TODO make functions return arrays or objects instead of logging to console
 //
 // 	/* Gets all representative info using zip code.

@@ -1,8 +1,10 @@
 <div class="welcome">
     <h1>Welcome to Represented!</h1>
     <br>
+    <button (click)="allowLocationServices()"><h2>Tap to Allow Location Services!</h2></button>
     <h2>Enter your zipcode to find your representative</h2>
-    <input type="text" name="zipcode">
-    <input type="submit" name="submit">
+    <form [formGroup]="zipSubmissionForm" (ngSubmit)="submitZip($event)">
+      <input formControlName="zipcode" placeholder="01234">
+      <button type="submit">Submit</button>
+    </form>
 </div>
-

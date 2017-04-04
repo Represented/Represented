@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
+var forms_2 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var http_2 = require('@angular/http');
 var app_routing_module_1 = require('./app-routing.module');
@@ -30,6 +31,7 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
+                forms_2.ReactiveFormsModule,
                 http_1.HttpModule,
                 http_2.JsonpModule,
                 app_routing_module_1.AppRoutingModule,

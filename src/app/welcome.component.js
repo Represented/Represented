@@ -9,9 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
 var WelcomeComponent = (function () {
     function WelcomeComponent() {
+        this.zipSubmissionForm = new forms_1.FormGroup({
+            'zipcode': new forms_1.FormControl('zipcode', forms_1.Validators.required)
+        });
     }
+    WelcomeComponent.prototype.allowLocationServices = function () {
+        var lat = 0;
+        var lng = 0;
+        navigator.geolocation.getCurrentPosition(function (position) {
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+            console.log("latitude: " + lat + ", longitude: " + lng);
+        });
+    };
+    WelcomeComponent.prototype.submitZip = function () {
+        var zip = this.zipSubmissionForm.get('zipcode').value;
+        console.log("zip: " + zip);
+    };
     WelcomeComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

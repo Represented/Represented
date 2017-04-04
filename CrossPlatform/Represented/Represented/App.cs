@@ -1,9 +1,9 @@
 ﻿using Plugin.Geolocator;
 using Represented.Data;
 using Represented.Model;
+using Represented.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
 namespace Represented
@@ -16,15 +16,12 @@ namespace Represented
         Button allowLocServices = new Button();
         View zipcodeEntry = new StackLayout();
         ContentPage welcomePage = new ContentPage();
-        String urlString = "http://represented506.me:8000/";
+        public static String urlString = "http://represented506.me:8000/";
 
         // Initialization of Data elements
         RepresentedItem repItem = new RepresentedItem();
         static RepresentedDatabase db;
         List<RepresentedItem> items = new List<RepresentedItem>();
-        String storedZip = "";
-        double storedLat = 0.0;
-        double storedLong = 0.0;
 
         // Database constructor
         static RepresentedDatabase Database
@@ -53,7 +50,7 @@ namespace Represented
                 VerticalOptions = LayoutOptions.Center
             };
 
-            // Entry accepts 5-digit zip code
+            // Entry prompts numeric input
             enterZipcodeEntry = new Entry
             {
                 Keyboard = Keyboard.Numeric,
@@ -108,99 +105,23 @@ namespace Represented
             };
 
             // Check to see if user has already stored location
-            checkStoredLocation();
+            setMainPage();
         }
 
         // Accesses local database to check for stored location data
         // If no location data stored, load welcome page
         // If location data stored, load feed page with location specific feed
-        async void checkStoredLocation()
+        public async void setMainPage()
         {
             List<RepresentedItem> items = await Database.GetItemsAsync();
 
-            // Iterate through database items returned from query
-            foreach (RepresentedItem item in items)
-            {
-                if(item.Zip.Length == 5)
-                {
-                    storedZip = item.Zip;
-                }
-                if (item.Lat != 0.0)
-                {
-                    storedLat = item.Lat;
-                }
-                if (item.Long != 0.0)
-                {
-                    storedLong = item.Long;
-                }
-            }
-
-            // Latitude and Longitude take priority over other location data
-            if(storedLong != 0.0 && storedLat != 0.0)
-            {
-                // Build WebView with lat and long args
-                WebView webView = new WebView
-                {
-                    Source = new UrlWebViewSource
-                    {
-                        Url = urlString + "lat=" + storedLat + ",long=" + storedLong,
-                    },
-                    VerticalOptions = LayoutOptions.FillAndExpand
-                };
-
-                // Create content page with WebView
-                var content = new ContentPage
-                {
-                    Title = "Represented",
-                    Content = new StackLayout
-                    {
-                        Children = {
-                        webView
-                    }
-                    }
-                };
-
-                MainPage = new NavigationPage(content);
-            }
-            // zip code is less reliable than lat and long
-            else if (storedZip.Length == 5)
-            {
-                // Build WebView with zip code arg
-                WebView webView = new WebView
-                {
-                    Source = new UrlWebViewSource
-                    {
-                        Url = urlString + "zip=" + storedZip,
-                    },
-                    VerticalOptions = LayoutOptions.FillAndExpand
-                };
-
-                // Create content page with WebView
-                var content = new ContentPage
-                {
-                    Title = "Represented",
-                    Content = new StackLayout
-                    {
-                        Children = {
-                        webView
-                    }
-                    }
-                };
-
-                MainPage = new NavigationPage(content);
-            }
-            // If no location data stored, load welcome page
-            else
-            {
-                MainPage = new NavigationPage(welcomePage);
-            }
+            MainPage = WelcomeViewModel.setMainPage(items, welcomePage);
         }
 
         // When button is clicked, get and store geolocation
         // Then load feed page with zip code location arg
         async void onButtonClicked(object sender, EventArgs e)
         {
-
             // Obtain user location data with geolocation
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 50;
@@ -213,34 +134,9 @@ namespace Represented
 
             // Store location data in database
             await Database.SaveItemAsync(repItem);
-
-            // Create navigable view element
-            Button button = (Button)sender;
-
-            // Build WebView with zip code arg
-            WebView webView = new WebView
-            {
-                Source = new UrlWebViewSource
-                {
-                    Url = urlString + "lat=" + position.Latitude + ",long=" + position.Longitude,
-                },
-                VerticalOptions = LayoutOptions.FillAndExpand
-            };
-
-            // Create content page with WebView
-            var content = new ContentPage
-            {
-                Title = "Represented",
-                Content = new StackLayout
-                {
-                    Children = {
-                        webView
-                    }
-                }
-            };
             
             // Push feed page onto navigation stack
-            await button.Navigation.PushAsync(content);
+            await MainPage.Navigation.PushAsync(WelcomeViewModel.buildContent("lat=" + position.Latitude + ",long=" + position.Longitude));
         }
 
         // When entry is completed, check input and store zip code
@@ -249,9 +145,7 @@ namespace Represented
         {
             // Obtain zipcode from entry field and check 5-digit int
             String arg = enterZipcodeEntry.Text;
-            if (arg == null || arg.Length != 5) return;
-            if (Regex.IsMatch(arg, @"^\d+$") == false) return;
-
+            if (WelcomeViewModel.isValidZip(arg) == false) return;
             // Set data item fields with location data
             repItem.Zip = arg;
             repItem.Lat = 0.0;
@@ -259,34 +153,9 @@ namespace Represented
 
             // Store location data in database
             await Database.SaveItemAsync(repItem);
-
-            // Create navigable view element
-            Entry entry = (Entry)sender;
-
-            // Build WebView with lat and long args
-            WebView webView = new WebView
-            {
-                Source = new UrlWebViewSource
-                {
-                    Url = urlString + "zip=" + arg,
-                },
-                VerticalOptions = LayoutOptions.FillAndExpand
-            };
-
-            // Create content page with WebView
-            var content = new ContentPage
-            {
-                Title = "Represented",
-                Content = new StackLayout
-                {
-                    Children = {
-                        webView
-                    }
-                }
-            };
-
+            
             // Push feed page onto navigation stack
-            await entry.Navigation.PushAsync(content);
+            await MainPage.Navigation.PushAsync(WelcomeViewModel.buildContent("zip=" + arg));
         }
 
         protected override void OnStart()

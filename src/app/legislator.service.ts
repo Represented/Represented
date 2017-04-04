@@ -8,6 +8,7 @@ import 'rxjs/add/observable/throw';
 
 
 import { Legislator } from './legislator';
+import { Bill } from './bill';
 
 @Injectable()
 export class LegislatorService {
@@ -27,10 +28,27 @@ export class LegislatorService {
   getLegislatorById(bioguide_id: string): Observable<Legislator> {
     var search = new URLSearchParams()
     search.set('bioguide_id', bioguide_id);
-    let res = this.jsonp.get(`${this.baseUrl}/legislators?`, { search })
-               .map(mapLegislators);
-               //.catch(handleError);
-               //.catch(this.handleError);
+    let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
+               .map(response => response.json().results as Legislator);
+    return res;
+  }
+
+  getLegLatestSponsorAction(bioguide_id: string): Observable<Bill[]> {
+    var search = new URLSearchParams()
+    search.set('sponsor_id', bioguide_id);
+    search.set('order', 'last_action_at');
+    let res = this.jsonp.get(`${this.baseUrl}/bills?callback=JSONP_CALLBACK`, { search })
+               .map(response => response.json().results as Bill[]);
+    return res;
+  }
+
+  getLegLatestCosponsorAction(bioguide_id: string): Observable<Bill[]> {
+    var search = new URLSearchParams()
+    search.set('cosponsor_ids', bioguide_id);
+    search.set('order', 'last_action_at');
+    console.log(`${this.baseUrl}/bills?callback=JSONP_CALLBACK`, { search });
+    let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
+               .map(response => response.json().results as Bill[]);
     return res;
   }
 

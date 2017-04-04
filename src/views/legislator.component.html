@@ -1,13 +1,29 @@
-<div class="sidebar">
-
-</div>
-<div class="rep">
+<div class="rep-sidebar">
   <section *ngIf="errorMsg">
     {{errorMsg}}
   </section>
   <ul>
     <li *ngFor="let rep of legislator">
-      <h1>{{rep.first_name}} {{rep.last_name}}</h1>
+
+      <h2> {{rep.title}} {{rep.first_name}} {{rep.last_name}} ({{rep.party}}) of {{rep.state_name}} </h2>
+      <h3 *ngIf="rep.district">  District: {{rep.state}} - {{rep.district}} </h3>
+      <h3> Gender: {{rep.gender}} </h3>
+
+      <h3> In office since: {{rep.term_start}} until {{rep.term_end}}</h3>
+      <h3> Chamber: {{rep.chamber}} </h3>
+      <h2> Contact info:
+        <h3> Website: <a href="{{rep.website}}" target="_blank">{{rep.website}} </a> </h3>
+        <h3>    Phone: {{rep.phone}} </h3>
+        <h3>    Office: {{rep.office}} </h3>
+      </h2>
+    </li>
+  </ul>
+</div>
+<div class="timeline">
+  <ul>
+    <li *ngFor="let s of sponsored">
+      <h2>Bill Title: {{s.short_title}}</h2>
+      <p>Sponsor: {{s.sponsor.first_name}} {{s.sponsor.last_name}}</p>
     </li>
   </ul>
 </div>

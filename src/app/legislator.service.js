@@ -29,10 +29,25 @@ var LegislatorService = (function () {
     LegislatorService.prototype.getLegislatorById = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('bioguide_id', bioguide_id);
-        var res = this.jsonp.get(this.baseUrl + "/legislators?", { search: search })
-            .map(mapLegislators);
-        //.catch(handleError);
-        //.catch(this.handleError);
+        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { search: search })
+            .map(function (response) { return response.json().results; });
+        return res;
+    };
+    LegislatorService.prototype.getLegLatestSponsorAction = function (bioguide_id) {
+        var search = new http_1.URLSearchParams();
+        search.set('sponsor_id', bioguide_id);
+        search.set('order', 'last_action_at');
+        var res = this.jsonp.get(this.baseUrl + "/bills?callback=JSONP_CALLBACK", { search: search })
+            .map(function (response) { return response.json().results; });
+        return res;
+    };
+    LegislatorService.prototype.getLegLatestCosponsorAction = function (bioguide_id) {
+        var search = new http_1.URLSearchParams();
+        search.set('cosponsor_ids', bioguide_id);
+        search.set('order', 'last_action_at');
+        console.log(this.baseUrl + "/bills?callback=JSONP_CALLBACK", { search: search });
+        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { search: search })
+            .map(function (response) { return response.json().results; });
         return res;
     };
     LegislatorService = __decorate([

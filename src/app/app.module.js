@@ -22,7 +22,6 @@ var legislator_service_1 = require('./legislator.service');
 var newsfeed_component_1 = require('./newsfeed.component');
 var repaction_service_1 = require('./repaction.service');
 var welcome_component_1 = require('./welcome.component');
-var legislator_profile_component_1 = require('./legislator-profile.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -41,8 +40,7 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 legislator_component_1.LegislatorComponent,
                 newsfeed_component_1.NewsfeedComponent,
-                welcome_component_1.WelcomeComponent,
-                legislator_profile_component_1.LegislatorProfileComponent
+                welcome_component_1.WelcomeComponent
             ],
             providers: [
                 legislator_service_1.LegislatorService,

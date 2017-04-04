@@ -27,15 +27,15 @@ export class LegislatorComponent implements OnInit {
         //console.log(this.legislator);
   }
 
-  onSelect(legislator: Legislator) {
-    this.selectedLegislator = legislator;
-  }
+  // onSelect(legislator: Legislator) {
+  //   this.selectedLegislator = legislator;
+  // }
 
   ngOnInit(): void {
     this.getLegislator();
   }
 
-  gotoProfile(): void {
-    this.router.navigate(['/profile', this.selectedLegislator.bioguide_id]);
-  }
+  // gotoProfile(): void {
+  //   this.router.navigate(['/profile', this.selectedLegislator.bioguide_id]);
+  // }
 }

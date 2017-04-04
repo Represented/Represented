@@ -15,6 +15,7 @@ export class LegislatorService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private baseUrl = 'https://congress.api.sunlightfoundation.com';
+  // private photoUrl = 'https://theunitedstates.io/images/congress/orignal/';
 
   constructor(private jsonp: Jsonp) { }
 
@@ -43,7 +44,7 @@ export class LegislatorService {
   }
 
   getLegLatestCosponsorAction(bioguide_id: string): Observable<Bill[]> {
-    var search = new URLSearchParams()
+    var search = new URLSearchParams();
     search.set('cosponsor_ids', bioguide_id);
     search.set('order', 'last_action_at');
     console.log(`${this.baseUrl}/bills?callback=JSONP_CALLBACK`, { search });
@@ -51,6 +52,10 @@ export class LegislatorService {
                .map(response => response.json().results as Bill[]);
     return res;
   }
+
+  // getLegPortraitUrl(bioguide_id: string): <string> {
+  //   return this.photoUrl + bioguide_id;
+  // }
 
   /*getLegislatorTest(bioguide_id: string) {
     var search = new URLSearchParams()

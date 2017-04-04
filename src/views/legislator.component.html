@@ -6,12 +6,19 @@
     {{errorMsg}}
   </section>
   <ul>
-    <li *ngFor="let rep of legislator" (click)= "onSelect(rep)">
-      <!--[class.selected]="rep === selectedRep" -->
-      <h1>{{rep.first_name}} {{rep.last_name}}</h1>
-      <!--<div *ngIf = "selectedRep">-->
-        <button (click)="gotoProfile()">View Profile</button>
-      <!--</div>-->
+    <li *ngFor="let rep of legislator">
+
+      <h2> {{rep.title}} {{rep.first_name}} {{rep.last_name}} ({{rep.party}}) of {{rep.state_name}} </h2>
+      <h3 *ngIf="rep.district">  District: {{rep.state}} - {{rep.district}} </h3>
+      <h3> Gender: {{rep.gender}} </h3>
+
+      <h3> In office since: {{rep.term_start}} until {{rep.term_end}}</h3>
+      <h3> Chamber: {{rep.chamber}} </h3>
+      <h2> Contact info:
+        <h3> Website: <a href="{{rep.website}}" target="_blank">{{rep.website}} </a> </h3>
+        <h3>    Phone: {{rep.phone}} </h3>
+        <h3>    Office: {{rep.office}} </h3>
+      </h2> 
     </li>
   </ul>
 </div>

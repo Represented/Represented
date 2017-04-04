@@ -14,14 +14,12 @@ var about_component_1 = require('./about.component');
 var legislator_component_1 = require('./legislator.component');
 var newsfeed_component_1 = require('./newsfeed.component');
 var welcome_component_1 = require('./welcome.component');
-var legislator_profile_component_1 = require('./legislator-profile.component');
 var routes = [
     { path: '', redirectTo: '/newsfeed', pathMatch: 'full' },
     { path: 'about', component: about_component_1.AboutComponent },
     { path: 'legislator', component: legislator_component_1.LegislatorComponent },
     { path: 'newsfeed', component: newsfeed_component_1.NewsfeedComponent },
     { path: 'welcome', component: welcome_component_1.WelcomeComponent },
-    { path: 'profile/:bioguide_id', component: legislator_profile_component_1.LegislatorProfileComponent }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

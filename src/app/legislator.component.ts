@@ -30,6 +30,7 @@ export class LegislatorComponent implements OnInit {
         //console.log(this.legislator);
   }
 
+<<<<<<< HEAD
   getSponsoredLegislation(): void {
       this.legislatorService
         .getLegLatestSponsorAction("R000570")
@@ -45,6 +46,11 @@ export class LegislatorComponent implements OnInit {
   onSelect(legislator: Legislator) {
     this.selectedLegislator = legislator;
   }
+=======
+  // onSelect(legislator: Legislator) {
+  //   this.selectedLegislator = legislator;
+  // }
+>>>>>>> 4aa3d8c455f33c1399abcd315753ecee0f565212
 
   ngOnInit(): void {
     this.getLegislator();
@@ -53,4 +59,7 @@ export class LegislatorComponent implements OnInit {
   gotoProfile(): void {
     this.router.navigate(['/profile', this.selectedLegislator.bioguide_id]);
   }
+  // gotoProfile(): void {
+  //   this.router.navigate(['/profile', this.selectedLegislator.bioguide_id]);
+  // }
 }

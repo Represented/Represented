@@ -31,8 +31,6 @@ var LegislatorService = (function () {
         search.set('bioguide_id', bioguide_id);
         var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { search: search })
             .map(mapLegislators);
-        //.catch(handleError);
-        //.catch(this.handleError);
         return res;
     };
     LegislatorService = __decorate([

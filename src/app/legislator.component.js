@@ -19,7 +19,7 @@ var LegislatorComponent = (function () {
     LegislatorComponent.prototype.getLegislator = function () {
         var _this = this;
         this.legislatorService
-            .getAllLegislators()
+            .getLegislatorById("R000570")
             .subscribe(function (legislator) { return _this.legislator = legislator; });
         //console.log(this.legislator);
     };

@@ -29,8 +29,8 @@ var LegislatorService = (function () {
     LegislatorService.prototype.getLegislatorById = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('bioguide_id', bioguide_id);
-        var res = this.jsonp.get(this.baseUrl + "/legislators?", { search: search })
-            .map(mapLegislators);
+        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { search: search })
+            .map(function (response) { return response.json().results; });
         //.catch(handleError);
         //.catch(this.handleError);
         return res;

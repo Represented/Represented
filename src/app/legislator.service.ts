@@ -27,8 +27,8 @@ export class LegislatorService {
   getLegislatorById(bioguide_id: string): Observable<Legislator> {
     var search = new URLSearchParams()
     search.set('bioguide_id', bioguide_id);
-    let res = this.jsonp.get(`${this.baseUrl}/legislators?`, { search })
-               .map(mapLegislators);
+    let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
+               .map(response => response.json().results as Legislator);
                //.catch(handleError);
                //.catch(this.handleError);
     return res;

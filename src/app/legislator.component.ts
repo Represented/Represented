@@ -12,7 +12,7 @@ import { DataScrollerModule }       from 'primeng/primeng';
   styleUrls: [ '../styles/legislator.component.css' ]
 })
 export class LegislatorComponent implements OnInit {
-  legislator: Legislator[];
+  legislator: Legislator;
 
   constructor(
     private legislatorService: LegislatorService,
@@ -20,8 +20,8 @@ export class LegislatorComponent implements OnInit {
 
   getLegislator(): void {
     this.legislatorService
-        //.getLegislatorTest("R000570");
-        .getAllLegislators()
+        //.getAllLegislators()
+        .getLegislatorById("R000570")
         .subscribe(legislator => this.legislator = legislator);
         console.log(this.legislator);
   }

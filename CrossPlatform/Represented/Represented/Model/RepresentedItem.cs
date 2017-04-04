@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Represented.Model
 {
-    class RepresentedItem
+    public class RepresentedItem
     {    
 		[PrimaryKey, AutoIncrement]
 		public int ID { get; set; }

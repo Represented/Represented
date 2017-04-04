@@ -1,7 +1,4 @@
-<div class="sidebar">
-
-</div>
-<div class="rep">
+<div class="rep-sidebar">
   <section *ngIf="errorMsg">
     {{errorMsg}}
   </section>
@@ -18,7 +15,15 @@
         <h3> Website: <a href="{{rep.website}}" target="_blank">{{rep.website}} </a> </h3>
         <h3>    Phone: {{rep.phone}} </h3>
         <h3>    Office: {{rep.office}} </h3>
-      </h2> 
+      </h2>
+    </li>
+  </ul>
+</div>
+<div class="timeline">
+  <ul>
+    <li *ngFor="let s of sponsored">
+      <h2>Bill Title: {{s.short_title}}</h2>
+      <p>Sponsor: {{s.sponsor.first_name}} {{s.sponsor.last_name}}</p>
     </li>
   </ul>
 </div>

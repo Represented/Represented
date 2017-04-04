@@ -51,6 +51,8 @@ export class LegislatorComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLegislator();
+    this.getSponsoredLegislation();
+    this.getCosponsoredLegislation();
   }
 
   // gotoProfile(): void {

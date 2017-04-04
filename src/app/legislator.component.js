@@ -43,6 +43,8 @@ var LegislatorComponent = (function () {
     // }
     LegislatorComponent.prototype.ngOnInit = function () {
         this.getLegislator();
+        this.getSponsoredLegislation();
+        this.getCosponsoredLegislation();
     };
     LegislatorComponent = __decorate([
         core_1.Component({

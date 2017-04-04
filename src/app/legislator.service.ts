@@ -30,8 +30,6 @@ export class LegislatorService {
     search.set('bioguide_id', bioguide_id);
     let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
                .map(response => response.json().results as Legislator);
-               //.catch(handleError);
-               //.catch(this.handleError);
     return res;
   }
 
@@ -39,10 +37,8 @@ export class LegislatorService {
     var search = new URLSearchParams()
     search.set('sponsor_id', bioguide_id);
     search.set('order', 'last_action_at');
-    let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
+    let res = this.jsonp.get(`${this.baseUrl}/bills?callback=JSONP_CALLBACK`, { search })
                .map(response => response.json().results as Bill[]);
-               //.catch(handleError);
-               //.catch(this.handleError);
     return res;
   }
 
@@ -50,10 +46,9 @@ export class LegislatorService {
     var search = new URLSearchParams()
     search.set('cosponsor_ids', bioguide_id);
     search.set('order', 'last_action_at');
+    console.log(`${this.baseUrl}/bills?callback=JSONP_CALLBACK`, { search });
     let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
                .map(response => response.json().results as Bill[]);
-               //.catch(handleError);
-               //.catch(this.handleError);
     return res;
   }
 

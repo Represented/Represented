@@ -38,11 +38,11 @@ var LegislatorComponent = (function () {
     LegislatorComponent.prototype.onSelect = function (legislator) {
         this.selectedLegislator = legislator;
     };
+    // onSelect(legislator: Legislator) {
+    //   this.selectedLegislator = legislator;
+    // }
     LegislatorComponent.prototype.ngOnInit = function () {
         this.getLegislator();
-    };
-    LegislatorComponent.prototype.gotoProfile = function () {
-        this.router.navigate(['/profile', this.selectedLegislator.bioguide_id]);
     };
     LegislatorComponent = __decorate([
         core_1.Component({

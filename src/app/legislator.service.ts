@@ -28,11 +28,7 @@ export class LegislatorService {
     var search = new URLSearchParams()
     search.set('bioguide_id', bioguide_id);
     let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
-<<<<<<< HEAD
-               .map(mapLegislators);
-=======
                .map(response => response.json().results as Legislator);
->>>>>>> d4ac57ad6383e2718da5ae199080844c50a3049c
                //.catch(handleError);
                //.catch(this.handleError);
     return res;

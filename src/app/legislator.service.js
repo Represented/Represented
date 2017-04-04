@@ -15,6 +15,7 @@ var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
 var LegislatorService = (function () {
+    // private photoUrl = 'https://theunitedstates.io/images/congress/orignal/';
     function LegislatorService(jsonp) {
         this.jsonp = jsonp;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });

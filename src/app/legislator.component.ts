@@ -1,6 +1,6 @@
 import { Component, OnInit }        from '@angular/core';
 import { Router }                   from '@angular/router';
-
+import { Bill }                     from './bill';
 import { Legislator }               from './legislator';
 import { LegislatorService }        from './legislator.service';
 import { DataScrollerModule }       from 'primeng/primeng';
@@ -12,7 +12,11 @@ import { DataScrollerModule }       from 'primeng/primeng';
   styleUrls: [ '../styles/legislator.component.css' ]
 })
 export class LegislatorComponent implements OnInit {
-  legislator: Legislator[];
+  legislator: Legislator;
+  selectedLegislator: Legislator;
+  sponsored: Bill[];
+  cosponsored: Bill[];
+  portraitUrl = 'https://theunitedstates.io/images/congress/original/';
 
   constructor(
     private legislatorService: LegislatorService,
@@ -20,12 +24,43 @@ export class LegislatorComponent implements OnInit {
 
   getLegislator(): void {
     this.legislatorService
-        //.getLegislatorTest("R000570");
-        .getAllLegislators()
+        //.getAllLegislators()
+        .getLegislatorById("R000570")
         .subscribe(legislator => this.legislator = legislator);
-        console.log(this.legislator);
+        //console.log(this.legislator);
   }
+
+  getSponsoredLegislation(): void {
+      this.legislatorService
+        .getLegLatestSponsorAction("R000570")
+        .subscribe(sponsored => this.sponsored = sponsored);
+  }
+
+  getCosponsoredLegislation(): void {
+      this.legislatorService
+        .getLegLatestCosponsorAction("R000570")
+        .subscribe(cosponsored => this.cosponsored = cosponsored);
+  }
+
+  onSelect(legislator: Legislator) {
+    this.selectedLegislator = legislator;
+  }
+  // onSelect(legislator: Legislator) {
+  //   this.selectedLegislator = legislator;
+  // }
+
+  getLegPortraitUrl(): void {
+    this.portraitUrl += 'R000570.jpg';
+  }
+
   ngOnInit(): void {
     this.getLegislator();
+    this.getSponsoredLegislation();
+    this.getCosponsoredLegislation();
+    this.getLegPortraitUrl();
   }
+
+  // gotoProfile(): void {
+  //   this.router.navigate(['/profile', this.selectedLegislator.bioguide_id]);
+  // }
 }

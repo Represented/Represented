@@ -15,16 +15,41 @@ var LegislatorComponent = (function () {
     function LegislatorComponent(legislatorService, router) {
         this.legislatorService = legislatorService;
         this.router = router;
+        this.portraitUrl = 'https://theunitedstates.io/images/congress/original/';
     }
     LegislatorComponent.prototype.getLegislator = function () {
         var _this = this;
         this.legislatorService
-            .getAllLegislators()
+            .getLegislatorById("R000570")
             .subscribe(function (legislator) { return _this.legislator = legislator; });
-        console.log(this.legislator);
+        //console.log(this.legislator);
+    };
+    LegislatorComponent.prototype.getSponsoredLegislation = function () {
+        var _this = this;
+        this.legislatorService
+            .getLegLatestSponsorAction("R000570")
+            .subscribe(function (sponsored) { return _this.sponsored = sponsored; });
+    };
+    LegislatorComponent.prototype.getCosponsoredLegislation = function () {
+        var _this = this;
+        this.legislatorService
+            .getLegLatestCosponsorAction("R000570")
+            .subscribe(function (cosponsored) { return _this.cosponsored = cosponsored; });
+    };
+    LegislatorComponent.prototype.onSelect = function (legislator) {
+        this.selectedLegislator = legislator;
+    };
+    // onSelect(legislator: Legislator) {
+    //   this.selectedLegislator = legislator;
+    // }
+    LegislatorComponent.prototype.getLegPortraitUrl = function () {
+        this.portraitUrl += 'R000570.jpg';
     };
     LegislatorComponent.prototype.ngOnInit = function () {
         this.getLegislator();
+        this.getSponsoredLegislation();
+        this.getCosponsoredLegislation();
+        this.getLegPortraitUrl();
     };
     LegislatorComponent = __decorate([
         core_1.Component({

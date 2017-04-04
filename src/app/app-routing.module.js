@@ -19,7 +19,7 @@ var routes = [
     { path: 'about', component: about_component_1.AboutComponent },
     { path: 'legislator', component: legislator_component_1.LegislatorComponent },
     { path: 'newsfeed', component: newsfeed_component_1.NewsfeedComponent },
-    { path: 'welcome', component: welcome_component_1.WelcomeComponent }
+    { path: 'welcome', component: welcome_component_1.WelcomeComponent },
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

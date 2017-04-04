@@ -14,7 +14,7 @@ import { LegislatorService }    from './legislator.service';
 import { NewsfeedComponent }    from './newsfeed.component';
 import { RepActionService }     from './repaction.service';
 import { WelcomeComponent}      from './welcome.component';
-
+import { LegislatorProfileComponent}  from './legislator-profile.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -29,7 +29,8 @@ import { WelcomeComponent}      from './welcome.component';
     AppComponent,
     LegislatorComponent,
     NewsfeedComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    LegislatorProfileComponent
   ],
   providers: [
     LegislatorService,

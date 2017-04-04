@@ -21,10 +21,16 @@ var LegislatorComponent = (function () {
         this.legislatorService
             .getAllLegislators()
             .subscribe(function (legislator) { return _this.legislator = legislator; });
-        console.log(this.legislator);
+        //console.log(this.legislator);
+    };
+    LegislatorComponent.prototype.onSelect = function (legislator) {
+        this.selectedLegislator = legislator;
     };
     LegislatorComponent.prototype.ngOnInit = function () {
         this.getLegislator();
+    };
+    LegislatorComponent.prototype.gotoProfile = function () {
+        this.router.navigate(['/profile', this.selectedLegislator.bioguide_id]);
     };
     LegislatorComponent = __decorate([
         core_1.Component({

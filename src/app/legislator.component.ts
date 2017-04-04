@@ -13,6 +13,7 @@ import { DataScrollerModule }       from 'primeng/primeng';
 })
 export class LegislatorComponent implements OnInit {
   legislator: Legislator[];
+  selectedLegislator: Legislator;
 
   constructor(
     private legislatorService: LegislatorService,
@@ -23,9 +24,18 @@ export class LegislatorComponent implements OnInit {
         //.getLegislatorTest("R000570");
         .getAllLegislators()
         .subscribe(legislator => this.legislator = legislator);
-        console.log(this.legislator);
+        //console.log(this.legislator);
   }
+
+  onSelect(legislator: Legislator) {
+    this.selectedLegislator = legislator;
+  }
+
   ngOnInit(): void {
     this.getLegislator();
+  }
+
+  gotoProfile(): void {
+    this.router.navigate(['/profile', this.selectedLegislator.bioguide_id]);
   }
 }

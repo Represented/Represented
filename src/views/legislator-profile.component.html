@@ -1,0 +1,11 @@
+<div *ngIf="rep">
+    <h2> {{rep.title}} {{rep.first_name}} {{rep.last_name}} ({{rep.party}})  of {{rep.state_name}} </h2>
+    
+    <h3> Gender: {{rep.gender}} </h3>
+    
+    <h3> In office since: {{rep.term_start}} until {{rep.term_end}}</h3>
+    <h3> Chamber: {{rep.chamber}} </h3>
+    
+    <button (click)="goBack()">Back</button>
+    
+</div>

@@ -8,6 +8,7 @@ import 'rxjs/add/observable/throw';
 
 
 import { Legislator } from './legislator';
+import { Bill } from './bill';
 
 @Injectable()
 export class LegislatorService {
@@ -29,6 +30,28 @@ export class LegislatorService {
     search.set('bioguide_id', bioguide_id);
     let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
                .map(response => response.json().results as Legislator);
+               //.catch(handleError);
+               //.catch(this.handleError);
+    return res;
+  }
+
+  getLegLatestSponsorAction(bioguide_id: string): Observable<Bill[]> {
+    var search = new URLSearchParams()
+    search.set('sponsor_id', bioguide_id);
+    search.set('order', 'last_action_at');
+    let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
+               .map(response => response.json().results as Bill[]);
+               //.catch(handleError);
+               //.catch(this.handleError);
+    return res;
+  }
+
+  getLegLatestCosponsorAction(bioguide_id: string): Observable<Bill[]> {
+    var search = new URLSearchParams()
+    search.set('cosponsor_ids', bioguide_id);
+    search.set('order', 'last_action_at');
+    let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
+               .map(response => response.json().results as Bill[]);
                //.catch(handleError);
                //.catch(this.handleError);
     return res;

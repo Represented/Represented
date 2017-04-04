@@ -35,6 +35,26 @@ var LegislatorService = (function () {
         //.catch(this.handleError);
         return res;
     };
+    LegislatorService.prototype.getLegLatestSponsorAction = function (bioguide_id) {
+        var search = new http_1.URLSearchParams();
+        search.set('sponsor_id', bioguide_id);
+        search.set('order', 'last_action_at');
+        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { search: search })
+            .map(function (response) { return response.json().results; });
+        //.catch(handleError);
+        //.catch(this.handleError);
+        return res;
+    };
+    LegislatorService.prototype.getLegLatestCosponsorAction = function (bioguide_id) {
+        var search = new http_1.URLSearchParams();
+        search.set('cosponsor_ids', bioguide_id);
+        search.set('order', 'last_action_at');
+        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { search: search })
+            .map(function (response) { return response.json().results; });
+        //.catch(handleError);
+        //.catch(this.handleError);
+        return res;
+    };
     LegislatorService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Jsonp])

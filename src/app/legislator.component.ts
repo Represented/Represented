@@ -1,6 +1,6 @@
 import { Component, OnInit }        from '@angular/core';
 import { Router }                   from '@angular/router';
-
+import { Bill }                     from './bill';
 import { Legislator }               from './legislator';
 import { LegislatorService }        from './legislator.service';
 import { DataScrollerModule }       from 'primeng/primeng';
@@ -14,6 +14,9 @@ import { DataScrollerModule }       from 'primeng/primeng';
 export class LegislatorComponent implements OnInit {
   legislator: Legislator;
   selectedLegislator: Legislator;
+  sponsored: Bill[];
+  cosponsored: Bill[];
+
 
   constructor(
     private legislatorService: LegislatorService,
@@ -25,6 +28,18 @@ export class LegislatorComponent implements OnInit {
         .getLegislatorById("R000570")
         .subscribe(legislator => this.legislator = legislator);
         //console.log(this.legislator);
+  }
+
+  getSponsoredLegislation(): void {
+      this.legislatorService
+        .getLegLatestSponsorAction("R000570")
+        .subscribe(sponsored => this.sponsored = sponsored);
+  }
+
+  getCosponsoredLegislation(): void {
+      this.legislatorService
+        .getLegLatestCosponsorAction("R000570")
+        .subscribe(cosponsored => this.cosponsored = cosponsored);
   }
 
   onSelect(legislator: Legislator) {

@@ -23,6 +23,18 @@ var LegislatorComponent = (function () {
             .subscribe(function (legislator) { return _this.legislator = legislator; });
         //console.log(this.legislator);
     };
+    LegislatorComponent.prototype.getSponsoredLegislation = function () {
+        var _this = this;
+        this.legislatorService
+            .getLegLatestSponsorAction("R000570")
+            .subscribe(function (sponsored) { return _this.sponsored = sponsored; });
+    };
+    LegislatorComponent.prototype.getCosponsoredLegislation = function () {
+        var _this = this;
+        this.legislatorService
+            .getLegLatestCosponsorAction("R000570")
+            .subscribe(function (cosponsored) { return _this.cosponsored = cosponsored; });
+    };
     LegislatorComponent.prototype.onSelect = function (legislator) {
         this.selectedLegislator = legislator;
     };

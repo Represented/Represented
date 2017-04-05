@@ -4,7 +4,6 @@
   </section>
   <ul>
     <li *ngFor="let rep of legislator">
-
       <h2> {{rep.title}} {{rep.first_name}} {{rep.last_name}} ({{rep.party}}) of {{rep.state_name}} </h2>
       <h3 *ngIf="rep.district">  District: {{rep.state}} - {{rep.district}} </h3>
       <h3> Gender: {{rep.gender}} </h3>
@@ -27,13 +26,14 @@
     </li>
   </ul>-->
   <p-dataScroller [value]="sponsored" [rows]="5" [buffer]="0.4">
-    <template let-s pTemplate="item">
+    <template let-s pTemplate="item" >
         <h2>Bill Title: {{s.short_title}}</h2>
+        <button (click)="goToBill(s)">Go to Bill</button>
         <p>Sponsor: {{s.sponsor.first_name}} {{s.sponsor.last_name}}</p>
-    </template>  
-  </p-dataScroller> 
+    </template>
+  </p-dataScroller>
 </div>
 
 <div class="portrait">
-  <img src="{{portraitUrl}}"> 
+  <img src="{{portraitUrl}}">
 </div>

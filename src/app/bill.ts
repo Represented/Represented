@@ -6,35 +6,35 @@ export class Bill {
   congress: number;
   cosponsors_count: number;
   enacted_as: {
-    congress: number;
-    law_type: string;
-    number: number;
+    congress?: number;
+    law_type?: string;
+    number?: number;
   }
   history: {
     active: Boolean;
-    active_at: string;
+    active_at?: string;
     awaiting_signature: Boolean;
     enacted: Boolean;
-    enacted_at: string;
-    house_passage_result: string;
-    house_passage_result_at: string;
-    senate_passage_result: string;
-    senate_passage_result_at: string;
+    enacted_at?: string;
+    house_passage_result?: string;
+    house_passage_result_at?: string;
+    senate_passage_result?: string;
+    senate_passage_result_at?: string;
     vetoed: Boolean;
   }
   introduced_on: string;
   last_action_at: string;
-  last_version: {
-    version_code: string;
-    issued_on: string;
-    version_name: string;
-    bill_version_id: string;
-    urls: {
-      html: string;
-      pdf: string;
-      xml: string;
+  last_version?: {
+    version_code?: string;
+    issued_on?: string;
+    version_name?: string;
+    bill_version_id?: string;
+    urls?: {
+      html?: string;
+      pdf?: string;
+      xml?: string;
     }
-    pages: number;
+    pages?: number;
   }
   last_version_on: string;
   last_vote_at: string;

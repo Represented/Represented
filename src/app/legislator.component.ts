@@ -16,7 +16,9 @@ export class LegislatorComponent implements OnInit {
   selectedLegislator: Legislator;
   sponsored: Bill[];
   cosponsored: Bill[];
+  //clickedBill: Bill;
   portraitUrl = 'https://theunitedstates.io/images/congress/original/';
+
 
   constructor(
     private legislatorService: LegislatorService,
@@ -27,7 +29,6 @@ export class LegislatorComponent implements OnInit {
         //.getAllLegislators()
         .getLegislatorById("R000570")
         .subscribe(legislator => this.legislator = legislator);
-        //console.log(this.legislator);
   }
 
   getSponsoredLegislation(): void {
@@ -60,7 +61,7 @@ export class LegislatorComponent implements OnInit {
     this.getLegPortraitUrl();
   }
 
-  // gotoProfile(): void {
-  //   this.router.navigate(['/profile', this.selectedLegislator.bioguide_id]);
-  // }
+  goToBill(bill: Bill): void {
+    this.router.navigate(['/bill', bill.bill_id]);
+  }
 }

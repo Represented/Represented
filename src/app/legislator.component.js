@@ -15,6 +15,7 @@ var LegislatorComponent = (function () {
     function LegislatorComponent(legislatorService, router) {
         this.legislatorService = legislatorService;
         this.router = router;
+        //clickedBill: Bill;
         this.portraitUrl = 'https://theunitedstates.io/images/congress/original/';
     }
     LegislatorComponent.prototype.getLegislator = function () {
@@ -22,7 +23,6 @@ var LegislatorComponent = (function () {
         this.legislatorService
             .getLegislatorById("R000570")
             .subscribe(function (legislator) { return _this.legislator = legislator; });
-        //console.log(this.legislator);
     };
     LegislatorComponent.prototype.getSponsoredLegislation = function () {
         var _this = this;
@@ -50,6 +50,9 @@ var LegislatorComponent = (function () {
         this.getSponsoredLegislation();
         this.getCosponsoredLegislation();
         this.getLegPortraitUrl();
+    };
+    LegislatorComponent.prototype.goToBill = function (bill) {
+        this.router.navigate(['/bill', bill.bill_id]);
     };
     LegislatorComponent = __decorate([
         core_1.Component({

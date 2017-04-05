@@ -7,6 +7,8 @@ import { JsonpModule }   from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { CookieService }        from 'angularCookie';
+
 import { AboutComponent }       from './about.component';
 import { AppComponent}          from './app.component';
 import { DataScrollerModule }   from 'primeng/primeng';

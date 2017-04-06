@@ -11,10 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var repaction_service_1 = require('./repaction.service');
+var cookies_service_js_1 = require('angular2-cookie/services/cookies.service.js');
+var http_1 = require('@angular/http');
 var NewsfeedComponent = (function () {
-    function NewsfeedComponent(repActionService, router) {
+    function NewsfeedComponent(repActionService, router, cookieService, jsonp) {
         this.repActionService = repActionService;
         this.router = router;
+        this.cookieService = cookieService;
+        this.jsonp = jsonp;
     }
     /*getActions(): void {
       this.repActionService
@@ -22,17 +26,23 @@ var NewsfeedComponent = (function () {
           .then(repactions => this.repactions = repactions);
     }*/
     NewsfeedComponent.prototype.ngOnInit = function () {
+        var representatives = this.cookieService.getObject('bioguides');
+        if (representatives === undefined) {
+            this.router.navigate(['/welcome']);
+        }
     };
     NewsfeedComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
+            providers: [cookies_service_js_1.CookieService],
             selector: 'my-newsfeed',
             templateUrl: '../views/newsfeed.component.html',
             styleUrls: ['../styles/newsfeed.component.css']
         }), 
-        __metadata('design:paramtypes', [repaction_service_1.RepActionService, router_1.Router])
+        __metadata('design:paramtypes', [repaction_service_1.RepActionService, router_1.Router, (typeof (_a = typeof cookies_service_js_1.CookieService !== 'undefined' && cookies_service_js_1.CookieService) === 'function' && _a) || Object, http_1.Jsonp])
     ], NewsfeedComponent);
     return NewsfeedComponent;
+    var _a;
 }());
 exports.NewsfeedComponent = NewsfeedComponent;
 //# sourceMappingURL=newsfeed.component.js.map

@@ -11,12 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var about_component_1 = require('./about.component');
+var bill_component_1 = require('./bill.component');
 var legislator_component_1 = require('./legislator.component');
 var newsfeed_component_1 = require('./newsfeed.component');
 var welcome_component_1 = require('./welcome.component');
 var routes = [
     { path: '', redirectTo: '/newsfeed', pathMatch: 'full' },
     { path: 'about', component: about_component_1.AboutComponent },
+    { path: 'bill/:bill_id', component: bill_component_1.BillComponent },
     { path: 'legislator', component: legislator_component_1.LegislatorComponent },
     { path: 'newsfeed', component: newsfeed_component_1.NewsfeedComponent },
     { path: 'welcome', component: welcome_component_1.WelcomeComponent },

@@ -10,7 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { CookieService }        from 'angular2-cookie/services/cookies.service.js';
 
 import { AboutComponent }       from './about.component';
-import { AppComponent}          from './app.component';
+import { AppComponent }         from './app.component';
+import { BillComponent }        from './bill.component';
+import { BillService }          from './bill.service';
 import { DataScrollerModule }   from 'primeng/primeng';
 import { LegislatorComponent }  from './legislator.component';
 import { LegislatorService }    from './legislator.service';
@@ -31,11 +33,13 @@ import { WelcomeComponent}      from './welcome.component';
   declarations: [
     AboutComponent,
     AppComponent,
+    BillComponent,
     LegislatorComponent,
     NewsfeedComponent,
     WelcomeComponent
   ],
   providers: [
+    BillService,
     LegislatorService,
     RepActionService,
 	CookieService

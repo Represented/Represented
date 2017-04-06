@@ -15,6 +15,7 @@ var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
 var LegislatorService = (function () {
+    // private photoUrl = 'https://theunitedstates.io/images/congress/orignal/';
     function LegislatorService(jsonp) {
         this.jsonp = jsonp;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
@@ -36,7 +37,7 @@ var LegislatorService = (function () {
     LegislatorService.prototype.getLegLatestSponsorAction = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('sponsor_id', bioguide_id);
-        search.set('order', 'last_action_at');
+        search.set('order', 'introduced_on');
         var res = this.jsonp.get(this.baseUrl + "/bills?callback=JSONP_CALLBACK", { search: search })
             .map(function (response) { return response.json().results; });
         return res;
@@ -44,9 +45,9 @@ var LegislatorService = (function () {
     LegislatorService.prototype.getLegLatestCosponsorAction = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('cosponsor_ids', bioguide_id);
-        search.set('order', 'last_action_at');
+        search.set('order', 'introduced_on');
         console.log(this.baseUrl + "/bills?callback=JSONP_CALLBACK", { search: search });
-        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { search: search })
+        var res = this.jsonp.get(this.baseUrl + "/bills?callback=JSONP_CALLBACK", { search: search })
             .map(function (response) { return response.json().results; });
         return res;
     };

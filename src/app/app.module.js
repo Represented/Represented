@@ -17,6 +17,8 @@ var http_2 = require('@angular/http');
 var app_routing_module_1 = require('./app-routing.module');
 var about_component_1 = require('./about.component');
 var app_component_1 = require('./app.component');
+var bill_component_1 = require('./bill.component');
+var bill_service_1 = require('./bill.service');
 var primeng_1 = require('primeng/primeng');
 var legislator_component_1 = require('./legislator.component');
 var legislator_service_1 = require('./legislator.service');
@@ -40,11 +42,13 @@ var AppModule = (function () {
             declarations: [
                 about_component_1.AboutComponent,
                 app_component_1.AppComponent,
+                bill_component_1.BillComponent,
                 legislator_component_1.LegislatorComponent,
                 newsfeed_component_1.NewsfeedComponent,
                 welcome_component_1.WelcomeComponent
             ],
             providers: [
+                bill_service_1.BillService,
                 legislator_service_1.LegislatorService,
                 repaction_service_1.RepActionService
             ],

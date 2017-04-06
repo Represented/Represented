@@ -1,7 +1,12 @@
+<div class="portrait">
+  <img src="{{portraitUrl}}">
+</div>
+
 <div class="rep-sidebar">
   <section *ngIf="errorMsg">
     {{errorMsg}}
   </section>
+
   <ul>
     <li *ngFor="let rep of legislator">
       <h2> {{rep.title}} {{rep.first_name}} {{rep.last_name}} ({{rep.party}}) of {{rep.state_name}} </h2>
@@ -32,8 +37,4 @@
         <p>Sponsor: {{s.sponsor.first_name}} {{s.sponsor.last_name}}</p>
     </template>
   </p-dataScroller>
-</div>
-
-<div class="portrait">
-  <img src="{{portraitUrl}}">
 </div>

@@ -1,3 +1,27 @@
 
 
 /*# sourceMappingURL=legislator.component.css.map */
+
+.portrait {
+	float: left;
+}
+
+.portrait img {
+	height: 250px;
+	width: 220px;
+	margin: 20px;
+	border-radius: 30px;
+}
+
+.rep-sidebar {
+	float: left;
+}
+
+.timeline {
+	clear: both;
+	margin-left: 50px;
+}
+
+
+
+

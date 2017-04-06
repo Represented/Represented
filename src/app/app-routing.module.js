@@ -19,7 +19,7 @@ var routes = [
     { path: '', redirectTo: '/newsfeed', pathMatch: 'full' },
     { path: 'about', component: about_component_1.AboutComponent },
     { path: 'bill/:bill_id', component: bill_component_1.BillComponent },
-    { path: 'legislator', component: legislator_component_1.LegislatorComponent },
+    { path: 'legislator/:bioguide_id', component: legislator_component_1.LegislatorComponent },
     { path: 'newsfeed', component: newsfeed_component_1.NewsfeedComponent },
     { path: 'welcome', component: welcome_component_1.WelcomeComponent },
 ];

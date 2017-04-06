@@ -1,33 +1,38 @@
 <div class="rep-sidebar">
+
+  <div class="portrait">
+    <img src="{{portraitUrl}}">
+  </div>
   <section *ngIf="errorMsg">
     {{errorMsg}}
   </section>
-  <ul>
-    <li *ngFor="let rep of legislator">
 
-      <h2> {{rep.title}} {{rep.first_name}} {{rep.last_name}} ({{rep.party}}) of {{rep.state_name}} </h2>
-      <h3 *ngIf="rep.district">  District: {{rep.state}} - {{rep.district}} </h3>
-      <h3> Gender: {{rep.gender}} </h3>
+  <div>
+    <div *ngFor="let rep of legislator">
+      <h4> {{rep.title}} {{rep.first_name}} {{rep.last_name}} ({{rep.party}}) of {{rep.state_name}} </h4>
+      <h4 *ngIf="rep.district"> District: {{rep.state}} - {{rep.district}} </h4>
+      <h4> Gender: {{rep.gender}} </h4>
 
-      <h3> In office since: {{rep.term_start}} until {{rep.term_end}}</h3>
-      <h3> Chamber: {{rep.chamber}} </h3>
-      <h2> Contact info:
-        <h3> Website: <a href="{{rep.website}}" target="_blank">{{rep.website}} </a> </h3>
-        <h3>    Phone: {{rep.phone}} </h3>
-        <h3>    Office: {{rep.office}} </h3>
-      </h2>
-    </li>
-  </ul>
+      <h4> In office since: {{rep.term_start}} until {{rep.term_end}}</h4>
+      <h4> Chamber: {{rep.chamber}} </h4>
+        <p> Website: <a href="{{rep.website}}" target="_blank">{{rep.website}} </a> </p>
+        <p> Phone: {{rep.phone}} </p>
+        <p> Office: {{rep.office}} </p>
+    </div>
+  </div>
 </div>
 <div class="timeline">
-  <ul>
+  <!--<ul>
     <li *ngFor="let s of sponsored">
       <h2>Bill Title: {{s.short_title}}</h2>
       <p>Sponsor: {{s.sponsor.first_name}} {{s.sponsor.last_name}}</p>
     </li>
-  </ul>
-</div>
-
-<div class="portrait">
-  <img src="{{portraitUrl}}"> 
+  </ul>-->
+  <p-dataScroller [value]="sponsored" [rows]="5" [buffer]="0.4">
+    <template let-s pTemplate="item">
+      <h2>Bill Title: {{s.short_title}}</h2>
+      <button (click)="goToBill(s.bill_id)">Go to Bill</button>
+      <p>Sponsor: {{s.sponsor.first_name}} {{s.sponsor.last_name}}</p>
+    </template>
+  </p-dataScroller>
 </div>

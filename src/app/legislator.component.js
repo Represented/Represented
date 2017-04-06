@@ -8,11 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var router_2 = require('@angular/router');
-var legislator_service_1 = require('./legislator.service');
-var common_1 = require('@angular/common');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var router_2 = require("@angular/router");
+var legislator_service_1 = require("./legislator.service");
+var common_1 = require("@angular/common");
 var LegislatorComponent = (function () {
     function LegislatorComponent(legislatorService, router, route, location) {
         this.legislatorService = legislatorService;
@@ -51,9 +52,6 @@ var LegislatorComponent = (function () {
     LegislatorComponent.prototype.onSelect = function (legislator) {
         this.selectedLegislator = legislator;
     };
-    // onSelect(legislator: Legislator) {
-    //   this.selectedLegislator = legislator;
-    // }
     LegislatorComponent.prototype.setLegPortritUrl = function (id) {
         var address = this.portraitUrl += (id + '.jpg');
         return address;
@@ -70,6 +68,7 @@ var LegislatorComponent = (function () {
         this.getSponsoredLegislation();
         this.getCosponsoredLegislation();
         this.getLegPortraitUrl();
+        this.allBills = this.cosponsored.concat(this.sponsored);
     };
     LegislatorComponent.prototype.goToBill = function (bill_id) {
         this.router.navigate(['/bill', bill_id]);
@@ -77,16 +76,19 @@ var LegislatorComponent = (function () {
     LegislatorComponent.prototype.goBack = function () {
         this.location.back();
     };
-    LegislatorComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'my-legislator',
-            templateUrl: '../views/legislator.component.html',
-            styleUrls: ['../styles/legislator.component.css']
-        }), 
-        __metadata('design:paramtypes', [legislator_service_1.LegislatorService, router_1.Router, router_2.ActivatedRoute, common_1.Location])
-    ], LegislatorComponent);
     return LegislatorComponent;
 }());
+LegislatorComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'my-legislator',
+        templateUrl: '../views/legislator.component.html',
+        styleUrls: ['../styles/legislator.component.css']
+    }),
+    __metadata("design:paramtypes", [legislator_service_1.LegislatorService,
+        router_1.Router,
+        router_2.ActivatedRoute,
+        common_1.Location])
+], LegislatorComponent);
 exports.LegislatorComponent = LegislatorComponent;
 //# sourceMappingURL=legislator.component.js.map

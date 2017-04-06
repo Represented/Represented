@@ -22,29 +22,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
-  # https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-16-04 
   # https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04 (using PPA)
   config.vm.provision "shell", inline: <<-SHELL
         apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 
         
-        echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list 
         
-        apt-get -y update && apt-get install -y mongodb-org nodejs 
+        apt-get -y update && apt-get install -y nodejs 
         
-        echo "[Unit]" >> /etc/systemd/system/mongodb.service 
-        echo "Description=High-performance, schema-free document-oriented database" >> /etc/systemd/system/mongodb.service 
-        echo "After=network.target" >> /etc/systemd/system/mongodb.service 
-        echo "" >> /etc/systemd/system/mongodb.service 
-        echo "[Service]" >> /etc/systemd/system/mongodb.service 
-        echo "User=mongodb" >> /etc/systemd/system/mongodb.service 
-        echo "ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf" >> /etc/systemd/system/mongodb.service 
-        echo "" >> /etc/systemd/system/mongodb.service 
-        echo "[Install]" >> /etc/systemd/system/mongodb.service 
-        echo "WantedBy=multi-user.target" >> /etc/systemd/system/mongodb.service 
         
-        mkdir -p /data/db
-	systemctl start mongodb
-	systemctl enable mongodb
 	cd ~
 	curl -sL https://deb.nodesource.com/setup_6.x -o nodesource_setup.sh
 	sudo bash nodesource_setup.sh

@@ -27,6 +27,7 @@ export class NewsfeedComponent implements OnInit {
         .getActions()
         .then(repactions => this.repactions = repactions);
   }*/
+
     ngOnInit(): void {
 		var representatives = this.cookieService.getObject('bioguides');
 		if(representatives === undefined){
@@ -38,5 +39,6 @@ export class NewsfeedComponent implements OnInit {
  
   goToLegislator(bioguide_id: string): void {
     this.router.navigate(['/legislator', bioguide_id]);
+
   }
 }

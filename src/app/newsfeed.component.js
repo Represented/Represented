@@ -39,10 +39,9 @@ var NewsfeedComponent = (function () {
             templateUrl: '../views/newsfeed.component.html',
             styleUrls: ['../styles/newsfeed.component.css']
         }), 
-        __metadata('design:paramtypes', [repaction_service_1.RepActionService, router_1.Router, (typeof (_a = typeof cookies_service_js_1.CookieService !== 'undefined' && cookies_service_js_1.CookieService) === 'function' && _a) || Object, http_1.Jsonp])
+        __metadata('design:paramtypes', [repaction_service_1.RepActionService, router_1.Router, cookies_service_js_1.CookieService, http_1.Jsonp])
     ], NewsfeedComponent);
     return NewsfeedComponent;
-    var _a;
 }());
 exports.NewsfeedComponent = NewsfeedComponent;
 //# sourceMappingURL=newsfeed.component.js.map

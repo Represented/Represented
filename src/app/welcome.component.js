@@ -89,10 +89,9 @@ var WelcomeComponent = (function () {
             templateUrl: '../views/welcome.component.html',
             styleUrls: ['../styles/welcome.component.css']
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof cookies_service_js_1.CookieService !== 'undefined' && cookies_service_js_1.CookieService) === 'function' && _a) || Object, http_1.Jsonp, router_1.Router])
+        __metadata('design:paramtypes', [cookies_service_js_1.CookieService, http_1.Jsonp, router_1.Router])
     ], WelcomeComponent);
     return WelcomeComponent;
-    var _a;
 }());
 exports.WelcomeComponent = WelcomeComponent;
 //# sourceMappingURL=welcome.component.js.map

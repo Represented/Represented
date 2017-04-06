@@ -8,12 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var Observable_1 = require('rxjs/Observable');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var Observable_1 = require("rxjs/Observable");
 //import 'rxjs/add/operator/toPromise';
-require('rxjs/add/operator/map');
-require('rxjs/add/observable/throw');
+require("rxjs/add/operator/map");
+require("rxjs/add/observable/throw");
 var LegislatorService = (function () {
     // private photoUrl = 'https://theunitedstates.io/images/congress/orignal/';
     function LegislatorService(jsonp) {
@@ -37,7 +38,7 @@ var LegislatorService = (function () {
     LegislatorService.prototype.getLegLatestSponsorAction = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('sponsor_id', bioguide_id);
-        search.set('order', 'last_action_at');
+        search.set('order', 'introduced_on');
         var res = this.jsonp.get(this.baseUrl + "/bills?callback=JSONP_CALLBACK", { search: search })
             .map(function (response) { return response.json().results; });
         return res;
@@ -45,18 +46,17 @@ var LegislatorService = (function () {
     LegislatorService.prototype.getLegLatestCosponsorAction = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('cosponsor_ids', bioguide_id);
-        search.set('order', 'last_action_at');
-        console.log(this.baseUrl + "/bills?callback=JSONP_CALLBACK", { search: search });
-        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { search: search })
+        search.set('order', 'introduced_on');
+        var res = this.jsonp.get(this.baseUrl + "/bills?callback=JSONP_CALLBACK", { search: search })
             .map(function (response) { return response.json().results; });
         return res;
     };
-    LegislatorService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Jsonp])
-    ], LegislatorService);
     return LegislatorService;
 }());
+LegislatorService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Jsonp])
+], LegislatorService);
 exports.LegislatorService = LegislatorService;
 function mapLegislators(response) {
     // The response of the API has a results

@@ -2,15 +2,18 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent }       from './about.component';
+import { BillComponent }        from './bill.component';
 import { LegislatorComponent }  from './legislator.component';
 import { NewsfeedComponent }    from './newsfeed.component';
 import { WelcomeComponent}      from './welcome.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/newsfeed', pathMatch: 'full' },
-  { path: 'about',        component: AboutComponent },
-  { path: 'legislator',   component: LegislatorComponent },
-  { path: 'newsfeed',     component: NewsfeedComponent },
-  { path: 'welcome',      component: WelcomeComponent},
+  { path: 'about',                       component: AboutComponent },
+  { path: 'bill/:bill_id',               component: BillComponent },
+  { path: 'legislator/:bioguide_id',     component: LegislatorComponent },
+  { path: 'newsfeed',                    component: NewsfeedComponent },
+  { path: 'welcome',                     component: WelcomeComponent},
 ];
 
 @NgModule({

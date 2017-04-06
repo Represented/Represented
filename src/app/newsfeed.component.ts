@@ -14,7 +14,7 @@ import { Jsonp } 					from '@angular/http';
   styleUrls: [ '../styles/newsfeed.component.css' ]
 })
 export class NewsfeedComponent implements OnInit {
-  repactions: RepAction[];
+  legislators: String[];
 
   constructor(
     private repActionService: RepActionService,
@@ -27,10 +27,18 @@ export class NewsfeedComponent implements OnInit {
         .getActions()
         .then(repactions => this.repactions = repactions);
   }*/
-  ngOnInit(): void {
-	var representatives = this.cookieService.getObject('bioguides');
-	if(representatives === undefined){
-		this.router.navigate(['/welcome']);
-	}
+
+    ngOnInit(): void {
+		var representatives = this.cookieService.getObject('bioguides');
+		if(representatives === undefined){
+			this.router.navigate(['/welcome']);
+		}
+		this.legislators = representatives.toString().split(',');
+		console.log(this.legislators);
+    }
+ 
+  goToLegislator(bioguide_id: string): void {
+    this.router.navigate(['/legislator', bioguide_id]);
+
   }
 }

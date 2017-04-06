@@ -16,7 +16,6 @@ export class LegislatorComponent implements OnInit {
   selectedLegislator: Legislator;
   sponsored: Bill[];
   cosponsored: Bill[];
-  //clickedBill: Bill;
   portraitUrl = 'https://theunitedstates.io/images/congress/original/';
 
 
@@ -61,7 +60,7 @@ export class LegislatorComponent implements OnInit {
     this.getLegPortraitUrl();
   }
 
-  goToBill(bill: Bill): void {
-    this.router.navigate(['/bill', bill.bill_id]);
+  goToBill(bill_id: string): void {
+    this.router.navigate(['/bill', bill_id]);
   }
 }

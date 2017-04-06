@@ -19,7 +19,7 @@ export class BillService {
   getBillById(bill_id: string): Observable<Bill> {
     var search = new URLSearchParams();
     search.set('bill_id', bill_id);
-    let res = this.jsonp.get(`${this.baseUrl}/bills?callback=JSONP_CALLBACK&bill_id=hjres93-115`)
+    let res = this.jsonp.get(`${this.baseUrl}/bills?callback=JSONP_CALLBACK&bill_id`, {search})
                .map(response => response.json().results as Bill);
     return res;
   }

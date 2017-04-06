@@ -1,3 +1,6 @@
-<div class="bill" *ngFor="let b of bill">
-  <h1>{{b.official_title}}</h1>
+<div class="content">
+  <div *ngFor="let b of bill">
+    <h1>{{b.bill_type | uppercase}}.{{b.number}}:<h3>{{b.official_title}}</h3></h1>
+    <p>{{b.bill_id}}</p>
+  </div>
 </div>

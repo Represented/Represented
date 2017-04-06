@@ -23,7 +23,7 @@ var BillService = (function () {
     BillService.prototype.getBillById = function (bill_id) {
         var search = new http_1.URLSearchParams();
         search.set('bill_id', bill_id);
-        var res = this.jsonp.get(this.baseUrl + "/bills?callback=JSONP_CALLBACK&bill_id=hjres93-115")
+        var res = this.jsonp.get(this.baseUrl + "/bills?callback=JSONP_CALLBACK&bill_id", { search: search })
             .map(function (response) { return response.json().results; });
         return res;
     };

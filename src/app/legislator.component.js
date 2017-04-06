@@ -15,7 +15,6 @@ var LegislatorComponent = (function () {
     function LegislatorComponent(legislatorService, router) {
         this.legislatorService = legislatorService;
         this.router = router;
-        //clickedBill: Bill;
         this.portraitUrl = 'https://theunitedstates.io/images/congress/original/';
     }
     LegislatorComponent.prototype.getLegislator = function () {
@@ -51,8 +50,8 @@ var LegislatorComponent = (function () {
         this.getCosponsoredLegislation();
         this.getLegPortraitUrl();
     };
-    LegislatorComponent.prototype.goToBill = function (bill) {
-        this.router.navigate(['/bill', bill.bill_id]);
+    LegislatorComponent.prototype.goToBill = function (bill_id) {
+        this.router.navigate(['/bill', bill_id]);
     };
     LegislatorComponent = __decorate([
         core_1.Component({

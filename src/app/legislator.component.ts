@@ -75,7 +75,7 @@ export class LegislatorComponent implements OnInit {
     this.getSponsoredLegislation();
     this.getCosponsoredLegislation();
     this.getLegPortraitUrl();
-    this.allBills = this.cosponsored.concat(this.sponsored);
+    //this.allBills = this.cosponsored.concat(this.sponsored);
   }
 
   goToBill(bill_id: string): void {

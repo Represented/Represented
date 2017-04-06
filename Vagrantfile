@@ -56,6 +56,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # EXTRAS atop what was copied from the link above
   # config.vm.synced_folder "../", "/home/ubuntu/"
-  config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
 
 end

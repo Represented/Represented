@@ -10,23 +10,36 @@
 	height: 250px;
 	width: 220px;
 	margin: 20px;
-	border-radius: 30px;
 }
 
 .rep-sidebar {
 	float: left;
 	width: 20%;
 	position: absolute;
+	background-color: #e6f9ff;
+	margin: 10px;
+	padding: 10px;
 }
 
 .timeline {
-	clear: both;
+	float: right;
 	width: 60%;
-	position: absolute;
-	right: 0;
-	margin-left: 50px;
+	margin-right: 30px;
+	margin-top: 10px;
+	background-color: ;
 }
 
+.bill-info {
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 10px;
+	box-shadow: 2px 2px 2px 2px;
+}
 
+.bill-info h2 {
+	color: blue;
+}
 
 

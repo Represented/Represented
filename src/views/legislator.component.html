@@ -29,10 +29,16 @@
     </li>
   </ul>-->
   <p-dataScroller [value]="sponsored" [rows]="5" [buffer]="0.4">
-    <template let-s pTemplate="item">
-      <h2>Bill Title: {{s.short_title}}</h2>
+  	
+ 		
+	<template let-s pTemplate="item">
+	
+	  <div class="bill-info">
+      <h2><a>Bill Title: {{s.short_title}}</a></h2>
       <button (click)="goToBill(s.bill_id)">Go to Bill</button>
       <p>Sponsor: {{s.sponsor.first_name}} {{s.sponsor.last_name}}</p>
-    </template>
+	  </div>
+	</template>
+   
   </p-dataScroller>
 </div>

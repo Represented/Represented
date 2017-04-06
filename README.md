@@ -47,4 +47,5 @@ $ vagrant ssh
 ubuntu@ubuntu-xenial:~$ cd /vagrant
 ```
 2. Run the commands from "Building and Running Node Angular 2 Application"
+
 You can now access the project from localhost:8000

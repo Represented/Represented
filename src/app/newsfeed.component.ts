@@ -3,7 +3,7 @@ import { Router }            from '@angular/router';
 import { RepAction }                from './repaction';
 import { RepActionService }         from './repaction.service';
 import { DataScrollerModule }       from 'primeng/primeng';
-import { CookieService } 			from 'angular2-cookie/services/cookies.service.js';
+import { CookieService } 			from 'angular2-cookie/services/cookies.service';
 import { Jsonp } 					from '@angular/http';
 
 @Component({

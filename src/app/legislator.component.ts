@@ -16,7 +16,7 @@ export class LegislatorComponent implements OnInit {
   selectedLegislator: Legislator;
   sponsored: Bill[];
   cosponsored: Bill[];
-
+  portraitUrl = 'https://theunitedstates.io/images/congress/original/';
 
   constructor(
     private legislatorService: LegislatorService,
@@ -49,10 +49,15 @@ export class LegislatorComponent implements OnInit {
   //   this.selectedLegislator = legislator;
   // }
 
+  getLegPortraitUrl(): void {
+    this.portraitUrl += 'R000570.jpg';
+  }
+
   ngOnInit(): void {
     this.getLegislator();
     this.getSponsoredLegislation();
     this.getCosponsoredLegislation();
+    this.getLegPortraitUrl();
   }
 
   // gotoProfile(): void {

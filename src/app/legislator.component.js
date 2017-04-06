@@ -10,29 +10,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var router_2 = require('@angular/router');
 var legislator_service_1 = require('./legislator.service');
+var common_1 = require('@angular/common');
 var LegislatorComponent = (function () {
-    function LegislatorComponent(legislatorService, router) {
+    function LegislatorComponent(legislatorService, router, route, location) {
         this.legislatorService = legislatorService;
         this.router = router;
+        this.route = route;
+        this.location = location;
         this.portraitUrl = 'https://theunitedstates.io/images/congress/original/';
     }
     LegislatorComponent.prototype.getLegislator = function () {
         var _this = this;
-        this.legislatorService
-            .getLegislatorById("R000570")
+        this.route.params
+            .switchMap(function (params) {
+            return _this.legislatorService
+                .getLegislatorById(params['bioguide_id']);
+        })
             .subscribe(function (legislator) { return _this.legislator = legislator; });
     };
     LegislatorComponent.prototype.getSponsoredLegislation = function () {
         var _this = this;
-        this.legislatorService
-            .getLegLatestSponsorAction("R000570")
+        this.route.params
+            .switchMap(function (params) {
+            return _this.legislatorService
+                .getLegLatestSponsorAction(params['bioguide_id']);
+        })
             .subscribe(function (sponsored) { return _this.sponsored = sponsored; });
     };
     LegislatorComponent.prototype.getCosponsoredLegislation = function () {
         var _this = this;
-        this.legislatorService
-            .getLegLatestCosponsorAction("R000570")
+        this.route.params
+            .switchMap(function (params) {
+            return _this.legislatorService
+                .getLegLatestCosponsorAction(params['bioguide_id']);
+        })
             .subscribe(function (cosponsored) { return _this.cosponsored = cosponsored; });
     };
     LegislatorComponent.prototype.onSelect = function (legislator) {
@@ -41,8 +54,16 @@ var LegislatorComponent = (function () {
     // onSelect(legislator: Legislator) {
     //   this.selectedLegislator = legislator;
     // }
+    LegislatorComponent.prototype.setLegPortritUrl = function (id) {
+        var address = this.portraitUrl += (id + '.jpg');
+        return address;
+    };
     LegislatorComponent.prototype.getLegPortraitUrl = function () {
-        this.portraitUrl += 'R000570.jpg';
+        var _this = this;
+        this.route.params
+            .subscribe(function (params) {
+            return _this.portraitUrl = _this.setLegPortritUrl(params['bioguide_id']);
+        });
     };
     LegislatorComponent.prototype.ngOnInit = function () {
         this.getLegislator();
@@ -53,6 +74,9 @@ var LegislatorComponent = (function () {
     LegislatorComponent.prototype.goToBill = function (bill_id) {
         this.router.navigate(['/bill', bill_id]);
     };
+    LegislatorComponent.prototype.goBack = function () {
+        this.location.back();
+    };
     LegislatorComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -60,7 +84,7 @@ var LegislatorComponent = (function () {
             templateUrl: '../views/legislator.component.html',
             styleUrls: ['../styles/legislator.component.css']
         }), 
-        __metadata('design:paramtypes', [legislator_service_1.LegislatorService, router_1.Router])
+        __metadata('design:paramtypes', [legislator_service_1.LegislatorService, router_1.Router, router_2.ActivatedRoute, common_1.Location])
     ], LegislatorComponent);
     return LegislatorComponent;
 }());

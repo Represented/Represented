@@ -27,9 +27,14 @@ var NewsfeedComponent = (function () {
     }*/
     NewsfeedComponent.prototype.ngOnInit = function () {
         var representatives = this.cookieService.getObject('bioguides');
+        this.legislators = representatives.toString().split(',');
+        console.log(this.legislators);
         if (representatives === undefined) {
             this.router.navigate(['/welcome']);
         }
+    };
+    NewsfeedComponent.prototype.goToLegislator = function (bioguide_id) {
+        this.router.navigate(['/legislator', bioguide_id]);
     };
     NewsfeedComponent = __decorate([
         core_1.Component({

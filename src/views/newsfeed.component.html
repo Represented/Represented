@@ -1,3 +1,11 @@
+<div class="rep-buttons">
+  <ul *ngFor="let rep of legislators">
+    <li>
+      <button (click)="goToLegislator(rep)">Legislator: {{rep}}</button>
+    </li>
+  </ul>
+</div>
+
 <p-dataScroller [value]="repactions" [rows]="10" [buffer]="0.4">
   <p-header>
     Scroll Down to Load More
@@ -21,7 +29,7 @@
                             <div class="ui-grid-col-10">{{repaction.action}}</div>
                         </div>
                         <br>
-                        
+
                     </div>
                 </div>
             </div>

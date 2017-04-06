@@ -1,9 +1,11 @@
 import { Component, OnInit }        from '@angular/core';
 import { Router }                   from '@angular/router';
+import { ActivatedRoute, Params }   from '@angular/router';
 import { Bill }                     from './bill';
 import { Legislator }               from './legislator';
 import { LegislatorService }        from './legislator.service';
 import { DataScrollerModule }       from 'primeng/primeng';
+import { Location }                 from '@angular/common';
 
 @Component({
   moduleId: module.id,
@@ -21,24 +23,31 @@ export class LegislatorComponent implements OnInit {
 
   constructor(
     private legislatorService: LegislatorService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute,
+    private location: Location) { }
 
   getLegislator(): void {
-    this.legislatorService
-        //.getAllLegislators()
-        .getLegislatorById("R000570")
+    this.route.params
+      .switchMap((params: Params) =>
+        this.legislatorService
+        .getLegislatorById(params['bioguide_id']))
         .subscribe(legislator => this.legislator = legislator);
   }
 
   getSponsoredLegislation(): void {
-      this.legislatorService
-        .getLegLatestSponsorAction("R000570")
+    this.route.params
+      .switchMap((params: Params) =>
+        this.legislatorService
+        .getLegLatestSponsorAction(params['bioguide_id']))
         .subscribe(sponsored => this.sponsored = sponsored);
   }
 
   getCosponsoredLegislation(): void {
-      this.legislatorService
-        .getLegLatestCosponsorAction("R000570")
+    this.route.params
+      .switchMap((params: Params) =>
+        this.legislatorService
+        .getLegLatestCosponsorAction(params['bioguide_id']))
         .subscribe(cosponsored => this.cosponsored = cosponsored);
   }
 
@@ -49,8 +58,15 @@ export class LegislatorComponent implements OnInit {
   //   this.selectedLegislator = legislator;
   // }
 
+  setLegPortritUrl(id: string): string {
+    let address = this.portraitUrl += (id + '.jpg');
+    return address;
+  }
+
   getLegPortraitUrl(): void {
-    this.portraitUrl += 'R000570.jpg';
+    this.route.params
+      .subscribe(params =>
+      this.portraitUrl = this.setLegPortritUrl(params['bioguide_id']));
   }
 
   ngOnInit(): void {
@@ -62,5 +78,9 @@ export class LegislatorComponent implements OnInit {
 
   goToBill(bill_id: string): void {
     this.router.navigate(['/bill', bill_id]);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

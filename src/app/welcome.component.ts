@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { CookieService } from 'angularCookie';
+import { CookieService } from 'angular2-cookie/services/cookies.service.js';
 import { Headers, Http, Jsonp, Response, URLSearchParams } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ export class WelcomeComponent{
 	private baseUrl = 'https://congress.api.sunlightfoundation.com';
 
 	constructor(private cookieService: CookieService,
-	private jsonp: Jsonp
+	private jsonp: Jsonp,
 	private router: Router){}
 	
     public zipSubmissionForm = new FormGroup({
@@ -42,19 +42,20 @@ export class WelcomeComponent{
 		console.log(thisParent.cookieService.get('longLat'));
 		
 		var search = new URLSearchParams();
-		search.set('latitude', lat);
-		search.set('longitude', lng);
+		
+		search.set('latitude', lat.toString());
+		search.set('longitude', lng.toString());
 		
 		let res = thisParent.jsonp.get(`${thisParent.baseUrl}/legislators/locate?callback=JSONP_CALLBACK`, { search })
-                .subscribe(response =>{
+                .subscribe((response: any) =>{
 				    var returnReps = response.json().results;
 					if(returnReps.length == 0){
 						alert('Location not valid, please use zipcode');
 						this.router.navigate(['/welcome']);
 					}
 					else{
-						var bioGuideArray[];
-						returnReps.forEach(function(rep) {
+						var bioGuideArray:any = [];
+						returnReps.forEach((rep: any) => {
 							bioGuideArray.push(rep.bioguide_id);
 						});
 						thisParent.cookieService.putObject('bioguides', bioGuideArray);
@@ -69,22 +70,22 @@ export class WelcomeComponent{
     submitZip() {
 		var zip = this.zipSubmissionForm.get('zipcode').value;
 		this.cookieService.put('zipcode', zip);
-		//console.log(this.cookieService.get('zipcode'));
+		console.log(this.cookieService.get('zipcode'));
 		
 		var search = new URLSearchParams();
 		search.set('zip', zip);
 		
 		
 		let res = this.jsonp.get(`${this.baseUrl}/legislators/locate?callback=JSONP_CALLBACK`, { search })
-                .subscribe(response =>{
+                .subscribe((response: any) =>{
 				    var returnReps = response.json().results;
 					if(returnReps.length == 0){
 						alert('Please give a valid zipcode');
 						this.router.navigate(['/welcome']);
 					}
 					else{
-						var bioGuideArray[];
-						returnReps.forEach(function(rep) {
+						var bioGuideArray:any = [];
+						returnReps.forEach((rep: any) => {
 							bioGuideArray.push(rep.bioguide_id);
 						});
 						this.cookieService.putObject('bioguides', bioGuideArray);

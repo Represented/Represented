@@ -7,7 +7,7 @@ import { JsonpModule }   from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { CookieService }        from 'angularCookie';
+import { CookieService }        from 'angular2-cookie/services/cookies.service.js';
 
 import { AboutComponent }       from './about.component';
 import { AppComponent}          from './app.component';
@@ -37,7 +37,8 @@ import { WelcomeComponent}      from './welcome.component';
   ],
   providers: [
     LegislatorService,
-    RepActionService
+    RepActionService,
+	CookieService
    ],
   bootstrap: [ AppComponent ]
 })

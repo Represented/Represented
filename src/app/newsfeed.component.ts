@@ -3,12 +3,12 @@ import { Router }            from '@angular/router';
 import { RepAction }                from './repaction';
 import { RepActionService }         from './repaction.service';
 import { DataScrollerModule }       from 'primeng/primeng';
-import { CookieService } 			from 'angularCookie';
+import { CookieService } 			from 'angular2-cookie/services/cookies.service.js';
 import { Jsonp } 					from '@angular/http';
 
 @Component({
   moduleId: module.id,
-  providers: [CookieService];
+  providers: [CookieService],
   selector: 'my-newsfeed',
   templateUrl: '../views/newsfeed.component.html',
   styleUrls: [ '../styles/newsfeed.component.css' ]
@@ -18,8 +18,8 @@ export class NewsfeedComponent implements OnInit {
 
   constructor(
     private repActionService: RepActionService,
-    private router: Router
-	private cookieService: CookieService
+    private router: Router,
+	private cookieService: CookieService,
 	private jsonp: Jsonp) { }
 
   /*getActions(): void {

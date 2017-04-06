@@ -45,6 +45,6 @@ CS 506 Project
 $ vagrant up
 $ vagrant ssh
 ubuntu@ubuntu-xenial:~$ cd /vagrant
-ubuntu@ubuntu-xenial:/vagrant$ npm start
 ```
+2. Run the commands from "Building and Running Node Angular 2 Application"
 You can now access the project from localhost:8000

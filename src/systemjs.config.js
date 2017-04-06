@@ -23,7 +23,7 @@
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
       '@angular/router/upgrade': 'npm:@angular/router/bundles/router-upgrade.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
-
+	  'angular2-cookie/services/cookies.service.js': 'npm:angular2-cookie/services/cookies.service.js',
       // other libraries
       'rxjs':                      'npm:rxjs',
       'primeng':                   'node_modules/primeng'

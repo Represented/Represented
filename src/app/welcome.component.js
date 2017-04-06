@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
-var cookies_service_js_1 = require('angular2-cookie/services/cookies.service.js');
+var cookies_service_1 = require('angular2-cookie/services/cookies.service');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 var WelcomeComponent = (function () {
@@ -84,12 +84,12 @@ var WelcomeComponent = (function () {
     WelcomeComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            providers: [cookies_service_js_1.CookieService],
+            providers: [cookies_service_1.CookieService],
             selector: 'my-welcome',
             templateUrl: '../views/welcome.component.html',
             styleUrls: ['../styles/welcome.component.css']
         }), 
-        __metadata('design:paramtypes', [cookies_service_js_1.CookieService, http_1.Jsonp, router_1.Router])
+        __metadata('design:paramtypes', [cookies_service_1.CookieService, http_1.Jsonp, router_1.Router])
     ], WelcomeComponent);
     return WelcomeComponent;
 }());

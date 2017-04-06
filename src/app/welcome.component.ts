@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { CookieService } from 'angular2-cookie/services/cookies.service.js';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Headers, Http, Jsonp, Response, URLSearchParams } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { Router } from '@angular/router';

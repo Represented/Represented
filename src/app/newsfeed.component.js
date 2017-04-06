@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var repaction_service_1 = require('./repaction.service');
-var cookies_service_js_1 = require('angular2-cookie/services/cookies.service.js');
+var cookies_service_1 = require('angular2-cookie/services/cookies.service');
 var http_1 = require('@angular/http');
 var NewsfeedComponent = (function () {
     function NewsfeedComponent(repActionService, router, cookieService, jsonp) {
@@ -34,12 +34,12 @@ var NewsfeedComponent = (function () {
     NewsfeedComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            providers: [cookies_service_js_1.CookieService],
+            providers: [cookies_service_1.CookieService],
             selector: 'my-newsfeed',
             templateUrl: '../views/newsfeed.component.html',
             styleUrls: ['../styles/newsfeed.component.css']
         }), 
-        __metadata('design:paramtypes', [repaction_service_1.RepActionService, router_1.Router, cookies_service_js_1.CookieService, http_1.Jsonp])
+        __metadata('design:paramtypes', [repaction_service_1.RepActionService, router_1.Router, cookies_service_1.CookieService, http_1.Jsonp])
     ], NewsfeedComponent);
     return NewsfeedComponent;
 }());

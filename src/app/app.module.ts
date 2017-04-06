@@ -7,10 +7,10 @@ import { JsonpModule }   from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { CookieService }        from 'angular2-cookie/services/cookies.service.js';
+import { CookieService }        from 'angular2-cookie/services/cookies.service';
 
 import { AboutComponent }       from './about.component';
-import { AppComponent}          from './app.component';
+import { AppComponent }         from './app.component';
 import { DataScrollerModule }   from 'primeng/primeng';
 import { LegislatorComponent }  from './legislator.component';
 import { LegislatorService }    from './legislator.service';

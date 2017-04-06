@@ -8,12 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var repaction_service_1 = require("./repaction.service");
 var cookies_service_1 = require("angular2-cookie/services/cookies.service");
 var http_1 = require("@angular/http");
+
 var NewsfeedComponent = (function () {
     function NewsfeedComponent(repActionService, router, cookieService, jsonp) {
         this.repActionService = repActionService;
@@ -31,12 +33,14 @@ var NewsfeedComponent = (function () {
         if (representatives === undefined) {
             this.router.navigate(['/welcome']);
         }
+
         this.legislators = representatives.toString().split(',');
         console.log(this.legislators);
     };
     NewsfeedComponent.prototype.goToLegislator = function (bioguide_id) {
         this.router.navigate(['/legislator', bioguide_id]);
     };
+
     return NewsfeedComponent;
 }());
 NewsfeedComponent = __decorate([

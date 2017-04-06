@@ -39,12 +39,13 @@ CS 506 Project
 2.  If anything is running, run `forever stopall` from command line
 3.  Run `forever start -c "npm start" ./` from the command line to start server running at represented506.me:8000
 4.  Application can be accessed in browser at url: represented506.me:8000
-### Installation
+### Development Installation
 1. Spin up Ubuntu 16.04 Xenial the provided Vagrant Vagrantfile
 ```
 $ vagrant up
 $ vagrant ssh
 ubuntu@ubuntu-xenial:~$ cd /vagrant
-ubuntu@ubuntu-xenial:/vagrant$ npm start
 ```
-You can now access the project from localhost:3000
+2. Run the commands from "Building and Running Node Angular 2 Application"
+
+You can now access the project from localhost:8000

@@ -15,6 +15,7 @@ var forms_2 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var http_2 = require('@angular/http');
 var app_routing_module_1 = require('./app-routing.module');
+var cookies_service_js_1 = require('angular2-cookie/services/cookies.service.js');
 var about_component_1 = require('./about.component');
 var app_component_1 = require('./app.component');
 var primeng_1 = require('primeng/primeng');
@@ -46,7 +47,8 @@ var AppModule = (function () {
             ],
             providers: [
                 legislator_service_1.LegislatorService,
-                repaction_service_1.RepActionService
+                repaction_service_1.RepActionService,
+                cookies_service_js_1.CookieService
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

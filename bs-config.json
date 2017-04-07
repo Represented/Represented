@@ -1,5 +1,6 @@
 {
   "port": 80,
+  "ghostMode": false,
   "server": {
     "baseDir": "src",
     "routes": {

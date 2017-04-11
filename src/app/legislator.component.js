@@ -52,6 +52,9 @@ var LegislatorComponent = (function () {
     LegislatorComponent.prototype.onSelect = function (legislator) {
         this.selectedLegislator = legislator;
     };
+    // onSelect(legislator: Legislator) {
+    //   this.selectedLegislator = legislator;
+    // }
     LegislatorComponent.prototype.setLegPortritUrl = function (id) {
         var address = this.portraitUrl += (id + '.jpg');
         return address;
@@ -68,7 +71,7 @@ var LegislatorComponent = (function () {
         this.getSponsoredLegislation();
         this.getCosponsoredLegislation();
         this.getLegPortraitUrl();
-        this.allBills = this.cosponsored.concat(this.sponsored);
+        //this.allBills = this.cosponsored.concat(this.sponsored);
     };
     LegislatorComponent.prototype.goToBill = function (bill_id) {
         this.router.navigate(['/bill', bill_id]);

@@ -6,6 +6,7 @@ import { Legislator }               from './legislator';
 import { LegislatorService }        from './legislator.service';
 import { DataScrollerModule }       from 'primeng/primeng';
 import { Location }                 from '@angular/common';
+import { Vote }                     from './vote';
 
 @Component({
   moduleId: module.id,
@@ -19,6 +20,8 @@ export class LegislatorComponent implements OnInit {
   sponsored: Bill[];
   cosponsored: Bill[];
   allBills: Bill[];
+  votes: Vote[];
+  key = String;
   portraitUrl = 'https://theunitedstates.io/images/congress/original/';
 
 
@@ -52,6 +55,19 @@ export class LegislatorComponent implements OnInit {
         .subscribe(cosponsored => this.cosponsored = cosponsored);
   }
 
+  getVotedOnLegislation(): void {
+    this.route.params
+      .switchMap((params: Params) =>
+        this.legislatorService
+        .getLegLatestVoteAction(params['bioguide_id']))
+        .subscribe(votes => this.votes = votes);
+  }
+
+  getBioguideId(): void {
+    this.route.params
+      .subscribe(params => this.key = params['bioguide_id']);
+  }
+
   onSelect(legislator: Legislator) {
     this.selectedLegislator = legislator;
   }
@@ -75,7 +91,9 @@ export class LegislatorComponent implements OnInit {
     this.getSponsoredLegislation();
     this.getCosponsoredLegislation();
     this.getLegPortraitUrl();
-    //this.allBills = this.cosponsored.concat(this.sponsored);
+    this.getVotedOnLegislation();
+    this.getBioguideId();
+    //this.allBills = this.sponsored.concat(this.cosponsored);
   }
 
   goToBill(bill_id: string): void {

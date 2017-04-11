@@ -33,8 +33,10 @@ export class NewsfeedComponent implements OnInit {
 		if(representatives === undefined){
 			this.router.navigate(['/welcome']);
 		}
-		this.legislators = representatives.toString().split(',');
-		console.log(this.legislators);
+		else{
+			this.legislators = representatives.toString().split(',');
+			console.log(this.legislators);
+		}
     }
  
   goToLegislator(bioguide_id: string): void {

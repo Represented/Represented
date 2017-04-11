@@ -28,11 +28,17 @@
       <p>Sponsor: {{s.sponsor.first_name}} {{s.sponsor.last_name}}</p>
     </li>
   </ul>-->
-  <p-dataScroller [value]="sponsored" [rows]="5" [buffer]="0.4">
-    <template let-s pTemplate="item">
-      <h2>Bill Title: {{s.short_title}}</h2>
-      <button (click)="goToBill(s.bill_id)">Go to Bill</button>
-      <p>Sponsor: {{s.sponsor.first_name}} {{s.sponsor.last_name}}</p>
-    </template>
+  <p-dataScroller [value]="votes" [rows]="5" [buffer]="0.4">
+  	<template let-v pTemplate="item">
+
+  	  <div class="bill-info">
+        <h2 *ngIf="v.bill;"><a>Bill Title: {{v.bill.short_title}}</a></h2>
+        <p>Voted: {{v.voters[key].vote}} to the question: {{v.question}}</p>
+        <p>Vote Result: {{v.result}}</p>
+        <button *ngIf="v.bill;" (click)="goToBill(v.bill.bill_id)">Go to Bill</button>
+        <p *ngIf="v.bill;">Sponsor: {{v.bill.sponsor.first_name}} {{v.bill.sponsor.last_name}}</p>
+        <p>{{v.voted_at}}</p>
+  	  </div>
+  	</template>
   </p-dataScroller>
 </div>

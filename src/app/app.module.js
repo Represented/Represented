@@ -5,6 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+<<<<<<< HEAD
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
@@ -58,6 +59,30 @@ var AppModule = (function () {
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
+=======
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var platform_browser_1 = require("@angular/platform-browser");
+var forms_1 = require("@angular/forms");
+var forms_2 = require("@angular/forms");
+var http_1 = require("@angular/http");
+var http_2 = require("@angular/http");
+var app_routing_module_1 = require("./app-routing.module");
+var cookies_service_1 = require("angular2-cookie/services/cookies.service");
+var about_component_1 = require("./about.component");
+var app_component_1 = require("./app.component");
+var bill_component_1 = require("./bill.component");
+var bill_service_1 = require("./bill.service");
+var primeng_1 = require("primeng/primeng");
+var legislator_component_1 = require("./legislator.component");
+var legislator_service_1 = require("./legislator.service");
+var newsfeed_component_1 = require("./newsfeed.component");
+var repaction_service_1 = require("./repaction.service");
+var welcome_component_1 = require("./welcome.component");
+var AppModule = (function () {
+    function AppModule() {
+    }
+>>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c
     return AppModule;
 }());
 exports.AppModule = AppModule;

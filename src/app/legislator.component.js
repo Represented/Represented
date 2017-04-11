@@ -19,6 +19,7 @@ var LegislatorComponent = (function () {
         this.router = router;
         this.route = route;
         this.location = location;
+        this.key = String;
         this.portraitUrl = 'https://theunitedstates.io/images/congress/original/';
     }
     LegislatorComponent.prototype.getLegislator = function () {
@@ -48,6 +49,20 @@ var LegislatorComponent = (function () {
         })
             .subscribe(function (cosponsored) { return _this.cosponsored = cosponsored; });
     };
+    LegislatorComponent.prototype.getVotedOnLegislation = function () {
+        var _this = this;
+        this.route.params
+            .switchMap(function (params) {
+            return _this.legislatorService
+                .getLegLatestVoteAction(params['bioguide_id']);
+        })
+            .subscribe(function (votes) { return _this.votes = votes; });
+    };
+    LegislatorComponent.prototype.getBioguideId = function () {
+        var _this = this;
+        this.route.params
+            .subscribe(function (params) { return _this.key = params['bioguide_id']; });
+    };
     LegislatorComponent.prototype.onSelect = function (legislator) {
         this.selectedLegislator = legislator;
     };
@@ -70,7 +85,13 @@ var LegislatorComponent = (function () {
         this.getSponsoredLegislation();
         this.getCosponsoredLegislation();
         this.getLegPortraitUrl();
+<<<<<<< HEAD
         //this.allBills = this.cosponsored.concat(this.sponsored);
+=======
+        this.getVotedOnLegislation();
+        this.getBioguideId();
+        //this.allBills = this.sponsored.concat(this.cosponsored);
+>>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c
     };
     LegislatorComponent.prototype.goToBill = function (bill_id) {
         this.router.navigate(['/bill', bill_id]);

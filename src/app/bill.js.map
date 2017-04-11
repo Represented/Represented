@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"version":3,"file":"bill.js","sourceRoot":"","sources":["bill.ts"],"names":[],"mappings":";AAAA;IAAA;IA2DA,CAAC;IAAD,WAAC;AAAD,CAAC,AA3DD,IA2DC;AA3DY,YAAI,OA2DhB,CAAA"}
+=======
+{"version":3,"file":"bill.js","sourceRoot":"","sources":["bill.ts"],"names":[],"mappings":";;AAAA;IAAA;IA4DA,CAAC;IAAD,WAAC;AAAD,CAAC,AA5DD,IA4DC;AA5DY,oBAAI"}
+>>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c

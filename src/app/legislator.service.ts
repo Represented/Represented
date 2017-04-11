@@ -9,6 +9,7 @@ import 'rxjs/add/observable/throw';
 
 import { Legislator } from './legislator';
 import { Bill } from './bill';
+import { Vote } from './vote';
 
 @Injectable()
 export class LegislatorService {
@@ -19,15 +20,8 @@ export class LegislatorService {
 
   constructor(private jsonp: Jsonp) { }
 
-  getAllLegislators(): Observable<Legislator[]> {
-    this.headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
-    let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { headers:this.headers })
-               .map(response => response.json().results as Legislator[]);
-    return res;
-  }
-
   getLegislatorById(bioguide_id: string): Observable<Legislator> {
-    var search = new URLSearchParams()
+    let search = new URLSearchParams()
     search.set('bioguide_id', bioguide_id);
     let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
                .map(response => response.json().results as Legislator);
@@ -35,7 +29,7 @@ export class LegislatorService {
   }
 
   getLegLatestSponsorAction(bioguide_id: string): Observable<Bill[]> {
-    var search = new URLSearchParams()
+    let search = new URLSearchParams()
     search.set('sponsor_id', bioguide_id);
     search.set('order', 'introduced_on');
     let res = this.jsonp.get(`${this.baseUrl}/bills?callback=JSONP_CALLBACK`, { search })
@@ -44,11 +38,22 @@ export class LegislatorService {
   }
 
   getLegLatestCosponsorAction(bioguide_id: string): Observable<Bill[]> {
-    var search = new URLSearchParams();
+    let search = new URLSearchParams();
     search.set('cosponsor_ids', bioguide_id);
     search.set('order', 'introduced_on');
     let res = this.jsonp.get(`${this.baseUrl}/bills?callback=JSONP_CALLBACK`, { search })
                .map(response => response.json().results as Bill[]);
+    return res;
+  }
+
+  getLegLatestVoteAction(bioguide_id: string): Observable<Vote[]> {
+    let search = new URLSearchParams();
+    search.set('voter_ids.' + bioguide_id + '__exists', 'true');
+    search.set('fields','roll_id,bill,voted_at,vote_type,nomination,required,result,question,voters.'+bioguide_id+'.vote');
+    search.set('order', 'voted_at');
+    console.log(search);
+    let res = this.jsonp.get(`${this.baseUrl}/votes?callback=JSONP_CALLBACK`, { search })
+               .map(response => response.json().results as Vote[]);
     return res;
   }
 

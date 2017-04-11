@@ -8,20 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-<<<<<<< HEAD
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var repaction_service_1 = require('./repaction.service');
 var cookies_service_1 = require('angular2-cookie/services/cookies.service');
 var http_1 = require('@angular/http');
-=======
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var repaction_service_1 = require("./repaction.service");
-var cookies_service_1 = require("angular2-cookie/services/cookies.service");
-var http_1 = require("@angular/http");
->>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c
 var NewsfeedComponent = (function () {
     function NewsfeedComponent(repActionService, router, cookieService, jsonp) {
         this.repActionService = repActionService;
@@ -39,20 +30,14 @@ var NewsfeedComponent = (function () {
         if (representatives === undefined) {
             this.router.navigate(['/welcome']);
         }
-<<<<<<< HEAD
-        this.legislators = representatives.toString().split(',');
-        console.log(this.legislators);
-=======
         else {
             this.legislators = representatives.toString().split(',');
             console.log(this.legislators);
         }
->>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c
     };
     NewsfeedComponent.prototype.goToLegislator = function (bioguide_id) {
         this.router.navigate(['/legislator', bioguide_id]);
     };
-<<<<<<< HEAD
     NewsfeedComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -63,8 +48,6 @@ var NewsfeedComponent = (function () {
         }), 
         __metadata('design:paramtypes', [repaction_service_1.RepActionService, router_1.Router, cookies_service_1.CookieService, http_1.Jsonp])
     ], NewsfeedComponent);
-=======
->>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c
     return NewsfeedComponent;
 }());
 exports.NewsfeedComponent = NewsfeedComponent;

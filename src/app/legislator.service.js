@@ -44,12 +44,6 @@ var LegislatorService = (function () {
             .map(function (response) { return response.json().results; });
         return res;
     };
-<<<<<<< HEAD
-    LegislatorService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Jsonp])
-    ], LegislatorService);
-=======
     LegislatorService.prototype.getLegLatestVoteAction = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('voter_ids.' + bioguide_id + '__exists', 'true');
@@ -60,7 +54,10 @@ var LegislatorService = (function () {
             .map(function (response) { return response.json().results; });
         return res;
     };
->>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c
+    LegislatorService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Jsonp])
+    ], LegislatorService);
     return LegislatorService;
 }());
 exports.LegislatorService = LegislatorService;

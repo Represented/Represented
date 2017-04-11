@@ -1,3 +1,12 @@
+import {
+    Component,
+    Input,
+    OnInit
+} from '@angular/core';
+import {
+    FormGroup
+} from '@angular/forms';
+
 describe('1st tests', () => {
-	it('true is true', () => expect(true).toBe(true));
+	it('Hello, I\'m a test!', () => expect(true).toBe(false));
 });

@@ -8,20 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-<<<<<<< HEAD
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var cookies_service_1 = require('angular2-cookie/services/cookies.service');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
-=======
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var forms_1 = require("@angular/forms");
-var cookies_service_1 = require("angular2-cookie/services/cookies.service");
-var http_1 = require("@angular/http");
-var router_1 = require("@angular/router");
->>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c
 var WelcomeComponent = (function () {
     function WelcomeComponent(cookieService, jsonp, router) {
         this.cookieService = cookieService;
@@ -90,7 +81,6 @@ var WelcomeComponent = (function () {
             }
         });
     };
-<<<<<<< HEAD
     WelcomeComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -101,8 +91,6 @@ var WelcomeComponent = (function () {
         }), 
         __metadata('design:paramtypes', [cookies_service_1.CookieService, http_1.Jsonp, router_1.Router])
     ], WelcomeComponent);
-=======
->>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c
     return WelcomeComponent;
 }());
 exports.WelcomeComponent = WelcomeComponent;

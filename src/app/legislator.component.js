@@ -85,13 +85,9 @@ var LegislatorComponent = (function () {
         this.getSponsoredLegislation();
         this.getCosponsoredLegislation();
         this.getLegPortraitUrl();
-<<<<<<< HEAD
-        //this.allBills = this.cosponsored.concat(this.sponsored);
-=======
         this.getVotedOnLegislation();
         this.getBioguideId();
         //this.allBills = this.sponsored.concat(this.cosponsored);
->>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c
     };
     LegislatorComponent.prototype.goToBill = function (bill_id) {
         this.router.navigate(['/bill', bill_id]);

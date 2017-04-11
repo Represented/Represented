@@ -17,23 +17,12 @@ var AppComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'my-app',
-            template: "\n    <h1>\n      <img src=\"../img/represented_logo_3.png\" height=\"50\" width=\"40\" routerLink=\"/newsfeed\" routerLinkActive=\"active\">{{title}}\n      <img src=\"../img/Info.png\" height=\"40\" width=\"40\" align=\"right\" routerLink=\"/about\" routerLinkActive=\"active\">\n    </h1>\n    <nav>\n      <a routerLink=\"/newsfeed\"   routerLinkActive=\"active\">My Reps</a>\n      <a routerLink=\"/newsfeed\"   routerLinkActive=\"inactive\">House</a>\n      <a routerLink=\"/newsfeed\"   routerLinkActive=\"inactive\">Senate</a>\n      <a routerLink=\"/about\"      routerLinkActive=\"active\">About</a>\n      <a routerLink=\"/welcome\"    routerLinkActive=\"active\">Welcome</a>\n      <a routerLink=\"/legislator\" routerLinkActive=\"active\">Legislator</a>\n      <!--<a routerLink=\"/bill\"       routerLinkActive=\"active\">Bill</a>-->\n    </nav>\n    <router-outlet></router-outlet>\n  ",
+            template: "\n    <h1>\n      <img src=\"../img/represented_logo_3.png\" height=\"50\" width=\"40\" routerLink=\"/newsfeed\" routerLinkActive=\"active\">{{title}}\n      <img src=\"../img/Info.png\" height=\"40\" width=\"40\" align=\"right\" routerLink=\"/about\" routerLinkActive=\"active\">\n    </h1>\n    <nav>\n      <a routerLink=\"/newsfeed\"   routerLinkActive=\"active\">My Reps</a>\n      <a routerLink=\"/newsfeed\"   routerLinkActive=\"inactive\">House</a>\n      <a routerLink=\"/newsfeed\"   routerLinkActive=\"inactive\">Senate</a>\n      <a routerLink=\"/about\"      routerLinkActive=\"active\">About</a>\n      <a routerLink=\"/welcome\"    routerLinkActive=\"active\">Welcome</a>\n      <!--<a routerLink=\"/legislator\" routerLinkActive=\"active\">Legislator</a>-->\n      <!--<a routerLink=\"/bill\"       routerLinkActive=\"active\">Bill</a>-->\n    </nav>\n    <router-outlet></router-outlet>\n  ",
             styleUrls: ['../styles/app.component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 }());
-<<<<<<< HEAD
-=======
-AppComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'my-app',
-        template: "\n    <h1>\n      <img src=\"../img/represented_logo_3.png\" height=\"50\" width=\"40\" routerLink=\"/newsfeed\" routerLinkActive=\"active\">{{title}}\n      <img src=\"../img/Info.png\" height=\"40\" width=\"40\" align=\"right\" routerLink=\"/about\" routerLinkActive=\"active\">\n    </h1>\n    <nav>\n      <a routerLink=\"/newsfeed\"   routerLinkActive=\"active\">My Reps</a>\n      <a routerLink=\"/newsfeed\"   routerLinkActive=\"inactive\">House</a>\n      <a routerLink=\"/newsfeed\"   routerLinkActive=\"inactive\">Senate</a>\n      <a routerLink=\"/about\"      routerLinkActive=\"active\">About</a>\n      <a routerLink=\"/welcome\"    routerLinkActive=\"active\">Welcome</a>\n      <!--<a routerLink=\"/legislator\" routerLinkActive=\"active\">Legislator</a>-->\n      <!--<a routerLink=\"/bill\"       routerLinkActive=\"active\">Bill</a>-->\n    </nav>\n    <router-outlet></router-outlet>\n  ",
-        styleUrls: ['../styles/app.component.css']
-    })
-], AppComponent);
->>>>>>> bcad6e2e2b6805ba7a54bc60701c3658a765ba2c
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

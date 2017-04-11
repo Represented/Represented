@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Injectable} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
@@ -7,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { Router } from '@angular/router';
 
 import { Legislator } from './legislator';
-
 
 @Component({
     moduleId:module.id,
@@ -23,7 +23,7 @@ export class WelcomeComponent{
 	constructor(private cookieService: CookieService,
 	private jsonp: Jsonp,
 	private router: Router){}
-	
+
     public zipSubmissionForm = new FormGroup({
       'zipcode': new FormControl('zipcode', Validators.required)
     });
@@ -31,7 +31,7 @@ export class WelcomeComponent{
     allowLocationServices(){
       var lat = 0;
       var lng = 0;
-	  
+
 	  var thisParent = this;
 
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -40,12 +40,12 @@ export class WelcomeComponent{
         //console.log("latitude: " + lat + ", longitude: " + lng);
 		thisParent.cookieService.put('longLat', lng + ' ' + lat);
 		console.log(thisParent.cookieService.get('longLat'));
-		
+
 		var search = new URLSearchParams();
-		
+
 		search.set('latitude', lat.toString());
 		search.set('longitude', lng.toString());
-		
+
 		let res = thisParent.jsonp.get(`${thisParent.baseUrl}/legislators/locate?callback=JSONP_CALLBACK`, { search })
                 .subscribe((response: any) =>{
 				    var returnReps = response.json().results;
@@ -63,7 +63,7 @@ export class WelcomeComponent{
 						thisParent.router.navigate(['/newsfeed']);
 					}
 			    });
-		
+
       });
     }
 
@@ -71,11 +71,11 @@ export class WelcomeComponent{
 		var zip = this.zipSubmissionForm.get('zipcode').value;
 		this.cookieService.put('zipcode', zip);
 		console.log(this.cookieService.get('zipcode'));
-		
+
 		var search = new URLSearchParams();
 		search.set('zip', zip);
-		
-		
+
+
 		let res = this.jsonp.get(`${this.baseUrl}/legislators/locate?callback=JSONP_CALLBACK`, { search })
                 .subscribe((response: any) =>{
 				    var returnReps = response.json().results;

@@ -4,6 +4,7 @@ export class Bill {
   chamber: string;
   committee_ids: string[];
   congress: number;
+  cosponsor_ids?: string[];
   cosponsors_count: number;
   enacted_as: {
     congress?: number;

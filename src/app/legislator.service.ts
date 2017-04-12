@@ -23,10 +23,6 @@ export class LegislatorService {
 
   constructor(private jsonp: Jsonp) { }
 
-  test(){
-    return 0;
-  }
-
   getLegislatorById(bioguide_id: string): Observable<Legislator> {
     let search = new URLSearchParams()
     search.set('bioguide_id', bioguide_id);
@@ -89,6 +85,9 @@ export class LegislatorService {
     // throw an application level error
     return Observable.throw(errorMsg);
   }*/
+  handleAnyError(error: any){
+    handleError(error);
+  }
 }
 
 function mapLegislators(response:Response): Legislator{

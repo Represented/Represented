@@ -22,9 +22,6 @@ var LegislatorComponent = (function () {
         this.key = String;
         this.portraitUrl = 'https://theunitedstates.io/images/congress/original/';
     }
-    LegislatorComponent.prototype.test = function () {
-        return 0;
-    };
     LegislatorComponent.prototype.getLegislator = function () {
         var _this = this;
         this.route.params

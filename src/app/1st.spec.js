@@ -26,14 +26,11 @@ describe('Test Suite A: ', function () {
     it('this.legislatorComponent not null.', function () {
         expect(_this.legislatorComponent).not.toBeNull();
     });
-    it('Call test method in legislator service.', function () {
-        expect(_this.legislatorService.test()).toEqual(0);
+    it('Call handleAnyError() method in legislator service.', function () {
+        expect(_this.legislatorService.handleAnyError("error")).not.toBeNull();
     });
-    it('Call test method in legislator component.', function () {
-        expect(_this.legislatorComponent.test()).toEqual(0);
-    });
-    it('Get legislator by id from legislator service.', function () {
-        expect(_this.legislatorService.getLegislatorById('B001230')).not.toBeNull();
+    it('Call handleError() method in legislator component.', function () {
+        expect(_this.legislatorComponent.setLegPortritUrl("test")).toEqual('https://theunitedstates.io/images/congress/original/test.jpg');
     });
 });
 //# sourceMappingURL=1st.spec.js.map

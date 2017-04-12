@@ -31,10 +31,6 @@ export class LegislatorComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location) { }
 
-  test(){
-    return 0;
-  }
-
   getLegislator(): void {
     this.route.params
       .switchMap((params: Params) =>

@@ -31,7 +31,7 @@ var WelcomeComponent = (function () {
             var _this = this;
             lat = position.coords.latitude;
             lng = position.coords.longitude;
-            //console.log("latitude: " + lat + ", longitude: " + lng);
+            // if(this.isValidLatLong(lat, lng)){ TODO: uncomment after this has been verified
             thisParent.cookieService.put('longLat', lng + ' ' + lat);
             console.log(thisParent.cookieService.get('longLat'));
             var search = new http_1.URLSearchParams();
@@ -54,6 +54,7 @@ var WelcomeComponent = (function () {
                     thisParent.router.navigate(['/newsfeed']);
                 }
             });
+            //} TODO: uncomment after this has been verified
         });
     };
     WelcomeComponent.prototype.submitZip = function () {
@@ -80,6 +81,15 @@ var WelcomeComponent = (function () {
                 _this.router.navigate(['/newsfeed']);
             }
         });
+    };
+    WelcomeComponent.prototype.isValidLatLong = function (latitude, longitude) {
+        if (typeof latitude != "number" || typeof longitude != "number")
+            return false;
+        if (latitude == null || longitude == null)
+            return false;
+        if (latitude > 90 || latitude < -90 || longitude > 180 || longitude < -180)
+            return false;
+        return true;
     };
     WelcomeComponent = __decorate([
         core_1.Component({

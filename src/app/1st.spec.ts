@@ -35,6 +35,7 @@ describe('Test Suite A: ', () => {
 		this.testService = new TestService();
     this.legislator = new Legislator();
     this.legislatorService = new LegislatorService(null);
+    this.legislatorComponent = new LegislatorComponent(null, null, null, null);
 	});
 
   it('this.testService defined.', () => {
@@ -53,8 +54,16 @@ describe('Test Suite A: ', () => {
       expect(this.legislatorService).not.toBeNull();
   });
 
+  it('this.legislatorComponent not null.', () => {
+      expect(this.legislatorComponent).not.toBeNull();
+  });
+
 	it('Call test method in legislator service.', () => {
 		  expect(this.legislatorService.test()).toEqual(0);
+	});
+
+  it('Call test method in legislator component.', () => {
+		  expect(this.legislatorComponent.test()).toEqual(0);
 	});
 
 	it('Get legislator by id from legislator service.', () => {

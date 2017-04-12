@@ -6,8 +6,20 @@ describe('1st tests', function () {
         _this.testService = new test_service_1.TestService();
         //this.legislatorService = new LegislatorService();
     });
-    it('Hello, I\'m a test!', function () { return expect(true).toBe(true); });
-    it('Hello, this will fail. Just like Charlie.', function () { return expect(_this.testService.name).toBe('InjectedService'); });
-    xit('Hello, this will fail. Just like Charlie.', function () { return expect(_this.legislatorService).not.toBeNull(); });
+    it('Hello, I\'m a test!', function () {
+        expect(true).toBe(true);
+    });
+    it('This will succeed. Unlike Charlie.', function () {
+        expect(_this.testService).toBeDefined();
+    });
+    it('This will succeed. Unlike Charlie.', function () {
+        expect(_this.testService.name).toBe('InjectedService');
+    });
+    it('This will fail. Just like Charlie.', function () {
+        expect(_this.legislatorService).toBeDefined();
+    });
+    it('This will fail. Just like Charlie.', function () {
+        expect(_this.legislatorService.getLegislatorById('P001230')).not.toBeNull();
+    });
 });
 //# sourceMappingURL=1st.spec.js.map

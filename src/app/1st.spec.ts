@@ -40,9 +40,23 @@ describe('1st tests', () => {
 		//this.legislatorService = new LegislatorService();
 	});
 
-	it('Hello, I\'m a test!', () => expect(true).toBe(true));
+	it('Hello, I\'m a test!', () => {
+		expect(true).toBe(true);
+	});
 
-	it('Hello, this will fail. Just like Charlie.', () => expect(this.testService.name).toBe('InjectedService'));
+        it('This will succeed. Unlike Charlie.', () => {
+                expect(this.testService).toBeDefined();
+        });
 
-	xit('Hello, this will fail. Just like Charlie.', () => expect(this.legislatorService).not.toBeNull());
+	it('This will succeed. Unlike Charlie.', () => {
+		expect(this.testService.name).toBe('InjectedService');
+	});
+
+        it('This will fail. Just like Charlie.', () => {
+                expect(this.legislatorService).toBeDefined();
+        });
+
+	it('This will fail. Just like Charlie.', () => {
+		expect(this.legislatorService.getLegislatorById('B001230')).not.toBeNull();
+	});
 });

@@ -37,7 +37,7 @@ describe('1st tests', () => {
 
 	beforeEach(() => {
 		this.testService = new TestService();
-		//this.legislatorService = new LegislatorService();
+		//inject([LegislatorService], (legislatorService: LegislatorService));
 	});
 
 	it('Hello, I\'m a test!', () => {
@@ -52,11 +52,11 @@ describe('1st tests', () => {
 		expect(this.testService.name).toBe('InjectedService');
 	});
 
-        it('This will fail. Just like Charlie.', () => {
+        it('This will fail. Just like Charlie.', inject([LegislatorService], (legislatorService: LegislatorService) => {
                 expect(this.legislatorService).toBeDefined();
-        });
+        }));
 
-	it('This will fail. Just like Charlie.', () => {
+	it('This will fail. Just like Charlie.', inject([LegislatorService], (legislatorService: LegislatorService) => {
 		expect(this.legislatorService.getLegislatorById('B001230')).not.toBeNull();
-	});
+	}));
 });

@@ -8,6 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+require('zone.js');
+require('reflect-metadata');
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
@@ -21,6 +23,9 @@ var LegislatorService = (function () {
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.baseUrl = 'https://congress.api.sunlightfoundation.com';
     }
+    LegislatorService.prototype.test = function () {
+        return 0;
+    };
     LegislatorService.prototype.getLegislatorById = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('bioguide_id', bioguide_id);

@@ -11,17 +11,12 @@ import {
 } from '@angular/core/testing';
 
 import { AppModule }            from './app.module';
-
-import { AppRoutingModule } from './app-routing.module';
-
+import { AppRoutingModule }     from './app-routing.module';
 import { CookieService }        from 'angular2-cookie/services/cookies.service';
-
 import { AboutComponent }       from './about.component';
 import { AppComponent }         from './app.component';
-
 import { BillComponent }        from './bill.component';
 import { BillService }          from './bill.service';
-
 import { DataScrollerModule }   from 'primeng/primeng';
 import { LegislatorComponent }  from './legislator.component';
 import { LegislatorService }    from './legislator.service';
@@ -29,33 +24,40 @@ import { NewsfeedComponent }    from './newsfeed.component';
 import { RepActionService }     from './repaction.service';
 import { WelcomeComponent }     from './welcome.component';
 
+import { Headers, Http, Jsonp, Response, URLSearchParams } from '@angular/http';
+import { Router } from '@angular/router';
 import { Legislator } from './legislator';
-
 import { TestService } from './test.service';
 
-describe('1st tests', () => {
+describe('Test Suite A: ', () => {
 
 	beforeEach(() => {
 		this.testService = new TestService();
+    this.legislator = new Legislator();
+    this.legislatorService = new LegislatorService(null);
 	});
 
-	it('Hello, I\'m a test!', () => {
-		expect(true).toBe(true);
+  it('this.testService defined.', () => {
+      expect(this.testService).toBeDefined();
+  });
+
+  it('this.legislator defined.', () => {
+      expect(this.legislator).toBeDefined();
+  });
+
+	it('this.testService named \"InjectedService\".', () => {
+		  expect(this.testService.name).toBe('InjectedService');
 	});
 
-        it('This will succeed. Unlike Charlie.', () => {
-                expect(this.testService).toBeDefined();
-        });
+  it('this.legislatorService not null.', () => {
+      expect(this.legislatorService).not.toBeNull();
+  });
 
-	it('This will succeed. Unlike Charlie.', () => {
-		expect(this.testService.name).toBe('InjectedService');
+	it('Call test method in legislator service.', () => {
+		  expect(this.legislatorService.test()).toEqual(0);
 	});
 
-        it('This will fail. Just like Charlie.', inject([LegislatorService], (legislatorService: LegislatorService) => {
-                expect(this.legislatorService).toBeDefined();
-        }));
-
-	it('This will fail. Just like Charlie.', inject([LegislatorService], (legislatorService: LegislatorService) => {
-		expect(this.legislatorService.getLegislatorById('B001230')).not.toBeNull();
-	}));
+	it('Get legislator by id from legislator service.', () => {
+		  expect(this.legislatorService.getLegislatorById('B001230')).not.toBeNull();
+	});
 });

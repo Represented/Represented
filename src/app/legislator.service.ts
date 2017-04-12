@@ -1,3 +1,6 @@
+import 'zone.js';
+import 'reflect-metadata';
+
 import { Injectable }    from '@angular/core';
 import { Headers, Http, Jsonp, Response, URLSearchParams } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
@@ -19,6 +22,10 @@ export class LegislatorService {
   // private photoUrl = 'https://theunitedstates.io/images/congress/orignal/';
 
   constructor(private jsonp: Jsonp) { }
+
+  test(){
+    return 0;
+  }
 
   getLegislatorById(bioguide_id: string): Observable<Legislator> {
     let search = new URLSearchParams()

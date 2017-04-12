@@ -9,12 +9,13 @@ module.exports = function(config) {
 
   config.set({
     basePath: '',
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'browserify'],
 
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
+      require('karma-browserify')
     ],
 
     client: {
@@ -86,6 +87,7 @@ module.exports = function(config) {
     exclude: [],
 
     preprocessors: {
+      'app/tests/*.js': [ 'browserify' ]
     },
     reporters: ['progress', 'kjhtml'],
 

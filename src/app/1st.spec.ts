@@ -37,7 +37,6 @@ describe('1st tests', () => {
 
 	beforeEach(() => {
 		this.testService = new TestService();
-		//inject([LegislatorService], (legislatorService: LegislatorService));
 	});
 
 	it('Hello, I\'m a test!', () => {

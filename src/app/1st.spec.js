@@ -5,7 +5,6 @@ var test_service_1 = require('./test.service');
 describe('1st tests', function () {
     beforeEach(function () {
         _this.testService = new test_service_1.TestService();
-        //inject([LegislatorService], (legislatorService: LegislatorService));
     });
     it('Hello, I\'m a test!', function () {
         expect(true).toBe(true);

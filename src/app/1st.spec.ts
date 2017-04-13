@@ -152,6 +152,30 @@ describe('Test Suite 1: ', () => {
       expect(this.welcomeComponent.isValidLatLong(-45, -90)).toBe(true);
   });
 
+  it('Valid zipcode passed as argument to isValidZip.', () => {
+      expect(this.welcomeComponent.isValidZip('53703')).toBe(true);
+  });
+
+  it('Null zipcode passed as argument to isValidZip.', () => {
+      expect(this.welcomeComponent.isValidZip(null)).toBe(false);
+  });
+
+  it('Zipcode of incorrect type passed as argument to isValidZip.', () => {
+      expect(this.welcomeComponent.isValidZip(53703)).toBe(false);
+  });
+
+  it('Zipcode with too few digits passed as argument to isValidZip.', () => {
+      expect(this.welcomeComponent.isValidZip('5373')).toBe(false);
+  });
+
+  it('Zipcode with too many digits passed as argument to isValidZip.', () => {
+      expect(this.welcomeComponent.isValidZip('537030')).toBe(false);
+  });
+
+  it('Zipcode containing non-number character passed as argument to isValidZip.', () => {
+      expect(this.welcomeComponent.isValidZip('537a3')).toBe(false);
+  });
+
   it('Call handleAnyError() method in legislator service.', () => {
       expect(this.legislatorService.handleAnyError("error")).not.toBeNull();
   });

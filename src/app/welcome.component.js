@@ -60,6 +60,7 @@ var WelcomeComponent = (function () {
     WelcomeComponent.prototype.submitZip = function () {
         var _this = this;
         var zip = this.zipSubmissionForm.get('zipcode').value;
+        //if(this.isValidZip(zip)){ TODO: uncomment after this has been verified
         this.cookieService.put('zipcode', zip);
         console.log(this.cookieService.get('zipcode'));
         var search = new http_1.URLSearchParams();
@@ -81,6 +82,7 @@ var WelcomeComponent = (function () {
                 _this.router.navigate(['/newsfeed']);
             }
         });
+        //} TODO: uncomment after this has been verified
     };
     WelcomeComponent.prototype.isValidLatLong = function (latitude, longitude) {
         if (typeof latitude != "number" || typeof longitude != "number")
@@ -88,6 +90,17 @@ var WelcomeComponent = (function () {
         if (latitude == null || longitude == null)
             return false;
         if (latitude > 90 || latitude < -90 || longitude > 180 || longitude < -180)
+            return false;
+        return true;
+    };
+    WelcomeComponent.prototype.isValidZip = function (zipcode) {
+        if (typeof zipcode != "string")
+            return false;
+        if (zipcode == null)
+            return false;
+        if (zipcode.length < 5 || zipcode.length > 5)
+            return false;
+        if (isNaN(Number(zipcode)))
             return false;
         return true;
     };

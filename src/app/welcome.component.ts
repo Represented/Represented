@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
@@ -67,31 +67,33 @@ export class WelcomeComponent{
     }
 
     submitZip() {
-		var zip = this.zipSubmissionForm.get('zipcode').value;
-		this.cookieService.put('zipcode', zip);
-		console.log(this.cookieService.get('zipcode'));
+		    var zip = this.zipSubmissionForm.get('zipcode').value;
+        //if(this.isValidZip(zip)){ TODO: uncomment after this has been verified
+          this.cookieService.put('zipcode', zip);
+          console.log(this.cookieService.get('zipcode'));
 
-		var search = new URLSearchParams();
-		search.set('zip', zip);
+          var search = new URLSearchParams();
+          search.set('zip', zip);
 
 
-		let res = this.jsonp.get(`${this.baseUrl}/legislators/locate?callback=JSONP_CALLBACK`, { search })
-                .subscribe((response: any) =>{
-				    var returnReps = response.json().results;
-					if(returnReps.length == 0){
-						alert('Please give a valid zipcode');
-						this.router.navigate(['/welcome']);
-					}
-					else{
-						var bioGuideArray:any = [];
-						returnReps.forEach((rep: any) => {
-							bioGuideArray.push(rep.bioguide_id);
-						});
-						this.cookieService.putObject('bioguides', bioGuideArray);
-						console.log(this.cookieService.getObject('bioguides'));
-						this.router.navigate(['/newsfeed']);
-					}
-			    });
+          let res = this.jsonp.get(`${this.baseUrl}/legislators/locate?callback=JSONP_CALLBACK`, { search })
+            .subscribe((response: any) =>{
+              var returnReps = response.json().results;
+              if(returnReps.length == 0){
+                alert('Please give a valid zipcode');
+                this.router.navigate(['/welcome']);
+              }
+              else{
+                var bioGuideArray:any = [];
+                returnReps.forEach((rep: any) => {
+                  bioGuideArray.push(rep.bioguide_id);
+                });
+                this.cookieService.putObject('bioguides', bioGuideArray);
+                console.log(this.cookieService.getObject('bioguides'));
+                this.router.navigate(['/newsfeed']);
+              }
+        });
+    //} TODO: uncomment after this has been verified
     }
 
     public isValidLatLong(latitude: any, longitude: any){
@@ -100,6 +102,18 @@ export class WelcomeComponent{
       if(latitude == null || longitude == null)
         return false;
       if(latitude > 90 || latitude < -90 || longitude > 180 || longitude < -180)
+        return false;
+      return true;
+    }
+
+    public isValidZip(zipcode: any){
+      if(typeof zipcode != "string")
+        return false;
+      if(zipcode == null)
+        return false;
+      if(zipcode.length < 5 || zipcode.length > 5)
+        return false;
+      if(isNaN(Number(zipcode)))
         return false;
       return true;
     }

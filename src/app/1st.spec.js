@@ -43,6 +43,9 @@ describe('Test Suite 1: ', function () {
     it('this.appComponent defined.', function () {
         expect(_this.appComponent).toBeDefined();
     });
+    it('this.appComponent has correct title.', function () {
+        expect(_this.appComponent.title).toBe('epresented');
+    });
     it('this.bill defined.', function () {
         expect(_this.bill).toBeDefined();
     });
@@ -51,6 +54,10 @@ describe('Test Suite 1: ', function () {
     });
     it('this.billService defined.', function () {
         expect(_this.billService).toBeDefined();
+    });
+    it('obtain something from getBillById() if good id is used.', function () {
+        var ret = _this.billService.getBillById("hr1614-115");
+        expect(ret).not.toBeNull();
     });
     it('this.legislator defined.', function () {
         expect(_this.legislator).toBeDefined();

@@ -67,6 +67,10 @@ describe('Test Suite 1: ', () => {
       expect(this.appComponent).toBeDefined();
   });
 
+  it('this.appComponent has correct title.', () => {
+      expect(this.appComponent.title).toBe('epresented');
+  });
+
   it('this.bill defined.', () => {
       expect(this.bill).toBeDefined();
   });
@@ -77,6 +81,11 @@ describe('Test Suite 1: ', () => {
 
   it('this.billService defined.', () => {
       expect(this.billService).toBeDefined();
+  });
+
+  it('obtain something from getBillById() if good id is used.', () => {
+      var ret = this.billService.getBillById("hr1614-115");
+      expect(ret).not.toBeNull();
   });
 
   it('this.legislator defined.', () => {
@@ -143,11 +152,11 @@ describe('Test Suite 1: ', () => {
       expect(this.welcomeComponent.isValidLatLong(-45, -90)).toBe(true);
   });
 
-	it('Call handleAnyError() method in legislator service.', () => {
-		  expect(this.legislatorService.handleAnyError("error")).not.toBeNull();
-	});
+  it('Call handleAnyError() method in legislator service.', () => {
+      expect(this.legislatorService.handleAnyError("error")).not.toBeNull();
+  });
 
   it('Call handleError() method in legislator component.', () => {
-		  expect(this.legislatorComponent.setLegPortritUrl("test")).toEqual('https://theunitedstates.io/images/congress/original/test.jpg');
-	});
+      expect(this.legislatorComponent.setLegPortritUrl("test")).toEqual('https://theunitedstates.io/images/congress/original/test.jpg');
+  });
 });

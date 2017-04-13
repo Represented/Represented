@@ -8,6 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+require('zone.js');
+require('reflect-metadata');
 var core_1 = require('@angular/core');
 var AboutComponent = (function () {
     function AboutComponent() {

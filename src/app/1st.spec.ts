@@ -10,13 +10,13 @@ import {
     TestBed
 } from '@angular/core/testing';
 
-import { AppModule }            from './app.module';
-import { AppRoutingModule }     from './app-routing.module';
-import { CookieService }        from 'angular2-cookie/services/cookies.service';
 import { AboutComponent }       from './about.component';
 import { AppComponent }         from './app.component';
+import { AppModule }            from './app.module';
+import { AppRoutingModule }     from './app-routing.module';
 import { BillComponent }        from './bill.component';
 import { BillService }          from './bill.service';
+import { CookieService }        from 'angular2-cookie/services/cookies.service';
 import { DataScrollerModule }   from 'primeng/primeng';
 import { LegislatorComponent }  from './legislator.component';
 import { LegislatorService }    from './legislator.service';
@@ -26,37 +26,85 @@ import { WelcomeComponent }     from './welcome.component';
 
 import { Headers, Http, Jsonp, Response, URLSearchParams } from '@angular/http';
 import { Router } from '@angular/router';
+import { Bill } from './bill';
 import { Legislator } from './legislator';
+import { RepAction } from './repaction';
+import { Vote } from './vote';
 import { TestService } from './test.service';
 
 describe('Test Suite 1: ', () => {
 
 	beforeEach(() => {
 		this.testService = new TestService();
-    this.legislator = new Legislator();
-    this.legislatorService = new LegislatorService(null);
-    this.legislatorComponent = new LegislatorComponent(null, null, null, null);
-    this.welcomeComponent = new WelcomeComponent(null, null, null);
+		this.aboutComponent = new AboutComponent();
+		this.appComponent = new AppComponent();
+		this.bill = new Bill();
+		this.billComponent = new BillComponent(null, null, null, null);
+		this.billService = new BillService(null);
+		this.legislator = new Legislator();
+		this.legislatorComponent = new LegislatorComponent(null, null, null, null);
+		this.legislatorService = new LegislatorService(null);
+		this.newsfeedComponent = new NewsfeedComponent(null, null, null, null);
+		this.repAction = new RepAction();
+		this.repActionService = new RepActionService(null);
+		this.vote = new Vote();
+		this.welcomeComponent = new WelcomeComponent(null, null, null);
 	});
 
   it('this.testService defined.', () => {
       expect(this.testService).toBeDefined();
   });
 
+  it('this.testService named \"InjectedService\".', () => {
+      expect(this.testService.name).toBe('InjectedService');
+  });
+
+  it('this.aboutComponent defined.', () => {
+      expect(this.aboutComponent).toBeDefined();
+  });
+
+  it('this.appComponent defined.', () => {
+      expect(this.appComponent).toBeDefined();
+  });
+
+  it('this.bill defined.', () => {
+      expect(this.bill).toBeDefined();
+  });
+
+  it('this.billComponent defined.', () => {
+      expect(this.billComponent).toBeDefined();
+  });
+
+  it('this.billService defined.', () => {
+      expect(this.billService).toBeDefined();
+  });
+
   it('this.legislator defined.', () => {
       expect(this.legislator).toBeDefined();
   });
 
-	it('this.testService named \"InjectedService\".', () => {
-		  expect(this.testService.name).toBe('InjectedService');
-	});
+  it('this.legislatorComponent defined.', () => {
+      expect(this.legislatorComponent).toBeDefined();
+  });
 
   it('this.legislatorService defined.', () => {
       expect(this.legislatorService).toBeDefined();
   });
 
-  it('this.legislatorComponent defined.', () => {
-      expect(this.legislatorComponent).toBeDefined();
+  it('this.newsfeedComponent defined.', () => {
+      expect(this.newsfeedComponent).toBeDefined();
+  });
+
+  it('this.repAction defined.', () => {
+      expect(this.repAction).toBeDefined();
+  });
+
+  it('this.repActionService defined.', () => {
+      expect(this.repActionService).toBeDefined();
+  });
+
+  it('this.vote defined.', () => {
+      expect(this.vote).toBeDefined();
   });
 
   it('this.welcomeComponent defined.', () => {

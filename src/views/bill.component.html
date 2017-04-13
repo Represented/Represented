@@ -4,5 +4,14 @@
     <p>{{b.congress}}</p>
     <p>Last Action: {{b.last_action_at}}</p>
     <p> More info: <a href="{{b.urls.congress}}" target="_blank">{{b.urls.congress}} </a> </p>
+    <p> Sponsor: <a (click)="goToLegislator(b.sponsor_id)">{{b.sponsor.title}}. {{b.sponsor.first_name}} {{b.sponsor.last_name}} ({{b.sponsor.party}})</a>
+    <div *ngIf="b.cosponsors_count > 0">
+      <p>Cosponsor Count: {{b.cosponsors_count}}</p>
+      <ul *ngFor="let co of b.cosponsors">
+        <li>
+          <p><a (click)="goToLegislator(co.legislator.bioguide_id)">{{co.legislator.title}}. {{co.legislator.first_name}} {{co.legislator.last_name}} ({{co.legislator.party}})</a></p>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

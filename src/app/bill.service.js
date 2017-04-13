@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var Observable_1 = require("rxjs/Observable");
-//import 'rxjs/add/operator/toPromise';
 require("rxjs/add/operator/map");
 require("rxjs/add/observable/throw");
 var BillService = (function () {
@@ -20,10 +19,13 @@ var BillService = (function () {
         this.jsonp = jsonp;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.baseUrl = 'https://congress.api.sunlightfoundation.com';
+        this.fields = "bill_id,bill_type,chamber,committee_ids,congress,cosponsors,cosponsors_count,enacted_as,history,introduced_on,last_action_at,\nlast_version,last_version_on,last_vote_at,number,official_title,popular_title,related_bill_ids,short_title,sponsor,sponsor_id,urls,withdrawn_cosponsors_count";
     }
     BillService.prototype.getBillById = function (bill_id) {
         var search = new http_1.URLSearchParams();
         search.set('bill_id', bill_id);
+        search.set('fields', this.fields);
+        console.log(this.fields);
         var res = this.jsonp.get(this.baseUrl + "/bills?callback=JSONP_CALLBACK&bill_id", { search: search })
             .map(function (response) { return response.json().results; });
         return res;

@@ -34,6 +34,9 @@ var BillComponent = (function () {
     BillComponent.prototype.ngOnInit = function () {
         this.getBill();
     };
+    BillComponent.prototype.goToLegislator = function (bioguide_id) {
+        this.router.navigate(['/legislator', bioguide_id]);
+    };
     BillComponent.prototype.goBack = function () {
         this.location.back();
     };

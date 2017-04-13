@@ -3,6 +3,7 @@ import { Router }                   from '@angular/router';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { Bill }                     from './bill';
 import { BillService }              from './bill.service';
+import { DetailedBill }             from './detailed-bill';
 import { DataScrollerModule }       from 'primeng/primeng';
 import { Location }                 from '@angular/common';
 
@@ -15,7 +16,7 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: [ '../styles/bill.component.css' ]
 })
 export class BillComponent implements OnInit {
-  bill: Bill;
+  bill: DetailedBill;
 
   constructor(
     private billService: BillService,
@@ -35,6 +36,11 @@ export class BillComponent implements OnInit {
     this.getBill();
   }
 
+  goToLegislator(bioguide_id: string): void {
+    this.router.navigate(['/legislator', bioguide_id]);
+
+  }
+  
   goBack(): void {
     this.location.back();
   }

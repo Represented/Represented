@@ -12,12 +12,14 @@ var about_component_1 = require("./about.component");
 var bill_component_1 = require("./bill.component");
 var legislator_component_1 = require("./legislator.component");
 var newsfeed_component_1 = require("./newsfeed.component");
+var senate_component_1 = require("./senate.component");
 var welcome_component_1 = require("./welcome.component");
 var routes = [
     { path: '', redirectTo: '/newsfeed', pathMatch: 'full' },
     { path: 'about', component: about_component_1.AboutComponent },
     { path: 'bill/:bill_id', component: bill_component_1.BillComponent },
     { path: 'legislator/:bioguide_id', component: legislator_component_1.LegislatorComponent },
+    { path: 'senate', component: senate_component_1.SenateComponent },
     { path: 'newsfeed', component: newsfeed_component_1.NewsfeedComponent },
     { path: 'welcome', component: welcome_component_1.WelcomeComponent },
 ];

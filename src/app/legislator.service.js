@@ -22,6 +22,22 @@ var LegislatorService = (function () {
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.baseUrl = 'https://congress.api.sunlightfoundation.com';
     }
+    LegislatorService.prototype.getAllHouseLegislators = function () {
+        var search = new http_1.URLSearchParams();
+        search.set('chamber', 'house');
+        search.set('order', 'last_name__asc');
+        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { search: search })
+            .map(function (response) { return response.json().results; });
+        return res;
+    };
+    LegislatorService.prototype.getAllSenateLegislators = function () {
+        var search = new http_1.URLSearchParams();
+        search.set('chamber', 'senate');
+        search.set('order', 'last_name__asc');
+        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { search: search })
+            .map(function (response) { return response.json().results; });
+        return res;
+    };
     LegislatorService.prototype.getLegislatorById = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('bioguide_id', bioguide_id);

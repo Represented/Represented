@@ -13,8 +13,7 @@ export class BillService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private baseUrl = 'https://congress.api.sunlightfoundation.com';
-  private fields  = `bill_id,bill_type,chamber,committee_ids,congress,cosponsors,cosponsors_count,enacted_as,history,introduced_on,last_action_at,
-last_version,last_version_on,last_vote_at,number,official_title,popular_title,related_bill_ids,short_title,sponsor,sponsor_id,urls,withdrawn_cosponsors_count`;
+  private fields  = `bill_id,bill_type,chamber,committee_ids,congress,cosponsors,cosponsors_count,enacted_as,history,introduced_on,last_action_at,last_version,last_version_on,last_vote_at,number,official_title,popular_title,related_bill_ids,short_title,sponsor,sponsor_id,urls,withdrawn_cosponsors_count`;
 
   constructor(private jsonp: Jsonp) { }
 

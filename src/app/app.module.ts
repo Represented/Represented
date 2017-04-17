@@ -20,6 +20,7 @@ import { LegislatorComponent }  from './legislator.component';
 import { LegislatorService }    from './legislator.service';
 import { NewsfeedComponent }    from './newsfeed.component';
 import { RepActionService }     from './repaction.service';
+import { SenateComponent }      from './senate.component';
 import { WelcomeComponent}      from './welcome.component';
 
 @NgModule({
@@ -38,13 +39,14 @@ import { WelcomeComponent}      from './welcome.component';
     BillComponent,
     LegislatorComponent,
     NewsfeedComponent,
+    SenateComponent,
     WelcomeComponent
   ],
   providers: [
     BillService,
     LegislatorService,
     RepActionService,
-	CookieService
+	  CookieService
    ],
   bootstrap: [ AppComponent ]
 })

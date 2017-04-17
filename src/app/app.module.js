@@ -23,6 +23,7 @@ var legislator_component_1 = require("./legislator.component");
 var legislator_service_1 = require("./legislator.service");
 var newsfeed_component_1 = require("./newsfeed.component");
 var repaction_service_1 = require("./repaction.service");
+var senate_component_1 = require("./senate.component");
 var welcome_component_1 = require("./welcome.component");
 var AppModule = (function () {
     function AppModule() {
@@ -46,6 +47,7 @@ AppModule = __decorate([
             bill_component_1.BillComponent,
             legislator_component_1.LegislatorComponent,
             newsfeed_component_1.NewsfeedComponent,
+            senate_component_1.SenateComponent,
             welcome_component_1.WelcomeComponent
         ],
         providers: [

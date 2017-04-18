@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+<<<<<<< Updated upstream
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
@@ -20,6 +21,15 @@ var NewsfeedComponent = (function () {
         this.router = router;
         this.cookieService = cookieService;
         this.jsonp = jsonp;
+=======
+var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var repaction_service_1 = require('./repaction.service');
+var NewsfeedComponent = (function () {
+    function NewsfeedComponent(repActionService, router) {
+        this.repActionService = repActionService;
+        this.router = router;
+>>>>>>> Stashed changes
     }
     /*getActions(): void {
       this.repActionService
@@ -27,6 +37,7 @@ var NewsfeedComponent = (function () {
           .then(repactions => this.repactions = repactions);
     }*/
     NewsfeedComponent.prototype.ngOnInit = function () {
+<<<<<<< Updated upstream
         var representatives = this.cookieService.getObject('bioguides');
         if (representatives === undefined) {
             this.router.navigate(['/welcome']);
@@ -54,5 +65,19 @@ NewsfeedComponent = __decorate([
         cookies_service_1.CookieService,
         http_1.Jsonp])
 ], NewsfeedComponent);
+=======
+    };
+    NewsfeedComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'my-newsfeed',
+            templateUrl: '../views/newsfeed.component.html',
+            styleUrls: ['../styles/newsfeed.component.css']
+        }), 
+        __metadata('design:paramtypes', [repaction_service_1.RepActionService, router_1.Router])
+    ], NewsfeedComponent);
+    return NewsfeedComponent;
+}());
+>>>>>>> Stashed changes
 exports.NewsfeedComponent = NewsfeedComponent;
 //# sourceMappingURL=newsfeed.component.js.map

@@ -32,17 +32,6 @@ var SenateComponent = (function () {
     // onSelect(legislator: Legislator) {
     //   this.selectedLegislator = legislator;
     // }
-    SenateComponent.prototype.setLegPortritUrl = function (id) {
-        var address = this.portraitUrl += (id + '.jpg');
-        return address;
-    };
-    SenateComponent.prototype.getLegPortraitUrl = function () {
-        var _this = this;
-        this.route.params
-            .subscribe(function (params) {
-            return _this.portraitUrl = _this.setLegPortritUrl(params['bioguide_id']);
-        });
-    };
     SenateComponent.prototype.ngOnInit = function () {
         this.getSenateLegislators();
     };
@@ -59,7 +48,7 @@ SenateComponent = __decorate([
         moduleId: module.id,
         selector: 'my-senate',
         templateUrl: '../views/senate.component.html',
-        styleUrls: ['../styles/legislator.component.css']
+        styleUrls: ['../styles/house-senate.component.css']
     }),
     __metadata("design:paramtypes", [legislator_service_1.LegislatorService,
         router_1.Router,

@@ -11,7 +11,7 @@ import { Location }                 from '@angular/common';
   moduleId: module.id,
   selector: 'my-senate',
   templateUrl: '../views/senate.component.html',
-  styleUrls: [ '../styles/legislator.component.css' ]
+  styleUrls: [ '../styles/house-senate.component.css' ]
 })
 export class SenateComponent implements OnInit {
   legislators: Legislator[];
@@ -36,17 +36,6 @@ export class SenateComponent implements OnInit {
   // onSelect(legislator: Legislator) {
   //   this.selectedLegislator = legislator;
   // }
-
-  setLegPortritUrl(id: string): string {
-    let address = this.portraitUrl += (id + '.jpg');
-    return address;
-  }
-
-  getLegPortraitUrl(): void {
-    this.route.params
-      .subscribe(params =>
-      this.portraitUrl = this.setLegPortritUrl(params['bioguide_id']));
-  }
 
   ngOnInit(): void {
     this.getSenateLegislators();

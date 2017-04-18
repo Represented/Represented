@@ -1,5 +1,8 @@
 <div class="senator-list" *ngFor="let sen of legislators">
   <div class="senator" (click)=goToLegislator(sen.bioguide_id)>
-    <h4><img src="{{portraitUrl + sen.bioguide_id + '.jpg'}}">{{sen.first_name}} {{sen.last_name}} ({{sen.party}})</h4>
+    <div class="portrait">
+      <img src="{{portraitUrl + sen.bioguide_id + '.jpg'}}">
+    </div>
+    <h4>{{sen.first_name}} {{sen.last_name}} ({{sen.party}})</h4>
   </div>
 </div>

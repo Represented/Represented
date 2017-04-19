@@ -44,9 +44,9 @@ var BillComponent = (function () {
             _this.Nay = vote.breakdown.total.Nay,
             _this.Not_Voting = vote.breakdown.total.Not_Voting,
             _this.Present = vote.breakdown.total.Not_Voting); });
-        this.getBreakdown(this.Yea, this.Nay, this.Not_Voting, this.Present);
+        this.setData(this.Yea, this.Nay, this.Not_Voting, this.Present);
     };
-    BillComponent.prototype.getBreakdown = function (Yea, Nay, Not_Voting, Present) {
+    BillComponent.prototype.setData = function (Yea, Nay, Not_Voting, Present) {
         this.data = {
             labels: ['Yea', 'Nay', 'Not Voting', 'Present'],
             datasets: [

@@ -52,10 +52,10 @@ export class BillComponent implements OnInit {
         this.Not_Voting = vote.breakdown.total.Not_Voting,
         this.Present = vote.breakdown.total.Not_Voting));
 
-        this.getBreakdown(this.Yea, this.Nay, this.Not_Voting, this.Present);
+        this.setData(this.Yea, this.Nay, this.Not_Voting, this.Present);
   }
 
-  getBreakdown(Yea: number, Nay: number, Not_Voting: number, Present: number ): void {
+  setData(Yea: number, Nay: number, Not_Voting: number, Present: number ): void {
     this.data = {
       labels: ['Yea', 'Nay', 'Not Voting', 'Present'],
       datasets: [

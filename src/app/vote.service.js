@@ -13,29 +13,28 @@ var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
-var BillService = (function () {
-    function BillService(jsonp) {
+var VoteService = (function () {
+    function VoteService(jsonp) {
         this.jsonp = jsonp;
-        this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.baseUrl = 'https://congress.api.sunlightfoundation.com';
-        this.fields = "bill_id,bill_type,chamber,committee_ids,congress,cosponsors,cosponsors_count,enacted_as,history,introduced_on,last_action_at,\nlast_version,last_version_on,last_vote_at,number,official_title,popular_title,related_bill_ids,short_title,sponsor,sponsor_id,urls,withdrawn_cosponsors_count";
+        this.vote_fields = "bill_id,bill,question,required,result,roll_id,nomination,vote_type,voted_at,voters,breakdown,breakdown.total,\n    breakdown.total.Yea,breakdown.total.Nay,breakdown.total.Not_Voting,breakdown.total.Present";
     }
-    BillService.prototype.getBillById = function (bill_id) {
+    VoteService.prototype.getsVotesByBillID = function (bill_id) {
         var search = new http_1.URLSearchParams();
         search.set('bill_id', bill_id);
-        search.set('fields', this.fields);
-        console.log(this.fields);
-        var res = this.jsonp.get(this.baseUrl + "/bills?callback=JSONP_CALLBACK&bill_id", { search: search })
+        search.set('fields', this.vote_fields);
+        console.log(this.vote_fields);
+        var res = this.jsonp.get(this.baseUrl + "/votes?callback=JSONP_CALLBACK", { search: search })
             .map(function (response) { return response.json().results; });
         return res;
     };
-    BillService = __decorate([
+    VoteService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Jsonp])
-    ], BillService);
-    return BillService;
+    ], VoteService);
+    return VoteService;
 }());
-exports.BillService = BillService;
+exports.VoteService = VoteService;
 function handleError(error) {
     // log error
     // could be something more sofisticated
@@ -44,4 +43,4 @@ function handleError(error) {
     // throw an application level error
     return Observable_1.Observable.throw(errorMsg);
 }
-//# sourceMappingURL=bill.service.js.map
+//# sourceMappingURL=vote.service.js.map

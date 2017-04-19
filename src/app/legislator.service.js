@@ -8,17 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-<<<<<<< Updated upstream
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var http_1 = require("@angular/http");
-var Observable_1 = require("rxjs/Observable");
-//import 'rxjs/add/operator/toPromise';
-require("rxjs/add/operator/map");
-require("rxjs/add/observable/throw");
-var LegislatorService = (function () {
-    // private photoUrl = 'https://theunitedstates.io/images/congress/orignal/';
-=======
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
@@ -26,13 +15,12 @@ var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
 var LegislatorService = (function () {
->>>>>>> Stashed changes
+    // private photoUrl = 'https://theunitedstates.io/images/congress/orignal/';
     function LegislatorService(jsonp) {
         this.jsonp = jsonp;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.baseUrl = 'https://congress.api.sunlightfoundation.com';
     }
-<<<<<<< Updated upstream
     LegislatorService.prototype.getLegislatorById = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('bioguide_id', bioguide_id);
@@ -66,35 +54,12 @@ var LegislatorService = (function () {
             .map(function (response) { return response.json().results; });
         return res;
     };
-    return LegislatorService;
-}());
-LegislatorService = __decorate([
-    core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Jsonp])
-], LegislatorService);
-=======
-    LegislatorService.prototype.getAllLegislators = function () {
-        this.headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
-        var res = this.jsonp.get(this.baseUrl + "/legislators?callback=JSONP_CALLBACK", { headers: this.headers })
-            .map(function (response) { return response.json().results; });
-        return res;
-    };
-    LegislatorService.prototype.getLegislatorById = function (bioguide_id) {
-        var search = new http_1.URLSearchParams();
-        search.set('bioguide_id', bioguide_id);
-        var res = this.jsonp.get(this.baseUrl + "/legislators?", { search: search })
-            .map(mapLegislators);
-        //.catch(handleError);
-        //.catch(this.handleError);
-        return res;
-    };
     LegislatorService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Jsonp])
     ], LegislatorService);
     return LegislatorService;
 }());
->>>>>>> Stashed changes
 exports.LegislatorService = LegislatorService;
 function mapLegislators(response) {
     // The response of the API has a results

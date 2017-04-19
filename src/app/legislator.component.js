@@ -8,13 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-<<<<<<< Updated upstream
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var router_2 = require("@angular/router");
-var legislator_service_1 = require("./legislator.service");
-var common_1 = require("@angular/common");
+var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var router_2 = require('@angular/router');
+var legislator_service_1 = require('./legislator.service');
+var common_1 = require('@angular/common');
 var LegislatorComponent = (function () {
     function LegislatorComponent(legislatorService, router, route, location) {
         this.legislatorService = legislatorService;
@@ -97,39 +95,6 @@ var LegislatorComponent = (function () {
     LegislatorComponent.prototype.goBack = function () {
         this.location.back();
     };
-    return LegislatorComponent;
-}());
-LegislatorComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'my-legislator',
-        templateUrl: '../views/legislator.component.html',
-        styleUrls: ['../styles/legislator.component.css']
-    }),
-    __metadata("design:paramtypes", [legislator_service_1.LegislatorService,
-        router_1.Router,
-        router_2.ActivatedRoute,
-        common_1.Location])
-], LegislatorComponent);
-=======
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var legislator_service_1 = require('./legislator.service');
-var LegislatorComponent = (function () {
-    function LegislatorComponent(legislatorService, router) {
-        this.legislatorService = legislatorService;
-        this.router = router;
-    }
-    LegislatorComponent.prototype.getLegislator = function () {
-        var _this = this;
-        this.legislatorService
-            .getAllLegislators()
-            .subscribe(function (legislator) { return _this.legislator = legislator; });
-        console.log(this.legislator);
-    };
-    LegislatorComponent.prototype.ngOnInit = function () {
-        this.getLegislator();
-    };
     LegislatorComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -137,10 +102,9 @@ var LegislatorComponent = (function () {
             templateUrl: '../views/legislator.component.html',
             styleUrls: ['../styles/legislator.component.css']
         }), 
-        __metadata('design:paramtypes', [legislator_service_1.LegislatorService, router_1.Router])
+        __metadata('design:paramtypes', [legislator_service_1.LegislatorService, router_1.Router, router_2.ActivatedRoute, common_1.Location])
     ], LegislatorComponent);
     return LegislatorComponent;
 }());
->>>>>>> Stashed changes
 exports.LegislatorComponent = LegislatorComponent;
 //# sourceMappingURL=legislator.component.js.map

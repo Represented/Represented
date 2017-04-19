@@ -4,7 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import { JsonpModule }   from '@angular/http';
-
+import { ChartModule } from 'primeng/primeng';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CookieService }        from 'angular2-cookie/services/cookies.service';
@@ -15,6 +15,7 @@ import { AppComponent }         from './app.component';
 import { BillComponent }        from './bill.component';
 import { BillService }          from './bill.service';
 
+import { VoteService }          from './vote.service';
 import { DataScrollerModule }   from 'primeng/primeng';
 import { LegislatorComponent }  from './legislator.component';
 import { LegislatorService }    from './legislator.service';
@@ -30,7 +31,8 @@ import { WelcomeComponent}      from './welcome.component';
     HttpModule,
     JsonpModule,
     AppRoutingModule,
-    DataScrollerModule
+    DataScrollerModule,
+    ChartModule
   ],
   declarations: [
     AboutComponent,
@@ -44,7 +46,8 @@ import { WelcomeComponent}      from './welcome.component';
     BillService,
     LegislatorService,
     RepActionService,
-	CookieService
+    CookieService,
+    VoteService
    ],
   bootstrap: [ AppComponent ]
 })

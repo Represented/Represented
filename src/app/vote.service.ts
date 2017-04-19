@@ -13,8 +13,8 @@ import { Legislator }   from './legislator';
 @Injectable()
 export class VoteService {
     private baseUrl = 'https://congress.api.sunlightfoundation.com';
-    private vote_fields = `bill_id, bill, question, required, result, roll_id, nomination, vote_type, 
-                        voted_at, voters, breakdown`;
+    private vote_fields = `bill_id,bill,question,required,result,roll_id,nomination,vote_type,voted_at,voters,breakdown,breakdown.total,
+    breakdown.total.Yea,breakdown.total.Nay,breakdown.total.Not_Voting,breakdown.total.Present`;
     constructor(private jsonp: Jsonp) { }
 
     getsVotesByBillID(bill_id: string): Observable<Vote> {
@@ -22,7 +22,7 @@ export class VoteService {
         search.set('bill_id', bill_id);
         search.set('fields', this.vote_fields);
         console.log(this.vote_fields);
-        let res = this.jsonp.get(`${this.baseUrl}/votes?callback=JSON_CALLBACK&bill_id`, {search})
+        let res = this.jsonp.get(`${this.baseUrl}/votes?callback=JSONP_CALLBACK`, {search})
                 .map(response => response.json().results as Vote);
         return res;
     }

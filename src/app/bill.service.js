@@ -18,7 +18,7 @@ var BillService = (function () {
         this.jsonp = jsonp;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         this.baseUrl = 'https://congress.api.sunlightfoundation.com';
-        this.fields = "bill_id,bill_type,chamber,committee_ids,congress,cosponsors,cosponsors_count,enacted_as,history,introduced_on,last_action_at,\nlast_version,last_version_on,last_vote_at,number,official_title,popular_title,related_bill_ids,short_title,sponsor,sponsor_id,urls,withdrawn_cosponsors_count";
+        this.fields = "bill_id,bill_type,chamber,committee_ids,congress,cosponsors,cosponsors_count,enacted_as,history,introduced_on,last_action_at,last_version,last_version_on,last_vote_at,number,official_title,popular_title,related_bill_ids,short_title,sponsor,sponsor_id,urls,withdrawn_cosponsors_count";
     }
     BillService.prototype.getBillById = function (bill_id) {
         var search = new http_1.URLSearchParams();

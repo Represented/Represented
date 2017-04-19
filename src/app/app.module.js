@@ -28,6 +28,7 @@ var legislator_service_1 = require('./legislator.service');
 var newsfeed_component_1 = require('./newsfeed.component');
 var repaction_service_1 = require('./repaction.service');
 var welcome_component_1 = require('./welcome.component');
+
 var AppModule = (function () {
     function AppModule() {
     }

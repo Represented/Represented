@@ -11,7 +11,7 @@ import { Component }          from '@angular/core';
     <nav>
       <a routerLink="/newsfeed"   routerLinkActive="active">My Reps</a>
       <a routerLink="/newsfeed"   routerLinkActive="inactive">House</a>
-      <a routerLink="/newsfeed"   routerLinkActive="inactive">Senate</a>
+      <a routerLink="/senate"   routerLinkActive="inactive">Senate</a>
       <a routerLink="/about"      routerLinkActive="active">About</a>
       <a routerLink="/welcome"    routerLinkActive="active">Welcome</a>
       <!--<a routerLink="/legislator" routerLinkActive="active">Legislator</a>-->

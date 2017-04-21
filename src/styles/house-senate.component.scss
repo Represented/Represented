@@ -1,31 +1,27 @@
-.senator-list {
+.senator, .representative{
 
-  padding: 0px 50px 0px 50px;
+  border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	box-shadow: 1px 1px 1px;
+  overflow: hidden;
 
-  .senator {
-
-    border-style: solid;
-  	border-width: 1px;
-  	border-radius: 10px;
-  	box-shadow: 1px 1px 1px;
-    overflow: hidden;
-    &:hover {
-      background: #eee;
-    }
-
-    h4{
-      display: inline-block;
-      color: blue;
-    }
-
-    .portrait {
-      img{
-        height:  152px;
-      	width:   125px;
-      	margin:  20px;
-        float: left;
-      }
-    }
-
+  &:hover {
+    background: #eee;
   }
+
+  h4{
+    display: inline-block;
+    color: blue;
+  }
+
+  .portrait {
+    img{
+      height:  152px;
+    	width:   125px;
+    	margin:  20px;
+      float: left;
+    }
+  }
+
 }

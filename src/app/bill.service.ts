@@ -21,7 +21,6 @@ export class BillService {
     var search = new URLSearchParams();
     search.set('bill_id', bill_id);
     search.set('fields',this.fields);
-    console.log(this.fields);
     let res = this.jsonp.get(`${this.baseUrl}/bills?callback=JSONP_CALLBACK&bill_id`, {search})
                .map(response => response.json().results as DetailedBill);
     return res;

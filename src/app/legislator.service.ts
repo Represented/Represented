@@ -20,19 +20,21 @@ export class LegislatorService {
 
   constructor(private jsonp: Jsonp) { }
 
-  getAllHouseLegislators(): Observable<Legislator[]> {
+  getAllHouseLegislators(page: string): Observable<Legislator[]> {
     let search = new URLSearchParams()
     search.set('chamber', 'house');
     search.set('order', 'last_name__asc');
+    search.set('page', page);
     let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
                .map(response => response.json().results as Legislator[]);
     return res;
   }
 
-  getAllSenateLegislators(): Observable<Legislator[]> {
+  getAllSenateLegislators(page: string): Observable<Legislator[]> {
     let search = new URLSearchParams()
     search.set('chamber', 'senate');
     search.set('order', 'last_name__asc');
+    search.set('page', page);
     let res = this.jsonp.get(`${this.baseUrl}/legislators?callback=JSONP_CALLBACK`, { search })
                .map(response => response.json().results as Legislator[]);
     return res;

@@ -17,6 +17,7 @@ import { BillService }          from './bill.service';
 
 import { VoteService }          from './vote.service';
 import { DataScrollerModule }   from 'primeng/primeng';
+import { HouseComponent }       from './house.component';
 import { LegislatorComponent }  from './legislator.component';
 import { LegislatorService }    from './legislator.service';
 import { NewsfeedComponent }    from './newsfeed.component';
@@ -39,6 +40,7 @@ import { WelcomeComponent}      from './welcome.component';
     AboutComponent,
     AppComponent,
     BillComponent,
+    HouseComponent,
     LegislatorComponent,
     NewsfeedComponent,
     SenateComponent,

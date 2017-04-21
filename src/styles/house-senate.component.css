@@ -1,20 +1,18 @@
-.senator-list {
-  padding: 0px 50px 0px 50px; }
-  .senator-list .senator {
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 1px;
-    overflow: hidden; }
-    .senator-list .senator:hover {
-      background: #eee; }
-    .senator-list .senator h4 {
-      display: inline-block;
-      color: blue; }
-    .senator-list .senator .portrait img {
-      height: 152px;
-      width: 125px;
-      margin: 20px;
-      float: left; }
+.senator, .representative {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px;
+  overflow: hidden; }
+  .senator:hover, .representative:hover {
+    background: #eee; }
+  .senator h4, .representative h4 {
+    display: inline-block;
+    color: blue; }
+  .senator .portrait img, .representative .portrait img {
+    height: 152px;
+    width: 125px;
+    margin: 20px;
+    float: left; }
 
 /*# sourceMappingURL=house-senate.component.css.map */

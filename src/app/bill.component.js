@@ -8,13 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var router_2 = require('@angular/router');
-var bill_service_1 = require('./bill.service');
-var common_1 = require('@angular/common');
-var vote_service_1 = require('./vote.service');
-require('rxjs/add/operator/switchMap');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var router_2 = require("@angular/router");
+var bill_service_1 = require("./bill.service");
+var common_1 = require("@angular/common");
+var vote_service_1 = require("./vote.service");
+require("rxjs/add/operator/switchMap");
 var BillComponent = (function () {
     function BillComponent(billService, voteService, route, location, router) {
         this.billService = billService;
@@ -76,16 +77,20 @@ var BillComponent = (function () {
     BillComponent.prototype.goBack = function () {
         this.location.back();
     };
-    BillComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'my-bill',
-            templateUrl: '../views/bill.component.html',
-            styleUrls: ['../styles/bill.component.css']
-        }), 
-        __metadata('design:paramtypes', [bill_service_1.BillService, vote_service_1.VoteService, router_2.ActivatedRoute, common_1.Location, router_1.Router])
-    ], BillComponent);
     return BillComponent;
 }());
+BillComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'my-bill',
+        templateUrl: '../views/bill.component.html',
+        styleUrls: ['../styles/bill.component.css']
+    }),
+    __metadata("design:paramtypes", [bill_service_1.BillService,
+        vote_service_1.VoteService,
+        router_2.ActivatedRoute,
+        common_1.Location,
+        router_1.Router])
+], BillComponent);
 exports.BillComponent = BillComponent;
 //# sourceMappingURL=bill.component.js.map

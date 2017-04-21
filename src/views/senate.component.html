@@ -1,8 +1,14 @@
-<div class="senator-list" *ngFor="let sen of legislators">
-  <div class="senator" (click)=goToLegislator(sen.bioguide_id)>
-    <div class="portrait">
-      <img src="{{portraitUrl + sen.bioguide_id + '.jpg'}}">
-    </div>
-    <h4>{{sen.first_name}} {{sen.last_name}} ({{sen.party}})</h4>
-  </div>
-</div>
+<p-dataScroller [value]="legislators" [rows]="20" (onLazyLoad)="loadData($event)" [lazy]="true">
+    <p-header>
+        Scroll Down to to Load More
+    </p-header>
+    <template let-sen pTemplate="item">
+      <div class="senator" (click)=goToLegislator(sen.bioguide_id)>
+        <div class="portrait">
+          <img src="{{portraitUrl + sen.bioguide_id + '.jpg'}}">
+        </div>
+        <h4>{{sen.first_name}} {{sen.last_name}} ({{sen.party}})</h4>
+        <p>State: {{sen.state}}</p>
+      </div>
+    </template>
+</p-dataScroller>

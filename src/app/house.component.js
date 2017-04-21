@@ -13,42 +13,42 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var legislator_service_1 = require("./legislator.service");
 var common_1 = require("@angular/common");
-var SenateComponent = (function () {
-    function SenateComponent(legislatorService, router, location) {
+var HouseComponent = (function () {
+    function HouseComponent(legislatorService, router, location) {
         this.legislatorService = legislatorService;
         this.router = router;
         this.location = location;
         this.portraitUrl = 'https://theunitedstates.io/images/congress/original/';
     }
-    SenateComponent.prototype.getSenateLegislators = function () {
+    HouseComponent.prototype.getHouseLegislators = function () {
         var _this = this;
         this.legislatorService
-            .getAllSenateLegislators(this.page.toString())
+            .getAllHouseLegislators(this.page.toString())
             .subscribe(function (legislators) { return _this.legislators = legislators; });
     };
-    SenateComponent.prototype.getMoreLegislators = function () {
+    HouseComponent.prototype.getMoreLegislators = function () {
         var _this = this;
         this.legislatorService
-            .getAllSenateLegislators(this.page.toString())
+            .getAllHouseLegislators(this.page.toString())
             .subscribe(function (legislators) {
             for (var i = 0; i < legislators.length; i++) {
                 _this.legislators.push(legislators[i]);
             }
         });
     };
-    SenateComponent.prototype.onSelect = function (legislator) {
+    HouseComponent.prototype.onSelect = function (legislator) {
         this.selectedLegislator = legislator;
     };
     // onSelect(legislator: Legislator) {
     //   this.selectedLegislator = legislator;
     // }
-    SenateComponent.prototype.ngOnInit = function () {
+    HouseComponent.prototype.ngOnInit = function () {
         this.page = 1;
         //this.getSenateLegislators();
     };
-    SenateComponent.prototype.loadData = function (event) {
+    HouseComponent.prototype.loadData = function (event) {
         if (!this.legislators) {
-            this.getSenateLegislators();
+            this.getHouseLegislators();
             this.page++;
         }
         else {
@@ -56,24 +56,24 @@ var SenateComponent = (function () {
             this.page++;
         }
     };
-    SenateComponent.prototype.goToLegislator = function (bioguide_id) {
+    HouseComponent.prototype.goToLegislator = function (bioguide_id) {
         this.router.navigate(['/legislator', bioguide_id]);
     };
-    SenateComponent.prototype.goBack = function () {
+    HouseComponent.prototype.goBack = function () {
         this.location.back();
     };
-    return SenateComponent;
+    return HouseComponent;
 }());
-SenateComponent = __decorate([
+HouseComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        selector: 'my-senate',
-        templateUrl: '../views/senate.component.html',
+        selector: 'my-house',
+        templateUrl: '../views/house.component.html',
         styleUrls: ['../styles/house-senate.component.css']
     }),
     __metadata("design:paramtypes", [legislator_service_1.LegislatorService,
         router_1.Router,
         common_1.Location])
-], SenateComponent);
-exports.SenateComponent = SenateComponent;
-//# sourceMappingURL=senate.component.js.map
+], HouseComponent);
+exports.HouseComponent = HouseComponent;
+//# sourceMappingURL=house.component.js.map

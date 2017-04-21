@@ -9,11 +9,11 @@ import { Location }                 from '@angular/common';
 
 @Component({
   moduleId: module.id,
-  selector: 'my-senate',
-  templateUrl: '../views/senate.component.html',
+  selector: 'my-house',
+  templateUrl: '../views/house.component.html',
   styleUrls: [ '../styles/house-senate.component.css' ]
 })
-export class SenateComponent implements OnInit {
+export class HouseComponent implements OnInit {
   legislators: Legislator[];
   selectedLegislator: Legislator;
   portraitUrl = 'https://theunitedstates.io/images/congress/original/';
@@ -24,15 +24,15 @@ export class SenateComponent implements OnInit {
     private router: Router,
     private location: Location) { }
 
-  getSenateLegislators(): void {
+  getHouseLegislators(): void {
     this.legislatorService
-        .getAllSenateLegislators(this.page.toString())
+        .getAllHouseLegislators(this.page.toString())
         .subscribe(legislators => this.legislators = legislators);
   }
 
   getMoreLegislators(): void {
     this.legislatorService
-        .getAllSenateLegislators(this.page.toString())
+        .getAllHouseLegislators(this.page.toString())
         .subscribe(legislators => {
           for(let i = 0; i < legislators.length; i++){
             this.legislators.push(legislators[i]);
@@ -54,7 +54,7 @@ export class SenateComponent implements OnInit {
 
   loadData(event: any) {
     if(!this.legislators) {
-      this.getSenateLegislators();
+      this.getHouseLegislators();
       this.page++;
     } else {
       this.getMoreLegislators();

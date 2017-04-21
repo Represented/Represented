@@ -8,32 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var Observable_1 = require('rxjs/Observable');
-require('rxjs/add/operator/map');
-require('rxjs/add/observable/throw');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var Observable_1 = require("rxjs/Observable");
+require("rxjs/add/operator/map");
+require("rxjs/add/observable/throw");
 var VoteService = (function () {
     function VoteService(jsonp) {
         this.jsonp = jsonp;
         this.baseUrl = 'https://congress.api.sunlightfoundation.com';
-        this.vote_fields = "bill_id,bill,question,required,result,roll_id,nomination,vote_type,voted_at,voters,breakdown,breakdown.total,\n    breakdown.total.Yea,breakdown.total.Nay,breakdown.total.Not_Voting,breakdown.total.Present";
+        this.vote_fields = "bill_id,bill,question,required,result,roll_id,nomination,vote_type,voted_at,voters,breakdown";
     }
     VoteService.prototype.getsVotesByBillID = function (bill_id) {
         var search = new http_1.URLSearchParams();
         search.set('bill_id', bill_id);
         search.set('fields', this.vote_fields);
-        console.log(this.vote_fields);
         var res = this.jsonp.get(this.baseUrl + "/votes?callback=JSONP_CALLBACK", { search: search })
             .map(function (response) { return response.json().results; });
         return res;
     };
-    VoteService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Jsonp])
-    ], VoteService);
     return VoteService;
 }());
+VoteService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Jsonp])
+], VoteService);
 exports.VoteService = VoteService;
 function handleError(error) {
     // log error

@@ -1,0 +1,15 @@
+<p-dataScroller [value]="legislators" [rows]="20" (onLazyLoad)="loadData($event)" [lazy]="true">
+    <p-header>
+        Scroll Down to to Load More
+    </p-header>
+    <template let-rep pTemplate="item">
+      <div class="representative" (click)=goToLegislator(rep.bioguide_id)>
+        <div class="portrait">
+          <img src="{{portraitUrl + rep.bioguide_id + '.jpg'}}">
+        </div>
+        <h4>{{rep.first_name}} {{rep.last_name}} ({{rep.party}})</h4>
+        <p>State: {{rep.state}}</p>
+        <p>District: {{rep.district}}</p>
+      </div>
+    </template>
+</p-dataScroller>

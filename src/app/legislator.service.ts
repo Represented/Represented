@@ -69,39 +69,14 @@ export class LegislatorService {
   getLegLatestVoteAction(bioguide_id: string): Observable<Vote[]> {
     let search = new URLSearchParams();
     search.set('voter_ids.' + bioguide_id + '__exists', 'true');
-    search.set('fields','roll_id,bill,voted_at,vote_type,nomination,required,result,question,voters.'+bioguide_id+'.vote');
+    search.set('bill_id__exists', 'true');
+    search.set('fields','roll_id,bill,voted_at,vote_type,required,result,question,voters.'+bioguide_id+'.vote');
     search.set('order', 'voted_at');
     console.log(search);
     let res = this.jsonp.get(`${this.baseUrl}/votes?callback=JSONP_CALLBACK`, { search })
                .map(response => response.json().results as Vote[]);
     return res;
   }
-
-  // getLegPortraitUrl(bioguide_id: string): <string> {
-  //   return this.photoUrl + bioguide_id;
-  // }
-
-  /*getLegislatorTest(bioguide_id: string) {
-    var search = new URLSearchParams()
-    search.set('bioguide_id', bioguide_id);
-    this.jsonp.get(this.legislatorUrl, { search })
-      .map(res => res.json())
-      .subscribe(data => console.log(data));
-  }*/
-
-  /*private handleError(error: any): Observable<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Observable.throw(error.message || error);
-  }
-  private handleError (error: any) {
-    // log error
-    // could be something more sofisticated
-    let errorMsg = error.message || `Yikes! There was was a problem with our hyperdrive device and we couldn't retrieve your data!`
-    console.error(errorMsg);
-
-    // throw an application level error
-    return Observable.throw(errorMsg);
-  }*/
 }
 
 function mapLegislators(response:Response): Legislator{

@@ -1,48 +1,24 @@
-<div class="rep-buttons">
-  <ul *ngFor="let rep of legislators">
-    <li>
-      <button (click)="goToLegislator(rep)">Legislator: {{rep}}</button>
-    </li>
-  </ul>
+<div class="rep-icons" *ngFor="let rep of legislators">
+  <div class="rep" (click)="goToLegislator(rep.bioguide_id)">
+    <p>{{rep.first_name}} {{rep.last_name}}</p>
+  </div>
 </div>
-
-<p-dataScroller [value]="repactions" [rows]="10" [buffer]="0.4">
-  <p-header>
-    Scroll Down to Load More
-  </p-header>
-  <template let-rep pTemplate="item">
-    <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;border-bottom:1px solid #D5D5D5;">
-            <div class="ui-grid-row" *ngFor="let repaction of repactions">
-                <div class="ui-grid-col-3" style="text-align:center"></div>
-                <div class="ui-grid-col-9">
-                    <div class="ui-grid ui-grid-responsive ui-fluid">
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2"> {{repaction.leg_type}}: </div>
-                            <div class="ui-grid-col-10">{{repaction.legislation}} </div>
-                        </div>
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">Representative: </div>
-                            <div class="ui-grid-col-10">{{repaction.rep.name}} {{repaction.rep.party}}-{{repaction.rep.state}}</div>
-                        </div>
-                        <div class="ui-grid-row">
-                            <div class="ui-grid-col-2">Action: </div>
-                            <div class="ui-grid-col-10">{{repaction.action}}</div>
-                        </div>
-                        <br>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    <!--<h2>My Rep's Actions</h2>
-    <ul class="actions">
-      <li *ngFor="let repaction of repactions">
-        <h3>{{repaction.bill}}</h3>
-        <h4>Representative: {{repaction.rep.name}} {{repaction.rep.party}}-{{repaction.rep.state}}</h4>
-        <h4>Action: {{repaction.action}}</h4>
-      </li>
-    </ul>-->
-  </template>
-
-</p-dataScroller>
+<div class="timeline">
+  <p-dataScroller [value]="votes" [rows]="5" [buffer]="0.4">
+    <p-header>
+        Scroll Down to to Load More
+    </p-header>
+  	<template let-v pTemplate="item">
+  	  <div class="bill-info" (click)="goToBill(v.bill.bill_id)">
+        <h2 *ngIf="v.bill.short_title"><a>Bill Title: {{v.bill.short_title}}</a></h2>
+        <h2 *ngIf="v.bill.short_title==null"><a>Bill Title: {{v.bill.official_title}}</a></h2>
+        <p *ngIf="v.voters[repIds[0]]">Voted: {{v.voters[repIds[0]].vote}} to the question: {{v.question}}</p>
+        <p *ngIf="v.voters[repIds[1]]">Voted: {{v.voters[repIds[1]].vote}} to the question: {{v.question}}</p>
+        <p *ngIf="v.voters[repIds[2]]">Voted: {{v.voters[repIds[2]].vote}} to the question: {{v.question}}</p>
+        <p>Vote Result: {{v.result}}</p>
+        <p *ngIf="v.bill;">Sponsor: {{v.bill.sponsor.first_name}} {{v.bill.sponsor.last_name}}</p>
+        <p>{{v.voted_at}}</p>
+  	  </div>
+  	</template>
+  </p-dataScroller>
+</div>

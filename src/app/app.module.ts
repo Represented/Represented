@@ -21,7 +21,6 @@ import { HouseComponent }       from './house.component';
 import { LegislatorComponent }  from './legislator.component';
 import { LegislatorService }    from './legislator.service';
 import { NewsfeedComponent }    from './newsfeed.component';
-import { RepActionService }     from './repaction.service';
 import { SenateComponent }      from './senate.component';
 import { WelcomeComponent}      from './welcome.component';
 
@@ -49,7 +48,6 @@ import { WelcomeComponent}      from './welcome.component';
   providers: [
     BillService,
     LegislatorService,
-    RepActionService,
     CookieService,
     VoteService
 

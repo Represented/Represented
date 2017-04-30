@@ -25,7 +25,6 @@ var house_component_1 = require("./house.component");
 var legislator_component_1 = require("./legislator.component");
 var legislator_service_1 = require("./legislator.service");
 var newsfeed_component_1 = require("./newsfeed.component");
-var repaction_service_1 = require("./repaction.service");
 var senate_component_1 = require("./senate.component");
 var welcome_component_1 = require("./welcome.component");
 var AppModule = (function () {
@@ -58,7 +57,6 @@ AppModule = __decorate([
         providers: [
             bill_service_1.BillService,
             legislator_service_1.LegislatorService,
-            repaction_service_1.RepActionService,
             cookies_service_1.CookieService,
             vote_service_1.VoteService
         ],

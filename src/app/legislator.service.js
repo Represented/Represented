@@ -66,7 +66,8 @@ var LegislatorService = (function () {
     LegislatorService.prototype.getLegLatestVoteAction = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('voter_ids.' + bioguide_id + '__exists', 'true');
-        search.set('fields', 'roll_id,bill,voted_at,vote_type,nomination,required,result,question,voters.' + bioguide_id + '.vote');
+        search.set('bill_id__exists', 'true');
+        search.set('fields', 'roll_id,bill,voted_at,vote_type,required,result,question,voters.' + bioguide_id + '.vote');
         search.set('order', 'voted_at');
         console.log(search);
         var res = this.jsonp.get(this.baseUrl + "/votes?callback=JSONP_CALLBACK", { search: search })

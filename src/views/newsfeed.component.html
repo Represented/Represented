@@ -4,9 +4,10 @@
       <img src="{{portraitUrl + rep.bioguide_id + '.jpg'}}">
     </div>
     <p>{{rep.title}}. {{rep.first_name}} {{rep.last_name}} ({{rep.party}})</p>
+  </div>
+  <hr />
   <p><a href="{{rep.website}}">Website</a></p>
   <p>Phone: {{rep.phone}}</p>
-  </div>
 </div>
 <div class="timeline">
   <p-dataScroller [value]="votes" [rows]="5" [buffer]="0.4">

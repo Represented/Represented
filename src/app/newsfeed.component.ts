@@ -64,7 +64,9 @@ export class NewsfeedComponent implements OnInit {
             this.votes.push(votes[i]);
           }
 		  this.votes.sort((a,b) => {
-			return a.voted_at - b.voted_at;
+			let x1 = <any>a.voted_at;
+			let x2 = <any>b.voted_at;
+			return x1 - x2;
 		  });
         } else {
           this.votes = votes;

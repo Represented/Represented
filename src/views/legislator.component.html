@@ -32,7 +32,7 @@
   	<template let-v pTemplate="item">
   	  <div class="bill-info" (click)="goToBill(v.bill.bill_id)">
         <h2 *ngIf="v.bill.short_title"><a>Bill Title: {{v.bill.short_title}}</a></h2>
-        <h2 *ngIf="v.bill.short_title==null"><a>Bill Title: {{v.bill.official_title}}</a></h2>
+        <h2 *ngIf="v.bill.short_title==null && v.bill.official_title"><a>Bill Title: {{v.bill.official_title}}</a></h2>
         <h2 *ngIf="v.bill.official_title==null"><a>No bill title available: This may be a nomination, etc.</a></h2>
         <p>Voted: {{v.voters[key].vote}} to the question: {{v.question}}</p>
         <p>Vote Result: {{v.result}}</p>

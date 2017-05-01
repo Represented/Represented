@@ -48,6 +48,11 @@ export class NewsfeedComponent implements OnInit {
     for(let i = 0; i < this.repIds.length; i++) {
       this.getIndividualVoteAction(this.repIds[i]);
     }
+	/*
+	this.votes.sort((a,b) => {
+		return a.voted_at - b.voted_at;
+	});
+	*/
   }
 
   getIndividualVoteAction(bioguide_id: string) {
@@ -58,6 +63,9 @@ export class NewsfeedComponent implements OnInit {
           for (let i = 0; i < votes.length; i++) {
             this.votes.push(votes[i]);
           }
+		  this.votes.sort((a,b) => {
+			return a.voted_at - b.voted_at;
+		  });
         } else {
           this.votes = votes;
         }

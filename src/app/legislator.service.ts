@@ -48,6 +48,23 @@ export class LegislatorService {
     return res;
   }
 
+  getLegislatorByZip(zip: string): Observable<Legislator[]> {
+    var search = new URLSearchParams();
+		search.set('zip', zip);
+		let res = this.jsonp.get(`${this.baseUrl}/legislators/locate?callback=JSONP_CALLBACK`, { search })
+                .map(response => response.json().results as Legislator[]);
+    return res;
+  }
+
+  getLegislatorByLocation(longitude: string, latitude: string): Observable<Legislator[]> {
+    var search = new URLSearchParams();
+    search.set('latitude', latitude);
+		search.set('longitude', longitude);
+		let res = this.jsonp.get(`${this.baseUrl}/legislators/locate?callback=JSONP_CALLBACK`, { search })
+                .map(response => response.json().results as Legislator[]);
+    return res;
+  }
+
   getLegLatestSponsorAction(bioguide_id: string): Observable<Bill[]> {
     let search = new URLSearchParams()
     search.set('sponsor_id', bioguide_id);

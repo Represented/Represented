@@ -1,0 +1,46 @@
+.rep-icons {
+  display: inline-block;
+  padding: 25px;
+  border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	padding: 10px;
+	box-shadow: 1px 1px 1px;
+	margin: 10px;
+  .portrait {
+    img {
+      display: block;
+      margin: auto;
+    	height: 100px;
+    	width: 90px;
+    }
+  }
+  p {
+    text-align: center;
+  }
+  &:hover {
+    background: #eee;
+  }
+}
+
+.bill-info {
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 10px;
+	padding: 10px;
+	box-shadow: 1px 1px 1px;
+	margin-bottom: 10px;
+
+  &:hover {
+    background: #eee;
+  }
+}
+
+.bill-info {
+  h2 {
+  	color: blue;
+  }
+  a {
+    color: blue;
+  }
+}

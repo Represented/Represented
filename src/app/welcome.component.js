@@ -32,8 +32,11 @@ var WelcomeComponent = (function () {
             var _this = this;
             lat = position.coords.latitude;
             lng = position.coords.longitude;
+            var location = [];
+            location.push(lng.toString());
+            location.push(lat.toString());
             //console.log("latitude: " + lat + ", longitude: " + lng);
-            thisParent.cookieService.put('longLat', lng + ' ' + lat);
+            thisParent.cookieService.putObject('longLat', location);
             console.log(thisParent.cookieService.get('longLat'));
             var search = new http_1.URLSearchParams();
             search.set('latitude', lat.toString());

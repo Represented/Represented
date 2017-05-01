@@ -5,7 +5,6 @@ import { Jsonp } 					      from '@angular/http';
 import { Legislator }           from './legislator';
 import { LegislatorService }    from './legislator.service';
 import { Location }             from '@angular/common';
-import { RepAction }            from './repaction';
 import { Router }               from '@angular/router';
 import { Vote }                 from './vote';
 
@@ -18,8 +17,11 @@ import { Vote }                 from './vote';
 })
 export class NewsfeedComponent implements OnInit {
   repIds: string[];
+  loc: string[];
+  zip: string;
   legislators: Legislator[];
   votes: Vote[];
+  portraitUrl = 'https://theunitedstates.io/images/congress/original/';
 
   constructor(
     private legislatorService: LegislatorService,
@@ -28,23 +30,17 @@ export class NewsfeedComponent implements OnInit {
     private location: Location,
 	  private jsonp: Jsonp) { }
 
-  /*getActions(): void {
-    this.repActionService
-        .getActions()
-        .then(repactions => this.repactions = repactions);
-  }*/
   getMyRepData() {
-    for(var i = 0; i < this.repIds.length; i++) {
+    if (this.loc !== undefined) {
+      console.log('lat long');
       this.legislatorService
-        .getLegislatorById(this.repIds[i])
-        .subscribe(legislator => {
-          if(this.legislators){
-            this.legislators.push(legislator);
-          } else {
-            this.legislators = [];
-            this.legislators[i] = legislator;
-          }
-        });
+        .getLegislatorByLocation(this.loc[0], this.loc[1])
+        .subscribe(legislators => this.legislators = legislators);
+    } else if (this.zip !== undefined) {
+      console.log('zip');
+      this.legislatorService
+        .getLegislatorByZip(this.zip)
+        .subscribe(legislators => this.legislators = legislators);
     }
   }
 
@@ -70,12 +66,22 @@ export class NewsfeedComponent implements OnInit {
 
   ngOnInit(): void {
 		var representatives = this.cookieService.getObject('bioguides');
+    var location = this.cookieService.getObject('longLat');
+    console.log(location);
+    var zip = this.cookieService.getObject('zipcode');
 		if(representatives === undefined){
 			this.router.navigate(['/welcome']);
 		}
 		else{
 			this.repIds = representatives.toString().split(',');
-      //this.getMyRepData();
+      if (location !== undefined) {
+        this.loc = location.toString().split(',');
+        console.log('test' + this.loc);
+      }
+      if (zip !== undefined) {
+        this.zip = zip.toString();
+      }
+      this.getMyRepData();
 			this.getNewsfeedVoteAction();
 		}
   }

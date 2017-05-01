@@ -47,6 +47,21 @@ var LegislatorService = (function () {
             .map(function (response) { return response.json().results; });
         return res;
     };
+    LegislatorService.prototype.getLegislatorByZip = function (zip) {
+        var search = new http_1.URLSearchParams();
+        search.set('zip', zip);
+        var res = this.jsonp.get(this.baseUrl + "/legislators/locate?callback=JSONP_CALLBACK", { search: search })
+            .map(function (response) { return response.json().results; });
+        return res;
+    };
+    LegislatorService.prototype.getLegislatorByLocation = function (longitude, latitude) {
+        var search = new http_1.URLSearchParams();
+        search.set('latitude', latitude);
+        search.set('longitude', longitude);
+        var res = this.jsonp.get(this.baseUrl + "/legislators/locate?callback=JSONP_CALLBACK", { search: search })
+            .map(function (response) { return response.json().results; });
+        return res;
+    };
     LegislatorService.prototype.getLegLatestSponsorAction = function (bioguide_id) {
         var search = new http_1.URLSearchParams();
         search.set('sponsor_id', bioguide_id);

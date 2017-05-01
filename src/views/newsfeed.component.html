@@ -1,6 +1,9 @@
 <div class="rep-icons" *ngFor="let rep of legislators">
   <div class="rep" (click)="goToLegislator(rep.bioguide_id)">
-    <p>{{rep.first_name}} {{rep.last_name}}</p>
+    <div class="portrait">
+      <img src="{{portraitUrl + rep.bioguide_id + '.jpg'}}">
+    </div>
+    <p>{{rep.title}}. {{rep.first_name}} {{rep.last_name}} ({{rep.party}})</p>
   </div>
 </div>
 <div class="timeline">
@@ -12,9 +15,24 @@
   	  <div class="bill-info" (click)="goToBill(v.bill.bill_id)">
         <h2 *ngIf="v.bill.short_title"><a>Bill Title: {{v.bill.short_title}}</a></h2>
         <h2 *ngIf="v.bill.short_title==null"><a>Bill Title: {{v.bill.official_title}}</a></h2>
-        <p *ngIf="v.voters[repIds[0]]">Voted: {{v.voters[repIds[0]].vote}} to the question: {{v.question}}</p>
-        <p *ngIf="v.voters[repIds[1]]">Voted: {{v.voters[repIds[1]].vote}} to the question: {{v.question}}</p>
-        <p *ngIf="v.voters[repIds[2]]">Voted: {{v.voters[repIds[2]].vote}} to the question: {{v.question}}</p>
+        <p *ngIf="v.voters[legislators[0].bioguide_id]">
+          <a (click)="goToLegislator(legislator[0].bioguide_id)">
+            {{legislators[0].title}}. {{legislators[0].first_name}} {{legislators[0].last_name}} ({{legislators[0].party}})
+          </a>
+          Voted: {{v.voters[repIds[0]].vote}} to the question: {{v.question}}
+        </p>
+        <p *ngIf="v.voters[legislators[1].bioguide_id]">
+          <a (click)="goToLegislator(legislator[1].bioguide_id)">
+            {{legislators[1].title}}. {{legislators[1].first_name}} {{legislators[1].last_name}} ({{legislators[1].party}})
+          </a>
+          Voted: {{v.voters[repIds[1]].vote}} to the question: {{v.question}}
+        </p>
+        <p *ngIf="v.voters[legislators[2].bioguide_id]">
+          <a (click)="goToLegislator(legislator[2].bioguide_id)">
+            {{legislators[2].title}}. {{legislators[2].first_name}} {{legislators[2].last_name}} ({{legislators[2].party}})
+          </a>
+          Voted: {{v.voters[repIds[2]].vote}} to the question: {{v.question}}
+        </p>
         <p>Vote Result: {{v.result}}</p>
         <p *ngIf="v.bill;">Sponsor: {{v.bill.sponsor.first_name}} {{v.bill.sponsor.last_name}}</p>
         <p>{{v.voted_at}}</p>

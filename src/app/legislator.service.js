@@ -8,12 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var Observable_1 = require('rxjs/Observable');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var Observable_1 = require("rxjs/Observable");
 //import 'rxjs/add/operator/toPromise';
-require('rxjs/add/operator/map');
-require('rxjs/add/observable/throw');
+require("rxjs/add/operator/map");
+require("rxjs/add/observable/throw");
 var LegislatorService = (function () {
     // private photoUrl = 'https://theunitedstates.io/images/congress/orignal/';
     function LegislatorService(jsonp) {
@@ -77,23 +78,24 @@ var LegislatorService = (function () {
             .map(function (response) { return response.json().results; });
         return res;
     };
-    LegislatorService.prototype.getLegLatestVoteAction = function (bioguide_id) {
+    LegislatorService.prototype.getLegLatestVoteAction = function (bioguide_id, page) {
         var search = new http_1.URLSearchParams();
         search.set('voter_ids.' + bioguide_id + '__exists', 'true');
         search.set('bill_id__exists', 'true');
         search.set('fields', 'roll_id,bill,voted_at,vote_type,required,result,question,voters.' + bioguide_id + '.vote');
+        search.set('page', page);
         search.set('order', 'voted_at');
         console.log(search);
         var res = this.jsonp.get(this.baseUrl + "/votes?callback=JSONP_CALLBACK", { search: search })
             .map(function (response) { return response.json().results; });
         return res;
     };
-    LegislatorService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Jsonp])
-    ], LegislatorService);
     return LegislatorService;
 }());
+LegislatorService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Jsonp])
+], LegislatorService);
 exports.LegislatorService = LegislatorService;
 function mapLegislators(response) {
     // The response of the API has a results

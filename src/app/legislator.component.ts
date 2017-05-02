@@ -23,6 +23,7 @@ export class LegislatorComponent implements OnInit {
   votes: Vote[];
   key = String;
   portraitUrl = 'https://theunitedstates.io/images/congress/original/';
+  page: number;
 
 
   constructor(
@@ -77,8 +78,19 @@ export class LegislatorComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) =>
         this.legislatorService
-        .getLegLatestVoteAction(params['bioguide_id']))
+        .getLegLatestVoteAction(params['bioguide_id'], this.page.toString()))
         .subscribe(votes => this.votes = votes);
+  }
+  getMoreVotedOnLegislation(): void {
+    this.route.params
+      .switchMap((params: Params) =>
+        this.legislatorService
+        .getLegLatestVoteAction(params['bioguide_id'], this.page.toString()))
+        .subscribe(votes => {
+          for (let i = 0; i<votes.length; i++) {
+            this.votes.push(votes[i]);
+          }
+        });
   }
 
   getBioguideId(): void {
@@ -105,15 +117,26 @@ export class LegislatorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.page = 1;
     this.getLegislator();
     this.getSponsoredLegislation();
     this.getCosponsoredLegislation();
     this.getLegPortraitUrl();
-    this.getVotedOnLegislation();
     this.getBioguideId();
     //this.allBills = this.sponsored.concat(this.cosponsored);
   }
-  
+
+  loadData(event: any) {
+    if(!this.votes) {
+      this.getVotedOnLegislation();
+      this.page++;
+    } else {
+      this.getMoreVotedOnLegislation();
+      this.page++;
+    }
+  }
+
+
   changeURL(): void {
 	  this.portraitUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
   }

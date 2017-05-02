@@ -8,11 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var forms_1 = require('@angular/forms');
-var cookies_service_1 = require('angular2-cookie/services/cookies.service');
-var http_1 = require('@angular/http');
-var router_1 = require('@angular/router');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var cookies_service_1 = require("angular2-cookie/services/cookies.service");
+var http_1 = require("@angular/http");
+var router_1 = require("@angular/router");
 var WelcomeComponent = (function () {
     function WelcomeComponent(cookieService, jsonp, router) {
         this.cookieService = cookieService;
@@ -87,17 +88,19 @@ var WelcomeComponent = (function () {
             }
         });
     };
-    WelcomeComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            providers: [cookies_service_1.CookieService],
-            selector: 'my-welcome',
-            templateUrl: '../views/welcome.component.html',
-            styleUrls: ['../styles/welcome.component.css']
-        }), 
-        __metadata('design:paramtypes', [cookies_service_1.CookieService, http_1.Jsonp, router_1.Router])
-    ], WelcomeComponent);
     return WelcomeComponent;
 }());
+WelcomeComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        providers: [cookies_service_1.CookieService],
+        selector: 'my-welcome',
+        templateUrl: '../views/welcome.component.html',
+        styleUrls: ['../styles/welcome.component.css']
+    }),
+    __metadata("design:paramtypes", [cookies_service_1.CookieService,
+        http_1.Jsonp,
+        router_1.Router])
+], WelcomeComponent);
 exports.WelcomeComponent = WelcomeComponent;
 //# sourceMappingURL=welcome.component.js.map

@@ -22,6 +22,7 @@ export class NewsfeedComponent implements OnInit {
   legislators: Legislator[];
   votes: Vote[];
   portraitUrl = 'https://theunitedstates.io/images/congress/original/';
+  page: number;
 
   constructor(
     private legislatorService: LegislatorService,
@@ -56,7 +57,7 @@ export class NewsfeedComponent implements OnInit {
 
   getIndividualVoteAction(bioguide_id: string) {
     this.legislatorService
-      .getLegLatestVoteAction(bioguide_id)
+      .getLegLatestVoteAction(bioguide_id, this.page.toString())
       .subscribe(votes => {
         if (this.votes) {
           for (let i = 0; i < votes.length; i++) {
@@ -81,6 +82,7 @@ export class NewsfeedComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.page = 1;
 		var representatives = this.cookieService.getObject('bioguides');
     var location = this.cookieService.getObject('longLat');
     console.log(location);
@@ -101,7 +103,7 @@ export class NewsfeedComponent implements OnInit {
 	  this.getNewsfeedVoteAction();
 		}
   }
-  
+
   loadData(event: any){
 	  var representatives = this.cookieService.getObject('bioguides');
     var location = this.cookieService.getObject('longLat');
@@ -123,7 +125,7 @@ export class NewsfeedComponent implements OnInit {
 	  this.getNewsfeedVoteAction();
 		}
   }
-  
+
   changeURL($event: any): void {
 	  $event.srcElement.parentElement.innerHTML = '<img style="display: block; margin: auto;" height="100px" width="90px" _ngcontent-hqe-19="" ng-reflect-src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png">'
 	  console.log($event);

@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var legislator_service_1 = require('./legislator.service');
-var common_1 = require('@angular/common');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var legislator_service_1 = require("./legislator.service");
+var common_1 = require("@angular/common");
 var SenateComponent = (function () {
     function SenateComponent(legislatorService, router, location) {
         this.legislatorService = legislatorService;
@@ -61,16 +62,18 @@ var SenateComponent = (function () {
     SenateComponent.prototype.goBack = function () {
         this.location.back();
     };
-    SenateComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'my-senate',
-            templateUrl: '../views/senate.component.html',
-            styleUrls: ['../styles/house-senate.component.css']
-        }), 
-        __metadata('design:paramtypes', [legislator_service_1.LegislatorService, router_1.Router, common_1.Location])
-    ], SenateComponent);
     return SenateComponent;
 }());
+SenateComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'my-senate',
+        templateUrl: '../views/senate.component.html',
+        styleUrls: ['../styles/house-senate.component.css']
+    }),
+    __metadata("design:paramtypes", [legislator_service_1.LegislatorService,
+        router_1.Router,
+        common_1.Location])
+], SenateComponent);
 exports.SenateComponent = SenateComponent;
 //# sourceMappingURL=senate.component.js.map

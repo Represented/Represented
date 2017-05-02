@@ -22,13 +22,7 @@
   </div>
 </div>
 <div class="timeline">
-  <!--<ul>
-    <li *ngFor="let s of sponsored">
-      <h2>Bill Title: {{s.short_title}}</h2>
-      <p>Sponsor: {{s.sponsor.first_name}} {{s.sponsor.last_name}}</p>
-    </li>
-  </ul>-->
-  <p-dataScroller [value]="votes" [rows]="5" [buffer]="0.4">
+  <p-dataScroller [value]="votes" [rows]="20" (onLazyLoad)="loadData($event)" [lazy]="true">
   	<template let-v pTemplate="item">
   	  <div class="bill-info" (click)="goToBill(v.bill.bill_id)">
         <h2 *ngIf="v.bill.short_title"><a>Bill Title: {{v.bill.short_title}}</a></h2>

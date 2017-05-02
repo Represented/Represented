@@ -10,7 +10,7 @@
   <p>Phone: {{rep.phone}}</p>
 </div>
 <div class="timeline">
-  <p-dataScroller [value]="votes" [rows]="1" [buffer]="0.4">
+  <p-dataScroller [value]="votes" [rows]="20" (onLazyLoad)="loadData($event)" [lazy]="true">
     <p-header>
         Scroll Down to to Load More
     </p-header>

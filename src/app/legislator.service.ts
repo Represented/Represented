@@ -83,11 +83,12 @@ export class LegislatorService {
     return res;
   }
 
-  getLegLatestVoteAction(bioguide_id: string): Observable<Vote[]> {
+  getLegLatestVoteAction(bioguide_id: string, page: string): Observable<Vote[]> {
     let search = new URLSearchParams();
     search.set('voter_ids.' + bioguide_id + '__exists', 'true');
     search.set('bill_id__exists', 'true');
     search.set('fields','roll_id,bill,voted_at,vote_type,required,result,question,voters.'+bioguide_id+'.vote');
+    search.set('page', page);
     search.set('order', 'voted_at');
     console.log(search);
     let res = this.jsonp.get(`${this.baseUrl}/votes?callback=JSONP_CALLBACK`, { search })

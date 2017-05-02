@@ -25,7 +25,7 @@ export class WelcomeComponent{
 	private router: Router){}
 
     public zipSubmissionForm = new FormGroup({
-      'zipcode': new FormControl('zipcode', Validators.required)
+      'zipcode': new FormControl('', Validators.required)
     });
 
     allowLocationServices(){
@@ -42,6 +42,7 @@ export class WelcomeComponent{
         location.push(lat.toString());
         //console.log("latitude: " + lat + ", longitude: " + lng);
 		thisParent.cookieService.putObject('longLat', location);
+		thisParent.cookieService.remove('zipcode');
 		console.log(thisParent.cookieService.get('longLat'));
 
 		var search = new URLSearchParams();
@@ -73,6 +74,7 @@ export class WelcomeComponent{
     submitZip() {
 		var zip = this.zipSubmissionForm.get('zipcode').value;
 		this.cookieService.put('zipcode', zip);
+		this.cookieService.remove('longLat');
 		console.log(this.cookieService.get('zipcode'));
 
 		var search = new URLSearchParams();
@@ -83,6 +85,7 @@ export class WelcomeComponent{
                 .subscribe((response: any) =>{
 				    var returnReps = response.json().results;
 					if(returnReps.length == 0){
+						this.cookieService.remove('zipcode');
 						alert('Please give a valid zipcode');
 						this.router.navigate(['/welcome']);
 					}

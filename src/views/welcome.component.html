@@ -4,7 +4,7 @@
     <button (click)="allowLocationServices()"><h2>Tap to Allow Location Services!</h2></button>
     <h2>Enter your zipcode to find your representative</h2>
     <form [formGroup]="zipSubmissionForm" (ngSubmit)="submitZip($event)">
-      <input formControlName="zipcode" placeholder="01234">
+      <input formControlName="zipcode" placeholder="zipcode">
       <button type="submit">Submit</button>
     </form>
 </div>

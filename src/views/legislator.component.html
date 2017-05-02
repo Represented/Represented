@@ -1,7 +1,7 @@
 <div class="rep-sidebar">
 
   <div class="portrait">
-    <img src="{{portraitUrl}}">
+    <img src="{{portraitUrl}}" (error)="changeURL($event)">
   </div>
   <section *ngIf="errorMsg">
     {{errorMsg}}
@@ -13,7 +13,7 @@
       <h4 *ngIf="rep.district"> District: {{rep.state}} - {{rep.district}} </h4>
       <h4> Gender: {{rep.gender}} </h4>
 
-      <h4> In office since: {{rep.term_start}} until {{rep.term_end}}</h4>
+      <h4> Current Term: {{rep.term_start}} until {{rep.term_end}}</h4>
       <h4> Chamber: {{rep.chamber}} </h4>
         <p> Website: <a href="{{rep.website}}" target="_blank">{{rep.website}} </a> </p>
         <p> Phone: {{rep.phone}} </p>

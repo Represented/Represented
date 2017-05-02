@@ -8,12 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var forms_1 = require("@angular/forms");
-var cookies_service_1 = require("angular2-cookie/services/cookies.service");
-var http_1 = require("@angular/http");
-var router_1 = require("@angular/router");
+var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
+var cookies_service_1 = require('angular2-cookie/services/cookies.service');
+var http_1 = require('@angular/http');
+var router_1 = require('@angular/router');
 var WelcomeComponent = (function () {
     function WelcomeComponent(cookieService, jsonp, router) {
         this.cookieService = cookieService;
@@ -21,7 +20,7 @@ var WelcomeComponent = (function () {
         this.router = router;
         this.baseUrl = 'https://congress.api.sunlightfoundation.com';
         this.zipSubmissionForm = new forms_1.FormGroup({
-            'zipcode': new forms_1.FormControl('zipcode', forms_1.Validators.required)
+            'zipcode': new forms_1.FormControl('', forms_1.Validators.required)
         });
     }
     WelcomeComponent.prototype.allowLocationServices = function () {
@@ -37,6 +36,7 @@ var WelcomeComponent = (function () {
             location.push(lat.toString());
             //console.log("latitude: " + lat + ", longitude: " + lng);
             thisParent.cookieService.putObject('longLat', location);
+            thisParent.cookieService.remove('zipcode');
             console.log(thisParent.cookieService.get('longLat'));
             var search = new http_1.URLSearchParams();
             search.set('latitude', lat.toString());
@@ -64,6 +64,7 @@ var WelcomeComponent = (function () {
         var _this = this;
         var zip = this.zipSubmissionForm.get('zipcode').value;
         this.cookieService.put('zipcode', zip);
+        this.cookieService.remove('longLat');
         console.log(this.cookieService.get('zipcode'));
         var search = new http_1.URLSearchParams();
         search.set('zip', zip);
@@ -71,6 +72,7 @@ var WelcomeComponent = (function () {
             .subscribe(function (response) {
             var returnReps = response.json().results;
             if (returnReps.length == 0) {
+                _this.cookieService.remove('zipcode');
                 alert('Please give a valid zipcode');
                 _this.router.navigate(['/welcome']);
             }
@@ -85,19 +87,17 @@ var WelcomeComponent = (function () {
             }
         });
     };
+    WelcomeComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            providers: [cookies_service_1.CookieService],
+            selector: 'my-welcome',
+            templateUrl: '../views/welcome.component.html',
+            styleUrls: ['../styles/welcome.component.css']
+        }), 
+        __metadata('design:paramtypes', [cookies_service_1.CookieService, http_1.Jsonp, router_1.Router])
+    ], WelcomeComponent);
     return WelcomeComponent;
 }());
-WelcomeComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        providers: [cookies_service_1.CookieService],
-        selector: 'my-welcome',
-        templateUrl: '../views/welcome.component.html',
-        styleUrls: ['../styles/welcome.component.css']
-    }),
-    __metadata("design:paramtypes", [cookies_service_1.CookieService,
-        http_1.Jsonp,
-        router_1.Router])
-], WelcomeComponent);
 exports.WelcomeComponent = WelcomeComponent;
 //# sourceMappingURL=welcome.component.js.map

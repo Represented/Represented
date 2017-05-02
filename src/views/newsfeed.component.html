@@ -1,7 +1,7 @@
 <div class="rep-icons" *ngFor="let rep of legislators">
   <div class="rep" (click)="goToLegislator(rep.bioguide_id)">
     <div class="portrait">
-      <img src="{{portraitUrl + rep.bioguide_id + '.jpg'}}">
+      <img src="{{portraitUrl + rep.bioguide_id + '.jpg'}}" (error)="changeURL($event)">
     </div>
     <p>{{rep.title}}. {{rep.first_name}} {{rep.last_name}} ({{rep.party}})</p>
   </div>
@@ -10,7 +10,7 @@
   <p>Phone: {{rep.phone}}</p>
 </div>
 <div class="timeline">
-  <p-dataScroller [value]="votes" [rows]="5" [buffer]="0.4">
+  <p-dataScroller [value]="votes" [rows]="1" [buffer]="0.4">
     <p-header>
         Scroll Down to to Load More
     </p-header>

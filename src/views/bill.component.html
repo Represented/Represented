@@ -1,9 +1,14 @@
 <div class="content">
   <div *ngFor="let b of bill">
     <h1>{{b.bill_type | uppercase}}.{{b.number}}:<h3>{{b.official_title}}</h3></h1>
-    <p>Bill title: {{b.short_title}}</p>
+    <p *ngIf="b.short_title">Bill title: {{b.short_title}}</p>
     <p>Congress: {{b.congress}}</p>
     <p>Last Action: {{b.last_action_at}}</p>
+	<!--<div *ngFor="let v of vote">
+		<p>Yeas: {{v.breakdown.total.Yea}}</p>
+		<p>Nays: {{v.breakdown.total.Nay}}</p>
+	</div> -->
+	<p></p>
     <p> More info: <a href="{{b.urls.congress}}" target="_blank">{{b.urls.congress}} </a> </p>
     <p> Sponsor: <a (click)="goToLegislator(b.sponsor_id)">{{b.sponsor.title}}. {{b.sponsor.first_name}} {{b.sponsor.last_name}} ({{b.sponsor.party}})</a></p>
     <div *ngIf="b.cosponsors_count > 0">

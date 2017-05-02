@@ -8,12 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var router_2 = require("@angular/router");
-var legislator_service_1 = require("./legislator.service");
-var common_1 = require("@angular/common");
+var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var router_2 = require('@angular/router');
+var legislator_service_1 = require('./legislator.service');
+var common_1 = require('@angular/common');
 var LegislatorComponent = (function () {
     function LegislatorComponent(legislatorService, router, route, location) {
         this.legislatorService = legislatorService;
@@ -30,7 +29,25 @@ var LegislatorComponent = (function () {
             return _this.legislatorService
                 .getLegislatorById(params['bioguide_id']);
         })
-            .subscribe(function (legislator) { return _this.legislator = legislator; });
+            .subscribe(function (legislator) {
+            _this.legislator = legislator;
+            /*
+            //capitalize chamber
+            if(legislator[0].chamber == 'senate') this.legislator.chamber = 'Senate';
+            if(legislator[0].chamber == 'house') this.legislator.chamber = 'House';
+            //more readable dates
+            let termStart: string = legislator[0].term_start;
+            let termEnd: string = legislator[0].term_end;
+            let timeSplitStart: string[] = termStart.split('-');
+            let timeSplitEnd: string[] = termEnd.split('-');
+            timeSplitStart[1] = timeSplitStart[1] + '-';
+            timeSplitStart[2] = timeSplitStart[2] + '-';
+            timeSplitEnd[1] = timeSplitEnd[1] + '-';
+            timeSplitEnd[2] = timeSplitEnd[2] + '-';
+            this.legislator.term_start = timeSplitStart[1].concat(timeSplitStart[2].concat(timeSplitStart[0]));
+            this.legislator.term_end = timeSplitEnd[1].concat(timeSplitEnd[2].concat(timeSplitEnd[0]));
+            */
+        });
     };
     LegislatorComponent.prototype.getSponsoredLegislation = function () {
         var _this = this;
@@ -90,25 +107,25 @@ var LegislatorComponent = (function () {
         this.getBioguideId();
         //this.allBills = this.sponsored.concat(this.cosponsored);
     };
+    LegislatorComponent.prototype.changeURL = function () {
+        this.portraitUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
+    };
     LegislatorComponent.prototype.goToBill = function (bill_id) {
         this.router.navigate(['/bill', bill_id]);
     };
     LegislatorComponent.prototype.goBack = function () {
         this.location.back();
     };
+    LegislatorComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'my-legislator',
+            templateUrl: '../views/legislator.component.html',
+            styleUrls: ['../styles/legislator.component.css']
+        }), 
+        __metadata('design:paramtypes', [legislator_service_1.LegislatorService, router_1.Router, router_2.ActivatedRoute, common_1.Location])
+    ], LegislatorComponent);
     return LegislatorComponent;
 }());
-LegislatorComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: 'my-legislator',
-        templateUrl: '../views/legislator.component.html',
-        styleUrls: ['../styles/legislator.component.css']
-    }),
-    __metadata("design:paramtypes", [legislator_service_1.LegislatorService,
-        router_1.Router,
-        router_2.ActivatedRoute,
-        common_1.Location])
-], LegislatorComponent);
 exports.LegislatorComponent = LegislatorComponent;
 //# sourceMappingURL=legislator.component.js.map

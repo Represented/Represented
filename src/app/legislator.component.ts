@@ -36,7 +36,25 @@ export class LegislatorComponent implements OnInit {
       .switchMap((params: Params) =>
         this.legislatorService
         .getLegislatorById(params['bioguide_id']))
-        .subscribe(legislator => this.legislator = legislator);
+        .subscribe(legislator => {
+			this.legislator = legislator;
+			/*
+			//capitalize chamber
+			if(legislator[0].chamber == 'senate') this.legislator.chamber = 'Senate';
+			if(legislator[0].chamber == 'house') this.legislator.chamber = 'House';
+			//more readable dates
+			let termStart: string = legislator[0].term_start;
+			let termEnd: string = legislator[0].term_end;
+			let timeSplitStart: string[] = termStart.split('-');
+			let timeSplitEnd: string[] = termEnd.split('-');
+			timeSplitStart[1] = timeSplitStart[1] + '-';
+			timeSplitStart[2] = timeSplitStart[2] + '-';
+			timeSplitEnd[1] = timeSplitEnd[1] + '-';
+			timeSplitEnd[2] = timeSplitEnd[2] + '-';
+			this.legislator.term_start = timeSplitStart[1].concat(timeSplitStart[2].concat(timeSplitStart[0]));
+			this.legislator.term_end = timeSplitEnd[1].concat(timeSplitEnd[2].concat(timeSplitEnd[0]));
+			*/
+		});
   }
 
   getSponsoredLegislation(): void {
@@ -94,6 +112,10 @@ export class LegislatorComponent implements OnInit {
     this.getVotedOnLegislation();
     this.getBioguideId();
     //this.allBills = this.sponsored.concat(this.cosponsored);
+  }
+  
+  changeURL(): void {
+	  this.portraitUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
   }
 
   goToBill(bill_id: string): void {

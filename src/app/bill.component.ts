@@ -47,10 +47,10 @@ export class BillComponent implements OnInit {
         this.voteService
         .getsVotesByBillID(params['bill_id']))
         .subscribe(vote => (this.vote = vote,
-        this.Yea = vote.breakdown.total.Yea,
-        this.Nay = vote.breakdown.total.Nay,
-        this.Not_Voting = vote.breakdown.total.Not_Voting,
-        this.Present = vote.breakdown.total.Not_Voting));
+        this.Yea = vote[0].breakdown.total.Yea,
+        this.Nay = vote[0].breakdown.total.Nay,
+        this.Not_Voting = vote[0].breakdown.total.Not_Voting,
+        this.Present = vote[0].breakdown.total.Not_Voting));
 
         this.setData(this.Yea, this.Nay, this.Not_Voting, this.Present);
   }

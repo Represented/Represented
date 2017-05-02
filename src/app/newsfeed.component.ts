@@ -45,14 +45,13 @@ export class NewsfeedComponent implements OnInit {
   }
 
   getNewsfeedVoteAction() {
+	let promArr = <any>[];
     for(let i = 0; i < this.repIds.length; i++) {
-      this.getIndividualVoteAction(this.repIds[i]);
+      promArr.push(this.getIndividualVoteAction(this.repIds[i]));
     }
-	/*
-	this.votes.sort((a,b) => {
-		return a.voted_at - b.voted_at;
+	Promise.all(promArr).then(function () {
+		console.log('promArr done');
 	});
-	*/
   }
 
   getIndividualVoteAction(bioguide_id: string) {
@@ -61,13 +60,20 @@ export class NewsfeedComponent implements OnInit {
       .subscribe(votes => {
         if (this.votes) {
           for (let i = 0; i < votes.length; i++) {
-            this.votes.push(votes[i]);
+			  for (let j = 0; j < this.votes.length; j++){
+				  //console.log(votes[i]);
+				  //console.log(this.votes[i]);
+				if(votes[i].voted_at > this.votes[j].voted_at){
+					//console.log('inserting ' + votes[i].voted_at + ' before ' + this.votes[j].voted_at);
+					this.votes.splice(j,0,votes[i]);
+					break;
+				}
+				else if(j == this.votes.length - 1){
+					this.votes.push(votes[i]);
+					break;
+				}
+			  }
           }
-		  this.votes.sort((a,b) => {
-			let x1 = <any>a.voted_at;
-			let x2 = <any>b.voted_at;
-			return x1 - x2;
-		  });
         } else {
           this.votes = votes;
         }
@@ -78,7 +84,29 @@ export class NewsfeedComponent implements OnInit {
 		var representatives = this.cookieService.getObject('bioguides');
     var location = this.cookieService.getObject('longLat');
     console.log(location);
-    var zip = this.cookieService.getObject('zipcode');
+    var zip = this.cookieService.get('zipcode');
+		if(representatives === undefined || (location === undefined && zip === undefined)){
+			this.router.navigate(['/welcome']);
+		}
+		else{
+			this.repIds = representatives.toString().split(',');
+      if (location !== undefined) {
+        this.loc = location.toString().split(',');
+        console.log('test' + this.loc);
+      }
+      if (zip !== undefined) {
+        this.zip = zip.toString();
+      }
+      this.getMyRepData();
+	  this.getNewsfeedVoteAction();
+		}
+  }
+  
+  loadData(event: any){
+	  var representatives = this.cookieService.getObject('bioguides');
+    var location = this.cookieService.getObject('longLat');
+    console.log(location);
+    var zip = this.cookieService.get('zipcode');
 		if(representatives === undefined){
 			this.router.navigate(['/welcome']);
 		}
@@ -92,8 +120,14 @@ export class NewsfeedComponent implements OnInit {
         this.zip = zip.toString();
       }
       this.getMyRepData();
-			this.getNewsfeedVoteAction();
+	  this.getNewsfeedVoteAction();
 		}
+  }
+  
+  changeURL($event: any): void {
+	  $event.srcElement.parentElement.innerHTML = '<img style="display: block; margin: auto;" height="100px" width="90px" _ngcontent-hqe-19="" ng-reflect-src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png">'
+	  console.log($event);
+	  //this.portraitUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png';
   }
 
   goToBill(bill_id: string): void {
